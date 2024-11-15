@@ -4,13 +4,6 @@ import { Archivo } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const roasterFont = localFont({
-  src: './fonts/Roaster.otf',
-  variable: '--font-roaster',
-  weight: "100 300",
-  style: 'normal',
-});
-
 const roasterThinFont = localFont({
   src: '/fonts/Roaster-Thin.woff',  // Chemin vers la police
   variable: '--font-roaster-thin', // Variable CSS pour la police
@@ -23,13 +16,6 @@ const roasterLightFont = localFont({
   variable: '--font-roaster-light', // Variable CSS pour la police
   weight: '300',                    // Poids correspondant (adaptez si nécessaire)
   style: 'normal',                  // Style (normal, italic, etc.)
-});
-
-const newOrderFont = localFont({
-  src: './fonts/New_Order.otf',
-  variable: '--font-new-order',
-  weight: "200 500", // adapte les poids disponibles si nécessaire
-  style: 'normal',
 });
 
 const archivo = Archivo({ subsets: ['latin'] });
