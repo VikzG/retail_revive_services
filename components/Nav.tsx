@@ -1,30 +1,57 @@
 import Link from "next/link";
-import useIsMobile from "@/hooks/useIsMobile"
+import { FC } from "react";
+import { useState,useEffect } from "react";
 
-export default function Nav() {
+interface NavProps {
+  isSubVisible: boolean;
+  setIsSubVisible: (active: boolean) => void;
+}
 
-  const isMobile = useIsMobile(1050);
+const Nav: FC<NavProps> = ({ isSubVisible, setIsSubVisible }) => {
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1050px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
   
   return (
-    <nav className="fixed flex items-center justify-between px-4 py-2 z-20 bg-light_beige border-b border-neutral-200 top-0 left-0 w-full">
+    <nav className="fixed flex items-center justify-between px-4 py-2 z-30 bg-light_beige border-b border-neutral-200 top-0 left-0 w-full">
       {/* Left section */}
       <div className="flex items-center space-x-8">
         <Link href="/" className="shrink-0">
           <img src="/logo/logo_rss.png" alt="Club Icon" className="h-7 w-7 club_icon_desktop" />
         </Link>
+
+        {/* Affichage conditionnel basé sur subActive */}
         <div className="nav_words hidden items-center space-x-6 text-sm font-medium">
-          <Link href="#club-retail" className="nav_anchor text-black">
-            CLUB RETAIL AFRICA
-          </Link>
-          <Link href="#services" className="nav_anchor text-black">
-            SERVICES
-          </Link>
-          <Link href="#expertise" className="nav_anchor text-black">
-            EXPERTISE
-          </Link>
-          <Link href="#actualites" className="nav_anchor text-black">
-            ACTUALITÉS
-          </Link>
+          {isSubVisible ? (
+            <Link href="#" onClick={() => setIsSubVisible(false)} className="nav_anchor text-black">
+              Retour au site
+            </Link>
+          ) : (
+            <>
+              <Link href="#club-retail" onClick={() => setIsSubVisible(true)} className="nav_anchor text-black">
+                CLUB RETAIL AFRICA
+              </Link>
+              <Link href="#services" className="nav_anchor text-black">
+                SERVICES
+              </Link>
+              <Link href="#expertise" className="nav_anchor text-black">
+                EXPERTISE
+              </Link>
+              <Link href="#actualites" className="nav_anchor text-black">
+                ACTUALITÉS
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
@@ -166,4 +193,6 @@ l-105 -85 0 176 c0 96 2 175 4 175 2 0 51 -39 108 -86z m162 -125 c19 -9 32
       </div>
     </nav>
   );
-}
+};
+export default Nav;
+

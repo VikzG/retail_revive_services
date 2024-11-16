@@ -1,11 +1,23 @@
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
-import useIsMobile from "@/hooks/useIsMobile";
+import { useState, useEffect } from 'react';
 
 
 export default function Footer() {
 
-    const isMobile = useIsMobile(1000);
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1000px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 if (isMobile) {
     return(
         <div className="w-full bg-blond px-6">

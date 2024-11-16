@@ -1,9 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
-import useIsMobile from "@/hooks/useIsMobile";
+import { useState,useEffect } from "react";
 
 export default function Actualites() {
-  const isMobile = useIsMobile(1250);
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1250px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
 
   if (isMobile) {
     return (
@@ -11,7 +24,7 @@ export default function Actualites() {
       {/* Header */}
       <div className="mb-4">
         <h2 className="grand_titre_s">NOS ACTUALITÉS</h2>
-        <Link className="text-gold underline body_text"href="/etude-annuelle">
+        <Link className="text-gold underline body_text"href="#">
            <strong>Téléchargez notre étude annuelle gratuite sur<br/> le retail en Afrique</strong> 
         </Link>
       </div>

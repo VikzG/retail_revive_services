@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Nav from "@/components/Nav";
@@ -13,6 +13,7 @@ import Presse from "@/components/Presse";
 import Sub from "@/components/Sub";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";
+import SubForm from "@/components/subForm";
 
 export default function Home() {
 
@@ -20,6 +21,9 @@ export default function Home() {
 
   const headerTitleRef = useRef(null);
   const headerSpanRef = useRef(null);
+
+  const [isSubVisible, setIsSubVisible] = useState(false);
+  const subContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Timeline GSAP pour enchaîner les animations
@@ -37,11 +41,28 @@ export default function Home() {
       );
   }, []);
 
+  const toggleSub = () => {
+    setIsSubVisible(!isSubVisible);
+  };
+
+  const handleShowSub = () => {
+    setIsSubVisible(true);
+    setTimeout(() => {
+      if (subContainerRef.current) {
+        gsap.fromTo(
+          subContainerRef.current,
+          { y: "100%", opacity: 0 },
+          { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out" }
+        );
+      }
+    }, 0);
+  };
+
   return (
     <div>
-      <header className="bg-light_beige h-screen relative">
-        <Nav />
-        <div className="banner_container relative h-full w-full">
+      <header className="bg-light_beige min-h-screen relative">
+       <Nav isSubVisible={isSubVisible} setIsSubVisible={setIsSubVisible}/>
+        <div className="banner_container relative h-screen w-full">
           <img
             className="brightness-50 w-full h-full object-cover"
             src="/banner/banner_rss.png"
@@ -73,13 +94,16 @@ export default function Home() {
             </p>
           </div>
           <div className="absolute bottom-8 w-full flex justify-center p-4">
-            <button className="btn_border_1 bouton_page_garde sous_titre">
+            <button 
+            className="btn_border_1 bouton_page_garde sous_titre">
+              <a href="#services" >
               EN SAVOIR+
+              </a>
             </button>
           </div>
         </div>
       </header>
-      <section className="introduction flex flex-row items-center justify-center">
+      <section className="introduction min-h-[30vh] flex flex-row items-center justify-center">
         <span className="citations text-black text-center w-3/6">
           Nous propulsons les entreprises vers{" "}
           <em className="text-blond">l’innovation & le succès </em>sur le
@@ -97,6 +121,11 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      {isSubVisible && (
+        <div ref={subContainerRef} className="fixed inset-0 z-20 bg-white">
+          <Sub />
+        </div>
+      )}
     </div>
   );
 }

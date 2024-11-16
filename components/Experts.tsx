@@ -1,8 +1,7 @@
 import Image from "next/image"
 import { gsap } from "gsap";
 import { Button } from "@/components/ui/button"
-import React, { useRef, useEffect } from 'react';
-import useIsMobile from "@/hooks/useIsMobile";
+import React, { useRef, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination } from 'swiper/modules';
 import 'swiper/css';
@@ -11,7 +10,19 @@ import 'swiper/css/pagination';
 
 export default function Experts() {
 
-  const isMobile = useIsMobile(1250);
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1250px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   const topTeam = [
     {
@@ -140,7 +151,7 @@ export default function Experts() {
             <SwiperSlide
             key={index}
             className="flex flex-col items-center py-8">
-              <div className="w-50 h-32 overflow-hidden rounded-xl m-auto mb-4">
+              <div className="w-5/6 h-3/5 overflow-hidden rounded-xl m-auto mb-4">
                 <img src={expert.image} alt={expert.name} className="w-full h-full rounded-lg object-cover" />
               </div>
               <h3 className="citations text-center text-dark_brown_grey">{expert.name}</h3>
@@ -158,8 +169,13 @@ export default function Experts() {
         </div>
   
         <div className="flex justify-center gap-4 py-2">
-          <button className="experts_bouton_2 px-4 py-2 rounded-md sous_titre text-gold bg-white">CONTACTER</button>
-          <button className="experts_bouton px-4 py-2 rounded-md sous_titre bg-gold text-white">REJOINDRE</button>
+          <button 
+          className="experts_bouton_2 px-4 py-2 rounded-md sous_titre text-gold bg-white">
+            <a href="#contact">CONTACTER</a>
+            </button>
+          <button className="experts_bouton px-4 py-2 rounded-md sous_titre bg-gold text-white">
+            REJOINDRE
+            </button>
         </div>
       </section>
     );
@@ -206,7 +222,9 @@ export default function Experts() {
                 </p>
                 <div className="flex justify-center lg:justify-start gap-4">
                   <Button className="experts_bouton_2 bg-white text-gold sous_titre w-44">
+                    <a href="#contact">
                     CONTACTER
+                    </a>
                   </Button>
                   <Button className="bg-gold experts_bouton text-white sous_titre w-48">
                     DEVENIR MEMBRE

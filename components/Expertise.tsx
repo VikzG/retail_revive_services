@@ -1,11 +1,23 @@
 
 'use client'
-import { useEffect, useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 import { gsap } from "gsap";
-import useIsMobile from "@/hooks/useIsMobile";
 
 export default function Expertise() {
-  const isMobile = useIsMobile(1250);
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1250px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
   const sectors = [
     {
       number: "01",

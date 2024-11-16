@@ -8,11 +8,28 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Link from "next/link";
 import Image from "next/image";
-import useIsMobile from "../hooks/useIsMobile"; // Assurez-vous de définir le chemin selon l'endroit où vous stockez le hook
+import Sub from "./Sub";
 
 export default function Services() {
-  const isMobile = useIsMobile(1250);
+  const [isSubVisible, setIsSubVisible] = useState(false); 
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
 
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // Empêche le comportement par défaut du lien (la navigation)
+    setIsSubVisible(true); // Met à jour l'état pour afficher Sub
+  };
+  
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1250px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
   const [hoveredService, setHoveredService] = useState({
     image: "/services/services_img_1.png",
     title: "CONSEIL & STRATEGIE",
@@ -95,7 +112,7 @@ export default function Services() {
           dynamicBullets: true,
         }}
         modules={[Pagination]}
-        className="mySwiper w-full h-[70vh] mt-6"
+        className="mySwiper w-full h-[70vh] mt-6 rounded-lg overflow-hidden"
       >
         {services.map((service, index) => (
           <SwiperSlide key={index} className="relative w-full h-full">
@@ -114,9 +131,16 @@ export default function Services() {
       </Swiper>
           <p className="text-sm mt-4">
             <strong>Vous souhaitez aller encore plus loin ?</strong><br/>
-            <Link href="/club-retail-africa" className="text-gold underline">
-              <strong>Découvrez le Club Retail Africa.</strong>
-            </Link>
+            <Link
+    href="/club-retail-africa"
+    className="text-gold underline"
+    onClick={(e) => {
+      e.preventDefault(); // Empêche la navigation par défaut
+      setIsSubVisible(true); // Active l'état de visibilité
+    }}
+  >
+    <strong>Découvrez le Club Retail Africa.</strong>
+  </Link>
           </p>
       </section>
     );
@@ -137,7 +161,8 @@ export default function Services() {
             </p>
             <strong className="text-black body_text">
               Vous souhaitez aller encore plus loin ?{" "}
-              <Link href="/club-retail-africa">
+              <Link href="#"
+              onClick={handleLinkClick}>
                 <span className="text-gold underline">
                   Découvrez le Club Retail Africa
                 </span>
@@ -269,6 +294,11 @@ export default function Services() {
           </CardContent>
         </Card>
       </div>
+      {isSubVisible && (
+        <div className="fixed inset-0 z-20 bg-white">
+          <Sub />
+        </div>
+      )}
     </section>
   );
 }

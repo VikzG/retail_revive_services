@@ -1,15 +1,74 @@
 import Image from "next/image";
+import {gsap} from "gsap";
+import { useEffect, useRef,useState } from "react";
 import { Star } from "lucide-react";
-import useIsMobile from "@/hooks/useIsMobile";
 
 export default function Club() {
 
-  const isMobile = useIsMobile(1250);
+  const clubSectionRef = useRef<HTMLDivElement>(null);
+  const starsRef = useRef<HTMLDivElement[]>([]);
+
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1250px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  useEffect(() => {
+     {
+      // Animation pour club_section_anim
+      gsap.fromTo(
+        clubSectionRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: clubSectionRef.current,
+            start: "top 95%", // Déclenche quand le haut de la section atteint 80% de la fenêtre
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
+      // Animation pour les étoiles une par une
+      starsRef.current.forEach((star, index) => {
+        if (star) {
+          gsap.fromTo(
+            star,
+            { opacity: 0, y: -20 },
+            {
+              opacity: 1,
+              y: 0,
+              delay: index * 0.2, // Délai progressif
+              duration: 0.6,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: clubSectionRef.current, // Animation synchronisée avec la section
+                start: "top 80%",
+                toggleActions: "play none none none",
+              },
+            }
+          );
+        }
+      });
+    }
+  }, [isMobile]);
+  
 
   if (isMobile) {
     return (
 
-      <section className="pb-0 text-center flex flex-col items-center">
+      <section id="club" className="pb-0 text-center flex flex-col items-center">
       {/* Image at the top */}
       <div className="w-full h-48 relative mb-6">
         <Image
@@ -47,7 +106,7 @@ export default function Club() {
   }
 
   return (
-    <div className="bg-light_beige min-h-screen text-dark_brown_grey flex">
+    <div id="club" className="bg-light_beige min-h-screen text-dark_brown_grey flex">
       {/* Colonne gauche - Image prenant 40% de la largeur */}
       <div className="w-2/5 h-screen relative overflow-hidden rounded-lg shadow-lg">
         <Image
@@ -62,7 +121,7 @@ export default function Club() {
       {/* Colonne droite - Texte et informations prenant 60% de la largeur */}
       <div className="w-3/5 flex flex-col justify-between pt-12">
       <div className="flex flex-row px-16">
-        <div className="flex flex-col">
+        <div ref={clubSectionRef} className="club_section_anim flex flex-col">
           <h1 className="sur_titre_club text-black">
             Pourquoi rejoindre le <br />
             <span className="grand_titre_s text-gold">
@@ -73,22 +132,24 @@ export default function Club() {
 
           {/* Bloc Avis Client en dessous */}
           <div className="bg-white w-3/4 rounded-xl shadow-lg p-6 space-y-4 mt-8">
-            <div className="flex flex-row justify-between">
-              <p className="font-semibold text-gold">AVIS CLIENT</p>
-              <div className="flex items-center">
-                {[...Array(5)].map((_, i) => (
-                  <Star fill="#B69F61" key={i} className="w-5 h-5 text-gold" />
-                ))}
+              <div className="flex flex-row justify-between">
+                <p className="font-semibold text-gold">AVIS CLIENT</p>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <div
+                      key={i}
+                      ref={(el) => (starsRef.current[i] = el!)} // Initialisation des références
+                    >
+                      <Star fill="#B69F61" className="w-5 h-5 text-gold" />
+                    </div>
+                  ))}
+                </div>
               </div>
+              <p className="avis_body_text italic text-dark_brown_grey">
+              "Rejoindre le Club Retail Africa a été une décision déterminante pour notre marque. Grâce aux échanges privilégiés et aux événements organisés par le Club, nous avons pu affiner notre stratégie locale et créer des partenariats clés!”
+              </p>
             </div>
-            <p className="avis_body_text italic text-dark_brown_grey">
-              "Rejoindre le Club Retail Africa a été une décision déterminante
-              pour notre marque. Grâce aux échanges privilégiés et aux événements
-              organisés par le club, nous avons pu affiner notre stratégie locale
-              et créer des partenariats clés."
-            </p>
           </div>
-        </div>
 
         {/* Conteneur flex pour le titre et la liste des avantages à droite */}
         <div className="flex flex-col justify-center lg:flex-row lg:items-start lg:justify-between">

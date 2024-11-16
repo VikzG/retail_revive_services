@@ -1,8 +1,20 @@
-import useIsMobile from "@/hooks/useIsMobile";
+import { useState,useEffect } from "react";
 
 export default function Presse() {
 
-  const isMobile = useIsMobile(900);
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 900px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   // Liste fictive d'articles de presse
   const articles = [
@@ -15,13 +27,13 @@ export default function Presse() {
     {
       id: 2,
       title: "VISION COLLECTIVE ET TRANSFORMATION DU RETAIL EN AFRIQUE VERS UN MARCHE A 1000 MILLIARDS DE DOLLARS",
-      imgSrc: "/presse/ecofin_logo.png",
+      imgSrc: "/presse/logo_ivorian.png",
       link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
     },
     {
       id: 3,
       title: "LE DINER DEBAT DES DECIDEURS : VERS UN RETAIL AFRICAIN A 1000 MILLIARDS DE DOLLARS",
-      imgSrc: "/presse/ecofin_logo.png",
+      imgSrc: "/presse/logo_elle.png",
       link: "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars",
     },
   ];

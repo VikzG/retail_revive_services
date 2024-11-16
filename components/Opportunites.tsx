@@ -1,12 +1,23 @@
 import Image from "next/image"
-import { useEffect, useRef } from "react";
+import { useEffect, useRef,useState } from "react";
 import { Star } from "lucide-react"
 import { gsap } from "gsap";
-import useIsMobile from "@/hooks/useIsMobile"
 
 
 export default function Opportunites() {
-  const isMobile = useIsMobile(1050);
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 1050px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   const clubRef = useRef(null);
   const retailRef = useRef(null);
@@ -27,19 +38,19 @@ export default function Opportunites() {
       .fromTo(
         clubRef.current,
         { x: "-100%", opacity: 0 }, // CLUB : Part de la gauche avec opacité 0
-        { x: "0%", opacity: 1, duration: 1.5, ease: "power2.out" }
+        { x: "0%", opacity: 1, duration: 1, ease: "power2.out" }
       )
       .fromTo(
         retailRef.current,
         { x: "100%", opacity: 0 }, // RETAIL : Part de la droite avec opacité 0
-        { x: "0%", opacity: 1, duration: 1.5, ease: "power2.out" },
-        "-=1.3" // Commence légèrement avant la fin de CLUB
+        { x: "0%", opacity: 1, duration: 0.6, ease: "power2.out" },
+        "-=0.5" // Commence légèrement avant la fin de CLUB
       )
       .fromTo(
         africaRef.current,
         { x: "-100%", opacity: 0 }, // AFRICA : Part de la gauche avec opacité 0
-        { x: "0%", opacity: 1, duration: 1.5, ease: "power2.out" },
-        "-=1.3" // Commence légèrement avant la fin de RETAIL
+        { x: "0%", opacity: 1, duration: 1, ease: "power2.out" },
+        "-=0.1" // Commence légèrement avant la fin de RETAIL
       );
   }, []);
 
@@ -81,7 +92,7 @@ export default function Opportunites() {
                   <button 
               className="opportunite_bouton z-10 bg-gold text-white sous_titre uppercase py-3 px-8 rounded-xl"
             >
-              Dévoiler les avantages
+             <a href="#club">Dévoiler les avantages</a> 
             </button>
     </div>
     
@@ -116,7 +127,7 @@ export default function Opportunites() {
             <button 
               className="opportunite_bouton z-10 bg-gold text-white sous_titre uppercase py-3 px-8 rounded-xl"
             >
-              Dévoiler les avantages
+            <a href="#club"> Dévoiler les avantages</a> 
             </button>
           </div>
           <div className="absolute bottom-10">
