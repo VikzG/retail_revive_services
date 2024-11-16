@@ -1,15 +1,23 @@
 'use client'
 
-import { useState,useEffect } from "react"
-import { useActionState } from "react"
-import { submitContactForm } from "./actions"
-
+import { useState, useEffect } from "react"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [state, formAction] = useActionState(submitContactForm, { message: '', errors: {} })
-
-  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+  const [formData, setFormData] = useState({
+    subject: '',
+    name: '',
+    email: '',
+    message: '',
+  })
+  const [errors, setErrors] = useState({
+    subject: '',
+    name: '',
+    email: '',
+    message: '',
+  })
+  const [successMessage, setSuccessMessage] = useState('')
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");
@@ -17,17 +25,40 @@ export default function Contact() {
       setIsMobile(mediaQuery.matches);
     };
 
-    handleResize(); // Vérifie la condition dès que le composant est monté
-
-    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    handleResize();
+    mediaQuery.addEventListener("change", handleResize);
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    const formData = new FormData(e.currentTarget)
-    formAction(formData)
+
+    // Simuler une validation de formulaire
+    const newErrors = {
+      subject: formData.subject ? '' : 'Le sujet est requis.',
+      name: formData.name ? '' : 'Le nom est requis.',
+      email: formData.email ? '' : 'L\'email est requis.',
+      message: formData.message ? '' : 'Le message est requis.',
+    };
+
+    setErrors(newErrors);
+
+    // Si aucune erreur, simuler un envoi de formulaire réussi
+    if (!Object.values(newErrors).some(err => err)) {
+      setSuccessMessage("Merci pour votre message ! Nous reviendrons vers vous bientôt.");
+      setFormData({ subject: '', name: '', email: '', message: '' }); // Réinitialiser le formulaire
+    }
+
+    setIsSubmitting(false);
   }
 
   const renderForm = () => (
@@ -35,42 +66,50 @@ export default function Contact() {
       <input 
         type="text"
         name="subject"
+        value={formData.subject}
+        onChange={handleInputChange}
         placeholder="Selectionner un sujet*"
         className="w-full p-3 placeholder-gold bg-white border border-gold rounded-xl text-gold"
         required
       />
-      {state.errors?.subject && <p className="text-red-500">{state.errors.subject}</p>}
+      {errors.subject && <p className="text-red-500">{errors.subject}</p>}
 
       <div className="flex space-x-2">
         <div className="flex-1">
           <input 
             type="text" 
             name="name"
+            value={formData.name}
+            onChange={handleInputChange}
             placeholder="Votre nom*" 
             className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold" 
             required 
           />
-          {state.errors?.name && <p className="text-red-500">{state.errors.name}</p>}
+          {errors.name && <p className="text-red-500">{errors.name}</p>}
         </div>
         <div className="flex-1">
           <input 
             type="email" 
             name="email"
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="Votre email*" 
             className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold" 
             required 
           />
-          {state.errors?.email && <p className="text-red-500">{state.errors.email}</p>}
+          {errors.email && <p className="text-red-500">{errors.email}</p>}
         </div>
       </div>
 
       <textarea 
         name="message"
+        value={formData.message}
+        onChange={handleInputChange}
         placeholder="Votre message*" 
         className="w-full min-h-[200px] p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold" 
         required 
       ></textarea>
-      {state.errors?.message && <p className="text-red-500">{state.errors.message}</p>}
+      {errors.message && <p className="text-red-500">{errors.message}</p>}
 
       <div className="flex justify-center">
         <button 
@@ -102,10 +141,10 @@ export default function Contact() {
           {renderForm()}
         </div>
 
-        {state.message && (
+        {successMessage && (
           <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
             <div className="p-8 bg-white text-black text-center rounded-md shadow-lg">
-              <p className="text-xl font-semibold">{state.message}</p>
+              <p className="text-xl font-semibold">{successMessage}</p>
             </div>
           </div>
         )}
@@ -132,10 +171,10 @@ export default function Contact() {
 
         {renderForm()}
 
-        {state.message && (
+        {successMessage && (
           <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
             <div className="p-8 bg-white text-black text-center rounded-md shadow-lg">
-              <p className="text-xl font-semibold">{state.message}</p>
+              <p className="text-xl font-semibold">{successMessage}</p>
             </div>
           </div>
         )}
