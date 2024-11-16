@@ -3,7 +3,11 @@ import {gsap} from "gsap";
 import { useEffect, useRef,useState } from "react";
 import { Star } from "lucide-react";
 
-export default function Club() {
+type ClubProps = {
+  setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Club({ setIsSubVisible }: ClubProps) {
 
   const clubSectionRef = useRef<HTMLDivElement>(null);
   const starsRef = useRef<HTMLDivElement[]>([]);
@@ -98,7 +102,12 @@ export default function Club() {
         <p className="body_text text-white py-4">
           Rejoignez le Club Retail Africa dès aujourd'hui pour propulser<br/> votre entreprise vers l'excellence en accédant aux bons partenaires et à des informations stratégiques.
         </p>
-        <button className="btn_border_2 bouton_page_garde sous_titre text-center p-4">formulaire
+        <button className="btn_border_2 bouton_page_garde sous_titre text-center p-4"
+                     onClick={(e) => {
+                      e.preventDefault();
+                      setIsSubVisible(true);
+                    }}
+        >formulaire
         d’inscription</button>
       </div>
     </section>
@@ -182,7 +191,12 @@ export default function Club() {
                 <p className="body_text text-white"> <strong>Rejoignez le Club Retail Africa </strong>dès aujourd'hui pour propulser votre entreprise vers l'excellence en vous connectant aux bons partenaires et en accédant à des informations stratégiques.
                 </p>
                 </div>
-                <button className="btn_border_2 bouton_page_garde sous_titre text-center p-4">accéder au formulaire<br/>
+                <button 
+                             onClick={(e) => {
+                              e.preventDefault();
+                              setIsSubVisible(true);
+                            }}
+                className="btn_border_2 bouton_page_garde sous_titre text-center p-4">accéder au formulaire<br/>
                 d’inscription</button>
         </div>
       </div>

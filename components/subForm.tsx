@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState,useRef,useEffect } from "react";
+import gsap from "gsap";
 
 interface MultiStepFormProps {
   onComplete: () => void; // Définition du type pour onComplete
@@ -15,6 +16,19 @@ export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
     secteur: "",
     fonction: "",
   });
+
+  const stepContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Animation de transition entre les étapes
+    if (stepContainerRef.current) {
+      gsap.fromTo(
+        stepContainerRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+      );
+    }
+  }, [step]);
 
 
   const handleSelect = (value: string) => {
@@ -54,7 +68,7 @@ export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
   };
   return (
     <div className="form-container flex flex-col justify-center items-center bg-light_beige h-screen w-full">
-    <div className="max-w-xl min-w-[220px] p-6 bg-light_beige">
+    <div ref={stepContainerRef} className="max-w-xl min-w-[220px] p-6 bg-light_beige">
       {step === 1 && (
         <>
           <h1 className="citations text-center mb-4">

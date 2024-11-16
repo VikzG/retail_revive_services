@@ -592,6 +592,25 @@ body {
   }
 }
 
+
+@media (max-width: 900px) {
+  .sticker{
+    width: 100%;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sticker_left{
+    width: 100%;
+  }
+
+  .sticker_right {
+    width: 100%;
+  }
+}
+
 @media (max-width: 576px) {
   .banner_container{
     min-height: 852px;

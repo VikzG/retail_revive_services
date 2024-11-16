@@ -8,7 +8,11 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-export default function Experts() {
+type ExpertProps = {
+  setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Experts({ setIsSubVisible }: ExpertProps) {
 
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
 
@@ -173,7 +177,12 @@ export default function Experts() {
           className="experts_bouton_2 px-4 py-2 rounded-md sous_titre text-gold bg-white">
             <a href="#contact">CONTACTER</a>
             </button>
-          <button className="experts_bouton px-4 py-2 rounded-md sous_titre bg-gold text-white">
+          <button 
+             onClick={(e) => {
+              e.preventDefault();
+              setIsSubVisible(true);
+            }}
+          className="experts_bouton px-4 py-2 rounded-md sous_titre bg-gold text-white">
             REJOINDRE
             </button>
         </div>
@@ -226,7 +235,12 @@ export default function Experts() {
                     CONTACTER
                     </a>
                   </Button>
-                  <Button className="bg-gold experts_bouton text-white sous_titre w-48">
+                  <Button 
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setIsSubVisible(true);
+                              }}
+                  className="bg-gold experts_bouton text-white sous_titre w-48">
                     DEVENIR MEMBRE
                   </Button>
                 </div>

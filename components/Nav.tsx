@@ -1,14 +1,14 @@
+import React, { FC, useState, useEffect } from "react";
 import Link from "next/link";
-import { FC } from "react";
-import { useState,useEffect } from "react";
 
-interface NavProps {
+
+type NavProps = {
   isSubVisible: boolean;
-  setIsSubVisible: (active: boolean) => void;
-}
+  setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-const Nav: FC<NavProps> = ({ isSubVisible, setIsSubVisible }) => {
-  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1050px)");
@@ -16,49 +16,87 @@ const Nav: FC<NavProps> = ({ isSubVisible, setIsSubVisible }) => {
       setIsMobile(mediaQuery.matches);
     };
 
-    handleResize(); // Vérifie la condition dès que le composant est monté
-
+    handleResize(); // Vérifie dès que le composant est monté
     mediaQuery.addEventListener("change", handleResize); // Écoute les changements
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
-  
+
+  const handleLogoClick = () => {
+    if (isMobile) {
+      setIsSubVisible(!isSubVisible); // Ouvre ou ferme le menu mobile
+    }
+  };
+
   return (
     <nav className="fixed flex items-center justify-between px-4 py-2 z-30 bg-light_beige border-b border-neutral-200 top-0 left-0 w-full">
       {/* Left section */}
       <div className="flex items-center space-x-8">
-        <Link href="/" className="shrink-0">
-          <img src="/logo/logo_rss.png" alt="Club Icon" className="h-7 w-7 club_icon_desktop" />
+        <Link href="/" className="shrink-0" onClick={handleLogoClick}>
+          <img
+            src="/logo/logo_rss.png"
+            alt="Club Icon"
+            className={`h-7 w-7 cursor-pointer ${
+              isMobile ? "club_icon_mobile" : "club_icon_desktop"
+            }`}
+          />
         </Link>
 
-        {/* Affichage conditionnel basé sur subActive */}
-        <div className="nav_words hidden items-center space-x-6 text-sm font-medium">
-          {isSubVisible ? (
-            <Link href="#" onClick={() => setIsSubVisible(false)} className="nav_anchor text-black">
-              Retour au site
-            </Link>
-          ) : (
-            <>
-              <Link href="#club-retail" onClick={() => setIsSubVisible(true)} className="nav_anchor text-black">
-                CLUB RETAIL AFRICA
+        {!isMobile && (
+          <div className="nav_words hidden items-center space-x-6 text-sm font-medium">
+            {isSubVisible ? (
+              <Link
+                href="#"
+                onClick={() => setIsSubVisible(false)}
+                className="nav_anchor text-black"
+              >
+                Retour au site
               </Link>
-              <Link href="#services" className="nav_anchor text-black">
-                SERVICES
-              </Link>
-              <Link href="#expertise" className="nav_anchor text-black">
-                EXPERTISE
-              </Link>
-              <Link href="#actualites" className="nav_anchor text-black">
-                ACTUALITÉS
-              </Link>
-            </>
-          )}
-        </div>
+            ) : (
+              <>
+                <Link
+                  href="#club-retail"
+                  onClick={() => setIsSubVisible(true)}
+                  className="nav_anchor text-black"
+                >
+                  CLUB RETAIL AFRICA
+                </Link>
+                <Link href="#services" className="nav_anchor text-black">
+                  SERVICES
+                </Link>
+                <Link href="#expertise" className="nav_anchor text-black">
+                  EXPERTISE
+                </Link>
+                <Link href="#actualites" className="nav_anchor text-black">
+                  ACTUALITÉS
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Center logo */}
       <div className="retail_revive_svg_container absolute left-1/2 transform -translate-x-1/2">
         <Link href="/">
           <svg
+            className="retail_revive_svg"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 372 206"
+            width="150"
+            height="35"
+          >
+            {/* SVG content */}
+          </svg>
+        </Link>
+      </div>
+
+      {/* Right section */}
+      <div className="flex items-center">
+        {isMobile ? (
+          <>
+            {/* Vos anciens SVG pour la navigation mobile */}
+            <Link href="#contact">
+            <svg
             className="retail_revive_svg"
             version="1.1"
             id="Calque_1"
@@ -120,18 +158,9 @@ const Nav: FC<NavProps> = ({ isSubVisible, setIsSubVisible }) => {
             </g>
             <circle fill="#B69F61" className="st0" cx="333.1" cy="29.5" r="11.5" />
           </svg>
-        </Link>
-      </div>
-
-      {/* Right section */}
-      <div className="flex items-center">
-      <Link href="/" className="shrink-0">
-          <img src="/logo/logo_rss.png" alt="Club Icon" className="h-7 w-7 club_icon_mobile" />
-        </Link>
-      <Link
-          href="#contact"
-        >
-          <svg
+            </Link>
+            <Link href="/">
+            <svg
             className="enveloppe_icon"
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
@@ -158,41 +187,38 @@ l-105 -85 0 176 c0 96 2 175 4 175 2 0 51 -39 108 -86z m162 -125 c19 -9 32
               />
             </g>
           </svg>
-        </Link>
-        <Link href="/">
-          <svg
-            className="user_icon"
-            version="1.0"
-            xmlns="http://www.w3.org/2000/svg"
-            width="40" // Ajouter des dimensions explicites
-            height="25"
-            viewBox="0 0 78.000000 75.000000"
-          >
-            <g
-              transform="translate(0.000000,75.000000) scale(0.100000,-0.100000)"
-              fill="#000000"
-              stroke="none"
-            >
-              <path
-                d="M260 627 c-52 -17 -114 -84 -128 -139 -7 -27 -12 -121 -12 -218 l0
--171 68 3 67 3 5 175 c3 96 9 181 13 188 5 6 21 19 38 27 18 10 29 23 29 36 0
-25 16 57 43 87 l20 22 -54 -1 c-30 -1 -70 -6 -89 -12z"
-              />
-              <path
-                d="M450 627 c-41 -14 -80 -68 -80 -111 0 -40 33 -94 66 -106 38 -15 97
--12 122 6 51 36 66 107 32 161 -30 50 -82 69 -140 50z"
-              />
-              <path
-                d="M376 368 c-24 -38 -47 -119 -55 -191 -4 -37 -5 -70 -2 -72 2 -3 83
--5 179 -5 l175 0 -6 73 c-5 75 -37 181 -61 205 -11 12 -18 11 -44 -2 -39 -20
--98 -20 -136 -1 -36 19 -33 19 -50 -7z"
-              />
-            </g>
-          </svg>
-        </Link>
+            </Link>
+          </>
+        ) : (
+          <>
+            {/* Vos anciens SVG pour la navigation desktop */}
+            <Link href="#contact">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 92 63"
+                width="40"
+                height="25"
+                fill="currentColor"
+              >
+                {/* Contenu de l'icône enveloppe */}
+              </svg>
+            </Link>
+            <Link href="/">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 78 75"
+                width="40"
+                height="25"
+                fill="currentColor"
+              >
+                {/* Contenu de l'icône utilisateur */}
+              </svg>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );
 };
-export default Nav;
 
+export default Nav;

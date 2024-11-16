@@ -2,7 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState,useEffect } from "react";
 
-export default function Actualites() {
+type ClubProps = {
+  setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Actualites({ setIsSubVisible }: ClubProps) {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
 
   useEffect(() => {
@@ -81,6 +85,10 @@ export default function Actualites() {
       {/* Join Button */}
       <div className="mt-6">
       <Link 
+                           onClick={(e) => {
+                            e.preventDefault();
+                            setIsSubVisible(true);
+                          }}
           href="/club"
           className="inline-block actualite_bouton sous_titre bg-white text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
           >
@@ -152,6 +160,10 @@ export default function Actualites() {
             et opportunités du marché.</span>
           </p>
           <Link 
+                               onClick={(e) => {
+                                e.preventDefault();
+                                setIsSubVisible(true);
+                              }}
           href="/club"
           className="inline-block actualite_bouton sous_titre bg-white text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
           >

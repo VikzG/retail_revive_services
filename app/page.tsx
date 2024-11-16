@@ -22,7 +22,7 @@ export default function Home() {
   const headerTitleRef = useRef(null);
   const headerSpanRef = useRef(null);
 
-  const [isSubVisible, setIsSubVisible] = useState(false);
+  const [isSubVisible, setIsSubVisible] = useState<boolean>(false);
   const subContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -111,12 +111,13 @@ export default function Home() {
         </span>
       </section>
       <main>
-        <Services />
+        <Services setIsSubVisible={setIsSubVisible}/>
+        {isSubVisible && <Sub />}
         <Expertise />
-        <Experts />
+        <Experts setIsSubVisible={setIsSubVisible}/>
         <Opportunites />
-        <Club />
-        <Actualites />
+        <Club setIsSubVisible={setIsSubVisible}/>
+        <Actualites setIsSubVisible={setIsSubVisible}/>
         <Presse />
         <Contact />
       </main>

@@ -11,7 +11,7 @@ export default function Sub() {
   };
 
   return (
-    <div className="h-screen bg-light_beige flex justify-center items-center">
+    <div className="h-screen bg-light_beige flex justify-center items-center overflow-hidden">
       <h1 className="grand_titre_xl w-full text-center text-blond flex flex-col gap-56">
         <span className="text-start ms-28">CLUB</span>
         <span className="text-end me-28">RETAIL</span>
@@ -19,7 +19,7 @@ export default function Sub() {
       </h1>
 
       {/* Contenu de "sticker" */}
-      <div className="sticker absolute h-1/2 w-[800px] shadow rounded-xl bg-white opacity-90 p-12 flex">
+      <div className="sticker absolute h-3/4 shadow rounded-xl bg-white opacity-90 p-12 flex">
         {isCompleted ? (
           // Message affiché après l'inscription
           <div className="flex flex-col justify-center items-center w-full text-center">
@@ -29,7 +29,7 @@ export default function Sub() {
           // Contenu initial
           <>
             {/* Colonne gauche */}
-            <div className="w-1/2 flex flex-col gap-8 justify-start items-start">
+            <div className="sticker_left w-1/2 flex flex-col gap-8 justify-start items-start">
               <div>
                 <h2 className="sous_titre">DEVENEZ MEMBRE DU</h2>
                 <h3 className="grand_titre_xs">CLUB RETAIL AFRICA</h3>
@@ -55,7 +55,7 @@ export default function Sub() {
             </div>
 
             {/* Colonne droite */}
-            <div className="w-1/2 flex flex-col gap-4 body_text justify-center items-start">
+            <div className="sticker_right w-1/2 flex flex-col gap-4 body_text justify-center items-start">
               <div className="flex flex-col border-b border-black pb-2 w-full">
                 <strong>2 dîners par an</strong>
                 <span>aux côtés des décideurs influents du retail.</span>
