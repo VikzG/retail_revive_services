@@ -138,7 +138,6 @@ export default function Club() {
                   {[...Array(5)].map((_, i) => (
                     <div
                       key={i}
-                      ref={(el) => (starsRef.current[i] = el!)} // Initialisation des références
                     >
                       <Star fill="#B69F61" className="w-5 h-5 text-gold" />
                     </div>
