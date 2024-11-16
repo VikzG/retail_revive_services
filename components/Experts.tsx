@@ -159,7 +159,7 @@ export default function Experts() {
             </SwiperSlide>
           ))}
         </Swiper>
-        <h2 className="citations text-center py-8">
+        <h2 className="citations text-center py-8 pt-0">
                 "Réinventer l'avenir des marques sur le continent, en alliant{" "}
                 <span className="text-gold">ambition locale</span> et{" "}
                 <span className="text-gold">excellence internationale</span>."
