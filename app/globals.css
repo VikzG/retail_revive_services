@@ -28,29 +28,7 @@ body {
 /* Loader */ 
 
 
-/* Définition de l'animation pour le mouvement du cercle */
-@keyframes moveCircle {
-  0% {
-    cx: 333.1;
-    cy: 29.5;
-  }
-  25% {
-    cx: 280;
-    cy: 120; /* Position pour le point au-dessus du "i" */
-  }
-  50% {
-    cx: 200;
-    cy: 170; /* Position pour le "L" */
-  }
-  75% {
-    cx: 270;
-    cy: 170; /* Position à droite du "L" */
-  }
-  100% {
-    cx: 333.1;
-    cy: 29.5; /* Retour au point de départ */
-  }
-}
+
 
 
 /* banner */
@@ -86,8 +64,17 @@ body {
 }
 
 .enveloppe_icon {
+  width: 30px;
+  height: 30px;
   transition: all 300ms ease-in-out !important;
 }
+
+.user_icon {
+  width: 30px;
+  height: 30px;
+  transition: all 300ms ease-in-out !important;
+}
+
 .enveloppe_icon:hover {
   fill: #B69F61 !important;
 
@@ -562,11 +549,17 @@ body {
   
 }
 
+@media (max-width: 1050px) {
+
+.nav_container {
+  display: none;
+}
+}
+
 @media (max-width: 1000px) {
 
   .club_icon_mobile {
     display: block ;
-    margin-right: 5px;
   }
   .club_icon_desktop {
     display: none ;
