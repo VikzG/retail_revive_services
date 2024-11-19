@@ -11,7 +11,7 @@ export default function Sub() {
   };
 
   return (
-    <div className="h-screen bg-light_beige flex justify-center items-center overflow-hidden">
+    <div className="min-h-screen min-w-full bg-light_beige flex justify-center items-center overflow-hidden">
       <h1 className="grand_titre_xl w-full text-center text-blond flex flex-col gap-56">
         <span className="text-start ms-28">CLUB</span>
         <span className="text-end me-28">RETAIL</span>

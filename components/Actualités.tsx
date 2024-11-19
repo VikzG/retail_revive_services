@@ -1,13 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useRef } from "react";
+import { gsap } from "gsap";
 
 type ClubProps = {
   setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function Actualites({ setIsSubVisible }: ClubProps) {
-  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+  const [isMobile, setIsMobile] = useState(false);
+  const actualitesRef = useRef(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -19,6 +21,21 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
 
     mediaQuery.addEventListener("change", handleResize); // Écoute les changements
     return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  useEffect(() => {
+    // Animation GSAP pour faire apparaître le conteneur avec un effet d'opacité
+    gsap.fromTo(
+      ".actualites_animation", 
+      { opacity: 0 }, // Valeur initiale de l'opacité (invisible)
+      { opacity: 1, duration: 2, ease: "power2.out", scrollTrigger: {
+          trigger: actualitesRef.current, // Le trigger est le conteneur actualitesRef
+          start: "top 70%", // L'animation commence lorsque la section est à 80% du haut de la fenêtre
+          end: "bottom 20%", // L'animation dure jusqu'à ce que la section soit à 20% du bas de la fenêtre
+          scrub: false, // L'animation suit le défilement
+          once: true // L'animation se joue une seule fois
+      }}
+    );
   }, []);
 
 
@@ -99,7 +116,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
     )
   }
   return (
-    <section id="actualites" className="max-h-screen py-16 px-4 lg:px-20 bg-white">
+    <section id="actualites" className="actualites_animation max-h-screen py-16 px-4 lg:px-20 bg-white">
       <div className="grid grid-cols-3 lg:grid-cols-3 gap-10 p-8">
         
         {/* Colonne 1 : Nos Actualités */}

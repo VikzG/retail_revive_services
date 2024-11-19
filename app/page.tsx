@@ -41,22 +41,16 @@ export default function Home() {
       );
   }, []);
 
-  const toggleSub = () => {
-    setIsSubVisible(!isSubVisible);
-  };
-
-  const handleShowSub = () => {
-    setIsSubVisible(true);
-    setTimeout(() => {
-      if (subContainerRef.current) {
-        gsap.fromTo(
-          subContainerRef.current,
-          { y: "100%", opacity: 0 },
-          { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out" }
-        );
-      }
-    }, 0);
-  };
+  useEffect(() => {
+    if (isSubVisible && subContainerRef.current) {
+      // Animation d'apparition de Sub
+      gsap.fromTo(
+        subContainerRef.current,
+        { y: "100%", opacity: 0 },
+        { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out" }
+      );
+    }
+  }, [isSubVisible]);
 
   return (
     <div>
@@ -112,7 +106,6 @@ export default function Home() {
       </section>
       <main>
         <Services setIsSubVisible={setIsSubVisible}/>
-        {isSubVisible && <Sub />}
         <Expertise />
         <Experts setIsSubVisible={setIsSubVisible}/>
         <Opportunites />
@@ -123,7 +116,7 @@ export default function Home() {
       </main>
       <Footer />
       {isSubVisible && (
-        <div ref={subContainerRef} className="fixed inset-0 z-20 bg-white">
+        <div ref={subContainerRef} className="fixed min-h-screen overflow-hidden inset-0 z-20 bg-white">
           <Sub />
         </div>
       )}

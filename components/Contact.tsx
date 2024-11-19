@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from "react"
+import gsap from "gsap/all"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -28,6 +29,24 @@ export default function Contact() {
     handleResize();
     mediaQuery.addEventListener("change", handleResize);
     return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
+  useEffect(() => {
+    // Animation avec GSAP : effet d'opacité de 0 à 1
+    gsap.fromTo(
+      '.contact-animation', // Cible de l'animation
+      { opacity: 0 }, // Opacité initiale
+      {
+        opacity: 1, // Opacité finale
+        duration: 1.5, // Durée de l'animation
+        ease: "power2.out", // Courbe d'accélération
+        scrollTrigger: {
+          trigger: '.contact-animation', // Déclencheur de l'animation
+          start: "top 60%", // L'animation commence quand l'élément est à 80% dans la fenêtre
+          toggleActions: "play none none none", // L'animation ne se joue qu'une fois
+        },
+      }
+    );
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -162,7 +181,7 @@ export default function Contact() {
         />
       </div>
 
-      <div className="w-3/4 flex flex-col items-center gap-20 justify-center px-4">
+      <div className="contact-animation w-3/4 flex flex-col items-center gap-20 justify-center px-4">
         <h2 className="grand_titre_s">CONTACTEZ-NOUS</h2>
         <p className="w-3/4 sous_titre text-center">
           VOUS AVEZ UN PROJET ? UNE QUESTION ?<br />

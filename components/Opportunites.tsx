@@ -22,6 +22,8 @@ export default function Opportunites() {
   const clubRef = useRef(null);
   const retailRef = useRef(null);
   const africaRef = useRef(null);
+  const animationRef = useRef(null);
+
 
   useEffect(() => {
     const timeline = gsap.timeline({
@@ -51,7 +53,13 @@ export default function Opportunites() {
         { x: "-100%", opacity: 0 }, // AFRICA : Part de la gauche avec opacité 0
         { x: "0%", opacity: 1, duration: 1, ease: "power2.out" },
         "-=0.1" // Commence légèrement avant la fin de RETAIL
+      )
+      .fromTo(
+        animationRef.current,
+        { opacity: 0 }, // Valeur initiale
+        { opacity: 1, duration: 2, delay: 0.5, ease: "power2.out" } // Valeur finale avec durée et easing
       );
+
   }, []);
 
  if (isMobile) {
@@ -119,6 +127,7 @@ export default function Opportunites() {
             <span ref={retailRef} className="text-center">RETAIL</span>
             <span ref={africaRef} className="text-start ms-12">AFRICA</span>
           </h1>
+          <div ref={animationRef} className="opportunite_animation">
           <div className="flex flex-row gap-32 ms-12">
             <p className="sous_titre">
               VOUS OUVRE LES PORTES D'UN RÉSEAU <br/>
@@ -138,6 +147,7 @@ export default function Opportunites() {
             environnement stimulant pour <strong className="body_text">accélérer la croissance de votre entreprise</strong> et{" "}
             <strong className="body_text">rester à la pointe des évolutions du marché africain.</strong>
           </p>
+        </div>
         </div>
 
         {/* Right column - Image positioned to the right */}

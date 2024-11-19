@@ -38,7 +38,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
           ease: "power2.out",
           scrollTrigger: {
             trigger: clubSectionRef.current,
-            start: "top 95%", // Déclenche quand le haut de la section atteint 80% de la fenêtre
+            start: "top 60%", // Déclenche quand le haut de la section atteint 80% de la fenêtre
             toggleActions: "play none none none",
           },
         }
@@ -54,11 +54,11 @@ export default function Club({ setIsSubVisible }: ClubProps) {
               opacity: 1,
               y: 0,
               delay: index * 0.2, // Délai progressif
-              duration: 0.6,
+              duration: 1,
               ease: "power2.out",
               scrollTrigger: {
                 trigger: clubSectionRef.current, // Animation synchronisée avec la section
-                start: "top 80%",
+                start: "top 70%",
                 toggleActions: "play none none none",
               },
             }
@@ -146,7 +146,8 @@ export default function Club({ setIsSubVisible }: ClubProps) {
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
                     <div
-                      key={i}
+                    key={i} 
+                    ref={(el) => starsRef.current.push(el)}
                     >
                       <Star fill="#B69F61" className="w-5 h-5 text-gold" />
                     </div>
