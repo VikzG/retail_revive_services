@@ -147,7 +147,6 @@ export default function Club({ setIsSubVisible }: ClubProps) {
                   {[...Array(5)].map((_, i) => (
                     <div
                     key={i} 
-                    ref={(el) => starsRef.current.push(el)}
                     >
                       <Star fill="#B69F61" className="w-5 h-5 text-gold" />
                     </div>
@@ -161,9 +160,9 @@ export default function Club({ setIsSubVisible }: ClubProps) {
           </div>
 
         {/* Conteneur flex pour le titre et la liste des avantages à droite */}
-        <div className="flex flex-col justify-center lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex flex-col justify-center">
           {/* Liste des avantages avec séparation par une ligne noire */}
-          <ul className="space-y-6 w-80 body_text text-dark_brown_grey lg:w-1/2 lg:ml-10">
+          <ul className="space-y-6 w-80 body_text text-dark_brown_grey">
             <li className="border-b border-black pb-4 last:border-b-0">
               <strong>2 dîners par an</strong> <br/>aux côtés des décideurs influents
               du retail.
