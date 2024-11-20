@@ -1,125 +1,142 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Presse() {
+  const [currentArticle, setCurrentArticle] = useState(0);
+  const containerRef = useRef(null);
 
-  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 900px)");
-    const handleResize = () => {
-      setIsMobile(mediaQuery.matches);
-    };
-
-    handleResize(); // Vérifie la condition dès que le composant est monté
-
-    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
-    return () => mediaQuery.removeEventListener("change", handleResize);
-  }, []);
+  type Article = {
+    id: number;
+    title: string;
+    phrase: string;
+    imgSrc: string;
+    imgLogo: string;
+    link: string;
+  };
 
   // Liste fictive d'articles de presse
-  const articles = [
+  const articles: Article[] = [
     {
       id: 1,
-      title: "RETAIL EN AFRIQUE : VERS UN MARCHÉ À 1000 MILLIARDS DE DOLLARS",
-      imgSrc: "/presse/ecofin_logo.png",
-      link: "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars",
+      title: '"Dîner-Débat des décideurs"',
+      phrase:
+        "Le 10 octobre 2024, La Résidence Abidjan a accueilli le tout premier Dîner-Débat des Décideurs, un événement exclusif organisé par Retail Revive Services (RRS), un cabinet panafricain spécialisé...",
+      imgSrc: "/presse/presse_1.png",
+      imgLogo: "/presse/logo_elle.png",
+      link: "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars",
     },
     {
       id: 2,
-      title: "VISION COLLECTIVE ET TRANSFORMATION DU RETAIL EN AFRIQUE VERS UN MARCHE A 1000 MILLIARDS DE DOLLARS",
-      imgSrc: "/presse/logo_ivorian.png",
-      link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
+      title:
+        '"Retail en Afrique"',
+      phrase:
+        "Organisé par Retail Revive Services (RRS), le cabinet panafricain spécialisé dans la transformation des organisations retail, cet événement visait à poser les bases de la stratégie future du retail africain...",
+      imgSrc: "/presse/presse_2.png",
+      imgLogo: "/presse/logo_ivorian.png",
+      link: "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars",
     },
     {
       id: 3,
-      title: "LE DINER DEBAT DES DECIDEURS : VERS UN RETAIL AFRICAIN A 1000 MILLIARDS DE DOLLARS",
-      imgSrc: "/presse/logo_elle.png",
-      link: "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars",
+      title:
+        '"Vision collective et transformation"',
+      phrase:
+        "En Afrique, le secteur du retail connaît une transformation rapide, avec un marché estimé à près de 1000 milliards de dollars d’ici 2030. D’après les dernières analyses du Baromètre Retail en Afrique de Deloitte...",
+      imgSrc: "/presse/presse_3.png",
+      imgLogo: "/presse/ecofin_logo.png",
+      link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
     },
   ];
 
+  // Gestion du changement automatique des articles
   useEffect(() => {
-    gsap.utils.toArray('.card').forEach(card => {
-      gsap.fromTo(
-        ".article_presse_animation", 
-        { opacity: 0, y: 100 },  // Commence avec une opacité de 0 et une position Y décalée
-        {
-          opacity: 1,           // Opacité finale
-          y: 0,                 // Position finale sur l'axe Y
-          duration: 1, 
-          stagger:0.1,     // Durée de l'animation
-          ease: "power2.out",   // Courbe d'accélération
-          scrollTrigger: {    // Le déclencheur de l'animation est chaque carte
-            start: "top 60%",    // Quand l'élément entre dans la fenêtre à 80%
-            toggleActions: "play none none none", // Animation qui ne se joue qu'une fois
-          }
-        }
-      );
+    const interval = setInterval(() => {
+      // Animation de sortie
+      gsap.to(containerRef.current, {
+        opacity: 0.5,
+        duration: 0.5,
+        onComplete: () => {
+          // Changer l'article après l'animation de sortie
+          setCurrentArticle((prev) => (prev + 1) % articles.length);
+
+          // Animation d'entrée
+          gsap.to(containerRef.current, { opacity: 1, duration: 0.5 });
+        },
+      });
+    }, 3000); // Changement toutes les 3 secondes
+    return () => clearInterval(interval);
+  }, [articles.length]);
+
+  const handleDotClick = (index: number) => {
+    gsap.to(containerRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      onComplete: () => {
+        setCurrentArticle(index);
+        gsap.to(containerRef.current, { opacity: 1, duration: 0.5 });
+      },
     });
-  }, []);
+  };
+
+  const current = articles[currentArticle];
 
   return (
-    <section className="flex items-center justify-between bg-light_beige text-black p-10">
-      {/* Texte "PRESSE" sur le côté gauche */}
-      {!isMobile && (
-        <div className="rotate-text">
-          <p className="grand_titre_s text-dark_brown_grey">PRESSE</p>
-        </div>
-      )}
+    <section className="relative w-full h-[450px] overflow-hidden">
+      {/* Image de fond */}
+      <Image
+        ref={containerRef} 
+        src={current.imgSrc}
+        alt={current.title}
+        layout="fill"
+        objectFit="cover"
+        className="absolute top-0 left-0 w-full h-full"
+      />
 
-      {/* Cartes d'articles de presse */}
-      <div className={`flex-1 flex justify-around items-center ${isMobile ? 'flex-col' : ''}`}>
-        {isMobile && (
-          <h2 className="grand_titre_s">Presse</h2>
-        )}
-        {articles.map((article) => (
-          <div key={article.id} className="article_presse_animation card bg-transparent text-center p-6 mx-4">
-            <img 
-              src={article.imgSrc} 
-              alt={`Agence Ecofin ${article.id}`} 
-              className="mb-4 w-44 h-auto min-w-[130px]" 
-            />
-            <p className="body_text mb-4 text-lg">
-              “{article.title}”
-            </p>
-            <button className="presse_bouton px-8 py-2 border sous_titre border-black rounded-lg">
-              <a href={article.link} target="_blank" rel="noopener noreferrer">
-                VOIR L'ARTICLE
-              </a>
+      {/* Overlay avec contenu */}
+      <div className="absolute gap-8 top-16 left-[50%] translate-x-[-50%] bg-light_beige opacity-90 w-[850px] h-2/3 flex flex-row justify-center items-center text-white p-8 rounded-2xl text-center">
+      <div className="w-2/5 flex flex-col-reverse gap-8">
+        <div className="mb-4">
+          <Image
+            src={current.imgLogo}
+            alt="Logo Presse"
+            width={200}
+            height={70}
+            className="mx-auto"
+          />
+        </div>
+        <h3 className="sous_titre text-black uppercase tracking-widest">
+          Ils parlent de nous
+        </h3>
+        </div>
+        <div className="flex flex-col">
+        <h1 className="citations text-start text-black my-2">{current.title}</h1>
+        <p className="text-start body_text text-black max-w-2xl mx-auto my-4">
+          {current.phrase}
+        </p>
+        <div className="flex flex-row justify-between">
+        <button
+              onClick={() => window.open(current.link, "_blank")}
+              className="border-x border-y mt-2 sous_titre text-black px-8 py-2 bg-transparent border-black rounded-lg"
+            ><strong>
+              Voir l'article complet</strong>
             </button>
-          </div>
-        ))}
-      </div>
-
-      {/* Texte "PRESSE" sur le côté droit */}
-      {!isMobile && (
-        <div className="rotate-text-2">
-          <p className="grand_titre_s text-dark_brown_grey">PRESSE</p>
+            {/* Points radio */}
+            <div className="flex gap-2 me-6 items-center justify-center">
+  {articles.map((_, index: number) => (
+    <button
+      key={index}
+      onClick={() => handleDotClick(index)}
+      className={`w-3 h-3 rounded-full border-x border-y border-black ${
+        index === currentArticle ? "bg-gold" : "bg-transparent"
+      }`}
+      aria-label={`Article ${index + 1}`}
+    ></button>
+  ))}
+</div>
         </div>
-      )}
-
-      <style jsx>{`
-        .rotate-text {
-          writing-mode: vertical-rl;
-          transform: rotate(180deg);
-          margin: 0 20px;
-        }
-        .rotate-text-2 {
-          writing-mode: vertical-rl;
-          transform: rotate(360deg);
-          margin: 0 20px;
-        }
-        .card {
-          width: 30%; /* Élargi la carte */
-          height: auto; /* Ajuste la hauteur automatiquement */
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 20px; /* Augmente l'espace interne de la carte */
-        }
-      `}</style>
+      </div>
+      </div>
     </section>
   );
 }

@@ -199,7 +199,7 @@ body {
 
 /* Appliquer le noir et blanc sur les slides non actifs */
 .swiper-slide img {
-  filter: grayscale(100%);
+  filter: blur(5px) grayscale(100%);
   transition: all 0.3s ease; /* Transition douce pour l'effet */
 }
 
@@ -215,7 +215,7 @@ body {
 
 
 .swiper-slide-active img {
-  filter: grayscale(0%); /* Réinitialiser le filtre pour le slide actif */
+  filter: blur(0px) grayscale(0%); /* Réinitialiser le filtre pour le slide actif */
 }
 
 .swiper-slide-active h3 {
@@ -224,6 +224,14 @@ body {
 
 .swiper-slide-active p {
   opacity: 100; /* Réinitialiser le filtre pour le slide actif */
+}
+
+.blur {
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
 }
 
 
@@ -491,7 +499,7 @@ body {
 /* Classe pour le texte du corps */
 .body_text {
   font-family: 'Poppins';
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 19px;
   letter-spacing: 1px; /* Utilise 0.01em pour un espacement de 1% */
 }
@@ -517,6 +525,7 @@ body {
   letter-spacing: 1px;
 }
 
+
 .btn_gold_full {
   width: 10rem;
   height: 2.5rem;
@@ -528,9 +537,17 @@ body {
 
 /* Slider */ 
 
-.swiper-pagination-bullet {
+.swiper-pagination-bullet-active {
   background: #B69F61 !important;
+  border: solid white 1px!important;
 }
+.swiper-pagination-bullet {
+  background: transparent ;
+  border: solid white 1.5px;
+  width: 8px;
+  height: 8px;
+}
+
 
 
 /* breakpoints mobile */
@@ -633,7 +650,7 @@ body {
   }
 
   .body_text {
-    font-size: 11px;
+    font-size: 10.5px;
     line-height: 16.5px;
     letter-spacing: 1px;
   }

@@ -97,8 +97,8 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <section className="introduction min-h-[30vh] flex flex-row items-center justify-center overflow-hidden">
-        <span className="citations text-black text-center w-3/6">
+      <section className="introduction min-h-[30vh] flex flex-row items-center justify-center p-2">
+        <span className="citations text-center w-3/6">
           Nous propulsons les entreprises vers{" "}
           <em className="text-blond">l’innovation & le succès </em>sur le
           continent africain

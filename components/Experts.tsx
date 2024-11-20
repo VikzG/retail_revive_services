@@ -132,22 +132,23 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
 
     return (
       <section className="experts bg-light_beige text-center py-10 px-4">
-        <h2 className="grand_titre_s mb-4">NOS EXPERTS</h2>
-  
+        <h2 className="grand_titre_s">NOS <br/> EXPERTS</h2>
+      
         <Swiper
         effect={'coverflow'}
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={3}
+        slidesPerView={2}
         initialSlide={claudiaIndex} 
         coverflowEffect={{
           rotate: 0,
           stretch: 0,
-          depth: 100,
+          depth: 50,
           modifier: 3,
           slideShadows: false,
         }}
         pagination={false}
+        spaceBetween={20}
         modules={[EffectCoverflow, Pagination]}
         className="mySwiper"
       >
@@ -155,7 +156,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
             <SwiperSlide
             key={index}
             className="flex flex-col items-center py-8">
-              <div className="w-5/6 h-3/5 overflow-hidden rounded-xl m-auto mb-4">
+              <div className="w-6/6 h-3/5 overflow-hidden rounded-xl m-auto mb-4">
                 <img src={expert.image} alt={expert.name} className="w-full h-full rounded-lg object-cover" />
               </div>
               <h3 className="citations text-center text-dark_brown_grey">{expert.name}</h3>
@@ -198,7 +199,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
           {/* Flex container to align images and text side by side */}
           <div className="flex justify-between items-center mb-8">
             {/* Images de la Top Team */}
-            <div ref={topSlider}className="flex gap-4 mb-8">
+            <div ref={topSlider}className="flex gap-3 mb-8">
               {topTeam.reverse().map((member, index) => (
                 <div key={index} className="flex flex-col items-center text-center">
                   <div className="relative shadow-lg  bg-white border-4 border-white rounded-lg w-40 h-52 mb-4">

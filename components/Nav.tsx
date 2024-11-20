@@ -158,7 +158,10 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
             {isSubVisible ? (
                     <Link
                     href="#"
-                    onClick={() => setIsSubVisible(false)} // Ferme la vue mobile
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsSubVisible(false);
+                    }} // Ferme la vue mobile
                     className="nav_anchor text-black"
                   >
                     <svg
@@ -178,7 +181,10 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
                   </Link>
                 ) : (
             <Link href="/"
-            onClick={() => setIsSubVisible(true)}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsSubVisible(true);
+            }}
             >
             <svg
                     className={`h-7 w-7 cursor-pointer ${isMobile ? "club_icon_mobile" : "club_icon_desktop"

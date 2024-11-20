@@ -8,7 +8,6 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import Link from "next/link";
 import Image from "next/image";
-import Sub from "./Sub";
 
 type ServicesProps = {
   setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,7 +24,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
 
     handleResize(); // Vérifie la condition dès que le composant est monté
 
-    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    mediaQuery.addEventListener("change", handleResize);
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
   const [hoveredService, setHoveredService] = useState({
@@ -106,27 +105,68 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
           Chez <strong>Retail Revive Services</strong>, nous croyons en des solutions personnalisées pour la transformation des organisations retail en Afrique. Nous vous aidons dans 4 domaines clés.
         </p>
         <Swiper
-        pagination={{
-          dynamicBullets: true,
-        }}
-        modules={[Pagination]}
-        className="mySwiper w-full h-[70vh] mt-6 rounded-lg overflow-hidden"
-      >
-        {services.map((service, index) => (
-          <SwiperSlide key={index} className="relative w-full h-full">
-            <Image
-              src={service.image}
-              alt={service.title}
-              width={600}
-              height={400}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center border-xl">
-              <h3 className="text-white text-center citations max-w-56">{service.title}</h3>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+  pagination={{
+    dynamicBullets: true,
+  }}
+  modules={[Pagination]}
+  className="mySwiper w-full h-[70vh] mt-6 rounded-lg overflow-hidden"
+>
+  {services.flatMap((service, index) => {
+    const slides = [
+      // Slide 1 : Titre du service
+      <SwiperSlide key={`${service.title}-${index}-title`} className="relative w-full h-full">
+        <Image
+          src={service.image}
+          alt={service.title}
+          width={600}
+          height={400}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center border-xl">
+          <h3 className="text-white text-center citations max-w-56">{service.title}</h3>
+        </div>
+      </SwiperSlide>,
+
+      // Slide 2 : Phrases du service (avec icône enveloppe)
+      <SwiperSlide key={`${service.title}-${index}-phrases`} className="relative w-full h-full">
+        <Image
+          src={service.image}
+          alt={service.title}
+          width={600}
+          height={400}
+          className="w-full h-full object-cover"
+        />
+        {/* Icône d'enveloppe uniquement pour ce slide */}
+        <div className="absolute top-4 right-4 rounded-full shadow-xl">
+        <svg width="39" height="33" viewBox="0 0 39 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0.5" y="0.5" width="38" height="32" rx="13.5" fill="black" fillOpacity="0.15" stroke="white"/>
+        <path d="M7.94434 8.94446L17.9973 17.3219C18.739 17.94 19.8163 17.94 20.558 17.3219L30.611 8.94446" stroke="white" strokeLinejoin="round"/>
+        <path d="M7.94434 24.0556L12.6666 20.2778L17.3888 16.5" stroke="white" strokeLinejoin="round"/>
+        <path d="M30.6113 24.0556L25.8891 20.2778L21.1669 16.5" stroke="white" strokeLinejoin="round"/>
+        <rect x="7.5" y="8.5" width="23.5556" height="16" rx="1.5" stroke="white"/>
+        </svg>
+        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center px-4 text-center">
+          <ul className="text-white space-y-2 body_text">
+            {service.phrases.map((phrase, i) => (
+              <li key={`phrase-${i}`} className="flex items-start gap-2">
+                {/* Point et phrase avec <strong> */}
+                <span className="text-gold font-bold">•</span>
+                <span>
+                  <strong>{phrase.split(' ')[0]} </strong>
+                  {phrase.split(' ').slice(1).join(' ')}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </SwiperSlide>,
+    ];
+
+    return slides;
+  })}
+</Swiper>
+
           <p className="text-sm mt-4">
             <strong>Vous souhaitez aller encore plus loin ?</strong><br/>
             <Link
@@ -134,7 +174,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
                 e.preventDefault();
                 setIsSubVisible(true);
               }}
-    href="/club-retail-africa"
+    href="#"
     className="text-gold underline"
   >
     <strong>Découvrez le Club Retail Africa.</strong>
@@ -220,7 +260,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
               </h2>
             </div>
           </div>
-          <CardContent className="p-6 space-y-6 mt-10 flex flex-col items-center justify-center gap-2">
+          <CardContent className="p-6 space-y-6 mt-5 flex flex-col items-center justify-center gap-2">
           <ul className="space-y-4 body_text">
   {hoveredService.title === "CONSEIL & STRATEGIE" && (
     <>

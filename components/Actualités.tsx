@@ -102,10 +102,10 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
       {/* Join Button */}
       <div className="mt-6">
       <Link 
-                           onClick={(e) => {
-                            e.preventDefault();
-                            setIsSubVisible(true);
-                          }}
+           onClick={(e) => {
+            e.preventDefault();
+            setIsSubVisible(true);
+          }}
           href="/club"
           className="inline-block actualite_bouton sous_titre bg-white text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
           >
@@ -116,13 +116,13 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
     )
   }
   return (
-    <section id="actualites" className="actualites_animation max-h-screen py-16 px-4 lg:px-20 bg-white">
-      <div className="grid grid-cols-3 lg:grid-cols-3 gap-10 p-8">
+    <section id="actualites" className="actualites_animation h-[80vh] max-h-screen py-16 px-4 bg-white">
+      <div className="grid grid-cols-3 gap-10 p-8">
         
         {/* Colonne 1 : Nos Actualités */}
-        <div className="lg:col-span-1 p-6">
+        <div className="p-6">
           <h2 className="grand_titre_s text-dark_brown_grey mb-6">NOS <br/>ACTUALITÉS</h2>
-          <p className="text-gold sous_titre underline uppercase mb-2">
+          <p className="text-gold sous_titre mt-16 underline uppercase mb-2">
             TÉLÉCHARGEZ NOTRE ÉTUDE ANNUELLE GRATUITE SUR LE RETAIL EN AFRIQUE.
           </p>
           <p className="body_text text-gray-700 mb-8">
@@ -154,39 +154,63 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         </div>
 
         {/* Colonne 2 : Images */}
-        <div className="lg:col-span-1 flex flex-col space-y-6">
-          <div className="bg-gray-200 h-32 lg:h-40 w-full"></div>
-          <div className="bg-gray-200 h-32 lg:h-40 w-full"></div>
-          <div className="bg-gray-200 h-32 lg:h-40 w-full"></div>
+        <div className="flex flex-col items-center space-y-6">
+          <div className="relative h-48 w-5/6">
+            <Image
+              src="/actualites/presse_img_1.png"
+              alt="Image 1"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative h-48 w-5/6">
+            <Image
+              src="/actualites/presse_img_2.png"
+              alt="Image 2"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative h-48 w-5/6">
+            <Image
+              src="/actualites/presse_img_3.png"
+              alt="Image 3"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
 
+
         {/* Colonne 3 : Dernier Événement */}
-        <div className="lg:col-span-1">
+        <div className="flex flex-col justify-between">
           <h3 className="sous_titre underline mb-2">
             DERNIER ÉVÉNEMENT : LE DÎNER-DÉBAT DES DÉCIDEURS
           </h3>
+          <div>
           <p className="body_text mb-4">
             Nous organisons régulièrement des <span className="font-bold">événements exclusifs</span> dédiés 
             aux décideurs et <span className="font-bold">acteurs du retail en Afrique.</span> Chaque événement organisé 
             par Retail Revive Services est une opportunité de partage, d'apprendre et de collaborer pour 
             faire avancer l'industrie du retail en Afrique.
           </p>
-          <p className="body_text mb-6">
+          <p className="body_text">
             Vous souhaitez participer à nos événements et être au cœur de l'innovation dans le retail en Afrique ? 
             <span className="font-bold"> Inscrivez-vous à nos dîners privés et accédez aux dernières tendances, études 
             et opportunités du marché.</span>
           </p>
+          </div>
           <Link 
                                onClick={(e) => {
                                 e.preventDefault();
                                 setIsSubVisible(true);
                               }}
           href="/club"
-          className="inline-block actualite_bouton sous_titre bg-white text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
+          className="inline-block actualite_bouton sous_titre bg-white w-[230px] text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
           >
               REJOINDRE LE CLUB
           </Link>
-          <h2 className="grand_titre_s mt-14 text-dark_brown_grey uppercase text-end mb-6">réseau <br/>& événements</h2>
+          <h2 className="grand_titre_s mt-10 text-dark_brown_grey uppercase text-end mb-6">réseau <br/>& événements</h2>
         </div>
       </div>
     </section>
