@@ -9,6 +9,13 @@ import 'swiper/css/pagination';
 import Link from "next/link";
 import Image from "next/image";
 
+type Service = {
+  title: string;
+  image: string;
+  href: string;
+  phrases: JSX.Element[]; // phrases contenant des éléments JSX
+};
+
 type ServicesProps = {
   setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -27,48 +34,51 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     mediaQuery.addEventListener("change", handleResize);
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
-  const [hoveredService, setHoveredService] = useState({
+
+  const [hoveredService, setHoveredService] = useState<Service>({
     image: "/services/services_img_1.png",
     title: "CONSEIL & STRATEGIE",
+    href: "",
     phrases: [
-      "Études de marché détaillées pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance",
-      "Stratégie d'implantation et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable",
-      "Optimisation de l'expérience client pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux"
+      <span><strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.</span>,
+      <span><strong>Stratégie d'implantation</strong> et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.</span>,
+      <span><strong>Optimisation de l'expérience client</strong> pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux.</span>
     ]
   });
 
-  const services = [
+  const services: Service[] = [
     {
       title: "CONSEIL & STRATEGIE",
       image: "/services/services_img_1.png",
-      href: "/consulting",
+      href: "",
       phrases: [
-        "Études de marché détaillées pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.",
-        "Stratégie d'implantation et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.",
-        "Optimisation de l'expérience client pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux."
+        <span><strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.</span>,
+        <span><strong>Stratégie d'implantation</strong> et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.</span>,
+        <span><strong>Optimisation de l'expérience client</strong> pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux.</span>,
       ]
     },
     {
       title: "FORMATION & RECRUTEMENT",
       image: "/services/services_img_2.png",
-      href: "/training",
+      href: "",
       phrases: [
-        "Audit des compétences pour évaluer et développer les talents de vos équipes retail.",
-        "Formations spécialisées pour les équipes de vente pour maximiser les performances commerciales.",
-        "Recrutement de talents stratégiques pour les postes clés du secteur retail.",
+        <span><strong>Audit des compétences</strong> pour évaluer et développer les talents de vos équipes retail.</span>,
+        <span><strong>Formations spécialisées</strong> pour les équipes de vente pour maximiser les performances commerciales.</span>,
+        <span><strong>Recrutement de talents stratégiques</strong> pour les postes clés du secteur retail.</span>,
       ]
     },
     {
       title: "DISTRIBUTION & IMPLANTATION",
       image: "/services/services_img_3.png",
-      href: "/implementation",
+      href: "",
       phrases: [
-        "Go-to-Market sur mesure pour les marques internationales cherchant à s'établir en Afrique.",
-        "Mise en réseau stratégique pour faciliter les partenariats locaux et accéder aux financements nécessaires à votre succès.",
-        "Gestion clé en main de l’implantation pour vous accompagner dans toutes les phases, de l'ouverture à la mise en marché.",
+        <span><strong>Go-to-Market sur mesure</strong> pour les marques internationales cherchant à s'établir en Afrique.</span>,
+        <span><strong>Mise en réseau stratégique</strong> pour faciliter les partenariats locaux et accéder aux financements nécessaires à votre succès.</span>,
+        <span><strong>Gestion clé en main de l’implantation</strong> pour vous accompagner dans toutes les phases, de l'ouverture à la mise en marché.</span>,
       ]
     },
   ];
+
 
 
   const h2ServicesRef = useRef(null);
@@ -109,7 +119,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     dynamicBullets: true,
   }}
   modules={[Pagination]}
-  className="mySwiper w-full h-[70vh] mt-6 rounded-lg overflow-hidden"
+  className="mySwiper w-full h-[60vh] mt-6 rounded-2xl overflow-hidden"
 >
   {services.flatMap((service, index) => {
     const slides = [
@@ -123,7 +133,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center border-xl">
-          <h3 className="text-white text-center citations max-w-56">{service.title}</h3>
+          <h3 className="text-white text-center citations_services max-w-64">{service.title}</h3>
         </div>
       </SwiperSlide>,
 
@@ -137,7 +147,9 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
           className="w-full h-full object-cover"
         />
         {/* Icône d'enveloppe uniquement pour ce slide */}
-        <div className="absolute top-4 right-4 rounded-full shadow-xl">
+        <Link 
+        href="#contact"
+        className="absolute top-4 right-4 rounded-full shadow-xl z-10">
         <svg width="39" height="33" viewBox="0 0 39 33" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="0.5" y="0.5" width="38" height="32" rx="13.5" fill="black" fillOpacity="0.15" stroke="white"/>
         <path d="M7.94434 8.94446L17.9973 17.3219C18.739 17.94 19.8163 17.94 20.558 17.3219L30.611 8.94446" stroke="white" strokeLinejoin="round"/>
@@ -145,16 +157,15 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
         <path d="M30.6113 24.0556L25.8891 20.2778L21.1669 16.5" stroke="white" strokeLinejoin="round"/>
         <rect x="7.5" y="8.5" width="23.5556" height="16" rx="1.5" stroke="white"/>
         </svg>
-        </div>
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col items-center justify-center px-4 text-center">
-          <ul className="text-white space-y-2 body_text">
+        </Link>
+        <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center px-4 text-center">
+          <ul className="text-white text-start space-y-6 body_text">
             {service.phrases.map((phrase, i) => (
               <li key={`phrase-${i}`} className="flex items-start gap-2">
                 {/* Point et phrase avec <strong> */}
-                <span className="text-gold font-bold">•</span>
+                <span className="text-white font-bold">•</span>
                 <span>
-                  <strong>{phrase.split(' ')[0]} </strong>
-                  {phrase.split(' ').slice(1).join(' ')}
+                  {phrase}
                 </span>
               </li>
             ))}
@@ -219,6 +230,16 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
               key={service.title}
               className="service_card gap-2 flex flex-col w-full"
               onMouseEnter={() => setHoveredService(service)} 
+              onMouseLeave={() => setHoveredService({
+                image: "/services/services_img_1.png",
+                title: "CONSEIL & STRATEGIE",
+                href:"",
+                phrases: [
+                  <span><strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.</span>,
+                  <span><strong>Stratégie d'implantation</strong> et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.</span>,
+                  <span><strong>Optimisation de l'expérience client</strong> pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux.</span>
+                ]
+              })}
             >
               <div className="services_image relative overflow-hidden rounded-lg shadow-lg flex-grow h-[300px] w-full">
                 <Image

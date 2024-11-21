@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Presse() {
   const [currentArticle, setCurrentArticle] = useState(0);
   const containerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   type Article = {
     id: number;
@@ -79,7 +79,85 @@ export default function Presse() {
     });
   };
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 900px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
   const current = articles[currentArticle];
+  if (isMobile) {
+    // Code de la version mobile
+
+    return (
+      <section className="relative w-full bg-light_beige px-4 py-6 flex flex-col items-center">
+      <div className="w-full h-[450px] relative rounded-2xl shadow-lg overflow-hidden">
+        {/* Slider */}
+        <div className="flex flex-row transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentArticle * 100}%)` }}>
+          {articles.map((article, index) => (
+            <div 
+            key={index} 
+            className="flex-shrink-0 w-full h-full relative flex flex-col items-center justify-center">
+              <div className="relative w-full h-[450px]">
+                {/* Image principale */}
+                <Image
+                  src={article.imgSrc}
+                  alt={article.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-t-lg"
+                />
+              </div>
+              <div className="absolute w-full top-0 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-70 p-2 py-8 rounded-t-lg shadow-lg flex flex-col items-center">
+                <p className="sous_titre mb-2 text-black">ILS PARLENT DE NOUS</p>
+                <Image
+                  src={article.imgLogo} 
+                  alt={`Logo article ${index + 1}`}
+                  width={150}
+                  height={40}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Titre et description */}
+      <div className="mt-8 w-full text-center">
+        <h1 className="citations text-black">{current.title}</h1>
+        <p className="body_text text-black mt-8 px-2">{current.phrase}</p>
+      </div>
+
+      {/* Bouton et points radio */}
+      <div className="mt-6 w-full flex flex-col items-center">
+        <button
+          onClick={() => window.open(current.link, "_blank")}
+          className="border-x border-y sous_titre text-black px-8 py-2 bg-transparent border-black rounded-lg"
+        >
+          Voir l'article complet
+        </button>
+        <div className="flex mt-6 mb-4 space-x-2">
+        {articles.map((_, index: number) => (
+    <button
+      key={index}
+      onClick={() => handleDotClick(index)}
+      className={`w-3 h-3 rounded-full border-x border-y border-black ${
+        index === currentArticle ? "bg-gold" : "bg-transparent"
+      }`}
+      aria-label={`Article ${index + 1}`}
+    ></button>
+  ))}
+        </div>
+      </div>
+    </section>
+    );
+  }
 
   return (
     <section className="relative w-full h-[450px] overflow-hidden">
@@ -117,7 +195,7 @@ export default function Presse() {
         <div className="flex flex-row justify-between">
         <button
               onClick={() => window.open(current.link, "_blank")}
-              className="border-x border-y mt-2 sous_titre text-black px-8 py-2 bg-transparent border-black rounded-lg"
+              className="presse_bouton border-x border-y mt-2 sous_titre text-black px-8 py-2 bg-transparent border-black rounded-lg"
             ><strong>
               Voir l'article complet</strong>
             </button>

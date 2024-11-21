@@ -112,6 +112,14 @@ body {
   height: 100vh;
 }
 
+.citations_services {
+  font-family: var(--font-roaster-thin), sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 36.8px;
+  letter-spacing: 0.02em; /* Utilise 0.02em pour un espacement de 2% */
+}
+
 .service_card img{
   object-fit: cover;
 }

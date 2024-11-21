@@ -116,7 +116,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
     )
   }
   return (
-    <section id="actualites" className="actualites_animation h-[80vh] max-h-screen py-16 px-4 bg-white">
+    <section id="actualites" className="actualites_animation min-h-[80vh] max-h-screen py-16 px-4 bg-white">
       <div className="grid grid-cols-3 gap-10 p-8">
         
         {/* Colonne 1 : Nos Actualités */}
