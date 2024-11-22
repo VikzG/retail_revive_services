@@ -13,7 +13,7 @@ import Presse from "@/components/Presse";
 import Sub from "@/components/Sub";
 import Services from "@/components/Services";
 import Footer from "@/components/Footer";
-import SubForm from "@/components/subForm";
+import Loader from "@/components/Loader";
 
 export default function Home() {
 
@@ -24,6 +24,7 @@ export default function Home() {
 
   const [isSubVisible, setIsSubVisible] = useState<boolean>(false);
   const subContainerRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     // Timeline GSAP pour enchaîner les animations
@@ -52,8 +53,11 @@ export default function Home() {
     }
   }, [isSubVisible]);
 
+
   return (
+    
     <div>
+      <Loader />
       <header className="bg-light_beige min-h-screen relative">
        <Nav isSubVisible={isSubVisible} setIsSubVisible={setIsSubVisible}/>
         <div className="banner_container relative h-screen w-full">
@@ -113,6 +117,7 @@ export default function Home() {
         <Actualites setIsSubVisible={setIsSubVisible}/>
         <Presse />
         <Contact />
+        <Loader/>
       </main>
       <Footer />
       {isSubVisible && (

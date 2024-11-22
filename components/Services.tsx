@@ -281,7 +281,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
               </h2>
             </div>
           </div>
-          <CardContent className="p-6 space-y-6 mt-5 flex flex-col items-center justify-center gap-2">
+          <CardContent className="p-6 space-y-6 mt-5 flex flex-col items-center justify-between">
           <ul className="space-y-4 body_text">
   {hoveredService.title === "CONSEIL & STRATEGIE" && (
     <>
@@ -351,9 +351,9 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
   )}
 </ul>
 
-            <Button className="service_bouton_2 w-3/6 sous_titre bg-gold text-white">
+            <button className="service_bouton_2 w-[250px] py-2 sous_titre rounded-lg bg-gold text-white">
             <a href="#contact"> JE SUIS INTÉRESSÉ(E)</a> 
-            </Button>
+            </button>
           </CardContent>
         </Card>
       </div>

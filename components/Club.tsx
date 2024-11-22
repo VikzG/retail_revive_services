@@ -128,7 +128,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
       </div>
 
       {/* Colonne droite - Texte et informations prenant 60% de la largeur */}
-      <div className="w-3/5 flex flex-col justify-between pt-12">
+      <div className="min-w-[900px] w-3/5 flex flex-col justify-between pt-12">
       <div className="flex flex-row px-16">
         <div ref={clubSectionRef} className="club_section_anim flex flex-col">
           <h1 className="sur_titre_club text-black">

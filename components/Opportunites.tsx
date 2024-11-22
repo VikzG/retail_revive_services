@@ -71,7 +71,7 @@ export default function Opportunites() {
       <span className="text-start ps-8">CLUB</span>        
 
            <div className="relative"><span className="text-end ps-10 ms-8">RETAIL</span> 
-            <Star className="star_mobile_opportunite absolute bottom-14 right-24 me-2 w-5 h-5 fill-current text-gold" /></div> 
+            <Star className="star_mobile_opportunite absolute bottom-14 right-24 w-5 h-5 fill-current text-gold" /></div> 
             <span className="text-start ps-10">AFRICA</span>
             <span className="absolute right-10 sous_titre_opportunite_mobile uppercase text-gold">Le coin des opportunités</span>
           </h1>
@@ -114,7 +114,7 @@ export default function Opportunites() {
     <div className="min-h-[1000px] bg-dark_brown_grey text-white relative overflow-hidden">
       {/* Top right corner badge */}
       <div className="absolute top-12 right-12 flex items-center gap-2 text-gold">
-        <Star className="w-10 h-10 fill-current text-gold" />
+        <Star className="w-11 h-11 fill-current stroke-none text-gold" />
         <span className="sous_titre uppercase text-gold">Le coin des opportunités</span>
       </div>
 
@@ -124,7 +124,7 @@ export default function Opportunites() {
         <div className="space-y-8 p-14">
           <h1 className="opportunite_titre flex flex-col w-[1400px]">
             <span ref={clubRef} className="text-start ms-12">CLUB</span>
-            <span ref={retailRef} className="text-center">RETAIL</span>
+            <span ref={retailRef} className="text-center me-14">RETAIL</span>
             <span ref={africaRef} className="text-start ms-12">AFRICA</span>
           </h1>
           <div ref={animationRef} className="opportunite_animation">
@@ -151,7 +151,7 @@ export default function Opportunites() {
         </div>
 
         {/* Right column - Image positioned to the right */}
-        <div className="relative bottom-36 w-[350px] h-[550px] ml-auto">
+        <div className="opportunite_img_container relative bottom-36 w-[350px] h-[550px] ml-auto">
           <div className="absolute inset-0 overflow-hidden rounded-t-full">
             <Image
               src="/opportunites/opportunite_img.png"
