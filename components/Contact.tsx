@@ -1,10 +1,12 @@
 'use client'
 
-import { useState, useEffect } from "react"
+import { useState, useEffect,useRef } from "react"
 import gsap from "gsap/all"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const contactMobileTitle = useRef(null);
+  const contactMobileText = useRef(null);
   const [formData, setFormData] = useState({
     subject: '',
     name: '',
@@ -48,6 +50,42 @@ export default function Contact() {
       }
     );
   }, []);
+
+  useEffect(() => {
+    if (isMobile && contactMobileTitle.current && contactMobileText.current) {
+      // Timeline GSAP pour synchroniser les animations
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: contactMobileTitle.current,
+          start: "top 60%", // Animation déclenchée quand visible
+          toggleActions: "play none none none",
+        },
+      });
+  
+      // Animation du titre
+      timeline.fromTo(
+        contactMobileTitle.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        }
+      );
+  
+      // Animation du texte, avec un délai de 0.5s après le titre
+      timeline.fromTo(
+        contactMobileText.current,
+        { opacity: 0, }, // Départ légèrement en bas
+        {
+          opacity: 1, // Fin à sa position initiale
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "+=0.5" // Délai de 0.5s après le titre
+      );
+    }
+  }, [isMobile]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -146,8 +184,8 @@ export default function Contact() {
     return (
       <section id="contact" className="flex flex-col bg-dark_brown_grey text-white">
         <div className="w-full py-20 px-4 bg-dark-brown flex flex-col items-center text-center gap-8">
-          <h2 className="grand_titre_s">CONTACTEZ<br/>NOUS</h2>
-          <p className="w-5/6 sous_titre">
+          <h2 ref={contactMobileTitle}className="grand_titre_s">CONTACTEZ<br/>NOUS</h2>
+          <p ref={contactMobileText} className="w-5/6 sous_titre">
             VOUS AVEZ UN PROJET ? UNE QUESTION ?<br />
             CONTACTEZ-NOUS ET LAISSEZ-NOUS VOUS ACCOMPAGNER DANS VOTRE TRANSFORMATION RETAIL EN AFRIQUE.
           </p>

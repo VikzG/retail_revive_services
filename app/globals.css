@@ -7,6 +7,10 @@ em {
   font-style: normal;
 }
 
+html, body {
+  overflow-x: hidden; /* Empêche le scrolling horizontal */
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
@@ -24,11 +28,6 @@ body {
   transform: scale(1.05); /* Agrandir légèrement la carte */
   opacity: 0.9; /* Rendre la carte un peu plus transparente */
 }
-
-/* Loader */ 
-
-
-
 
 
 /* banner */

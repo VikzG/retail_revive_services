@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { gsap } from "gsap";
-import { Button } from "@/components/ui/button";
 import React, { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper/modules";
@@ -14,6 +13,7 @@ type ExpertProps = {
 
 export default function Experts({ setIsSubVisible }: ExpertProps) {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -26,6 +26,25 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     mediaQuery.addEventListener("change", handleResize); // Écoute les changements
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (isMobile && sectionRef.current) {
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%", // Animation déclenchée quand l'élément est visible à 90% dans le viewport
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
+  }, [isMobile]);
 
   const topTeam = [
     {
@@ -132,7 +151,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     // Code de la version mobile
 
     return (
-      <section className="experts bg-light_beige text-center py-10 px-4">
+      <section ref={sectionRef} className="experts bg-light_beige text-center py-10 px-4">
         <h2 className="grand_titre_s">
           NOS <br /> EXPERTS
         </h2>

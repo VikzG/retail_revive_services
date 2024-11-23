@@ -94,7 +94,6 @@ export default function Presse() {
   const current = articles[currentArticle];
   if (isMobile) {
     // Code de la version mobile
-
     return (
       <section className="relative w-full bg-light_beige px-4 py-6 flex flex-col items-center">
       <div className="w-full h-[450px] relative rounded-2xl shadow-lg overflow-hidden">
@@ -107,6 +106,7 @@ export default function Presse() {
               <div className="relative w-full h-[450px]">
                 {/* Image principale */}
                 <Image
+                ref={containerRef} 
                   src={article.imgSrc}
                   alt={article.title}
                   layout="fill"

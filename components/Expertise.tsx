@@ -18,6 +18,12 @@ export default function Expertise() {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
+  const expertiseTitle = useRef(null);
+  const expertiseIntro = useRef(null);
+  const expertiseList = useRef(null);
+  const expertiseRef = useRef(null);
+  const expertiseListMobile = useRef<(HTMLDivElement | null)[]>([]);
+
   const sectors = [
     {
       number: "01",
@@ -45,49 +51,103 @@ export default function Expertise() {
       description: "Partenariats pour répondre aux divers défis logistiques du retail en Afrique.",
     },
   ];
-  const expertiseTitle = useRef(null);
-  const expertiseIntro = useRef(null);
-  const expertiseList = useRef(null);
 
-  
+//  
+//  useEffect(() => {
+//    if (isMobile) return; // Ne pas exécuter si mobile
+//
+//    const timeline = gsap.timeline({
+//      scrollTrigger: {
+//        trigger: expertiseTitle.current,
+//        start: "top 95%",
+//        toggleActions: "play none none none",
+//      },
+//    });
+//
+//    timeline
+//      .fromTo(
+//        [expertiseTitle.current, expertiseIntro.current],
+//        { opacity: 0 },
+//        { opacity: 1, duration: 0.6, stagger: 0 }
+//      )
+//      .fromTo(
+//        expertiseList.current,
+//        { opacity: 0, y: 30 },
+//        { opacity: 1, y: 0, duration: 0.6 },
+//        "+=0.5"
+//      );
+//
+//    // Nettoyage
+//    return () => timeline.kill();
+//  }, [isMobile]);
+
+useEffect(() => {
+  if (isMobile && expertiseRef.current) {
+    gsap.fromTo(
+      expertiseRef.current,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        delay:2,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: expertiseRef.current,
+          start: "top 60%", // Animation déclenchée quand l'élément est visible à 90% dans le viewport
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }
+}, [isMobile]);
+
   useEffect(() => {
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: expertiseTitle.current, // Déclenchement sur le titre
-        start: "top 95%", // Commence quand l'élément atteint 70% du viewport
-        toggleActions: "play none none none", // Joue une seule fois
-      },
+    if (!isMobile) return; // Ne pas exécuter si desktop
+
+    const animations = expertiseListMobile.current.map((el, index) => {
+      if (el) {
+        const isLeft = index % 2 === 0;
+        return gsap.fromTo(
+          el,
+          { opacity: 0, x: isLeft ? -50 : 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            scrollTrigger: {
+              trigger: el,
+              start: "top 60%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
     });
-  
-    timeline
-      .fromTo(
-        [expertiseTitle.current, expertiseIntro.current], // Anime les deux en même temps
-        { opacity: 0, }, // Point de départ
-        { opacity: 1, duration: 0.6, stagger: 0 }, // Point d'arrivée, aucun délai entre les deux
-      )
-      .fromTo(
-        expertiseList.current, // Anime la liste après un délai
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6 },
-        "+=0.5" // Ajoute un délai de 0.5s après la fin des animations précédentes
-      );
-  }, []);
+
+    // Nettoyage
+    return () => animations.forEach((animation) => animation?.kill());
+  }, [isMobile]);
 
   if (isMobile) {
     // Code de la version mobile
   return (
     <section id="expertise" className="expertise flex flex-col items-center bg-dark_brown_grey text-white px-6 py-12">
-      <div className="text-center mb-8">
-        <h1 ref={expertiseTitle} className="expertise_titre mb-4">EXPERTISE</h1>
-        <p ref={expertiseIntro} className="citations text-end">
+      <div ref={expertiseRef} className="text-center mb-8">
+        <h1 className="expertise_titre mb-4">EXPERTISE</h1>
+        <p className="citations text-end">
           Nos secteurs clés pour<br/>répondre aux <span className="text-gold">besoins<br/>du marché africain</span>.
         </p>
       </div>
 
-      <div ref={expertiseList} className="flex flex-col items-center gap-10">
+      <div className="flex flex-col items-center gap-10">
         {sectors.map((sector,index) => (
             <div
             key={sector.number}
+            ref={(el) => {
+              if (el) {
+                expertiseListMobile.current[index] = el;
+              }
+            }}
             className={`${
               index === 0 || index === 2 || index === 4 ? "self-start text-left" : "self-end text-right"
             }`}

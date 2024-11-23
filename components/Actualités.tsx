@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState,useEffect,useRef } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 
 type ClubProps = {
@@ -24,25 +25,32 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   }, []);
 
   useEffect(() => {
-    // Animation GSAP pour faire apparaître le conteneur avec un effet d'opacité
-    gsap.fromTo(
-      ".actualites_animation", 
-      { opacity: 0 }, // Valeur initiale de l'opacité (invisible)
-      { opacity: 1, duration: 2, ease: "power2.out", scrollTrigger: {
-          trigger: actualitesRef.current, // Le trigger est le conteneur actualitesRef
-          start: "top 70%", // L'animation commence lorsque la section est à 80% du haut de la fenêtre
-          end: "bottom 20%", // L'animation dure jusqu'à ce que la section soit à 20% du bas de la fenêtre
-          scrub: false, // L'animation suit le défilement
-          once: true // L'animation se joue une seule fois
-      }}
-    );
-  }, []);
-
+    if (isMobile && actualitesRef.current) {
+      gsap.fromTo(
+        actualitesRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: actualitesRef.current,
+            start: "top 10%",
+            end: "bottom 20%",
+            scrub: false,
+            once: true,
+          },
+        }
+      );
+    }
+  }, [isMobile]);
 
   if (isMobile) {
     return (
       <section id="actualites" className="bg-white py-10 text-center flex flex-col items-center">
       {/* Header */}
+      <div ref={actualitesRef} >
+      <div className="actualites_animation_mobile">
       <div className="mb-4">
         <h2 className="grand_titre_s">NOS ACTUALITÉS</h2>
         <Link className="text-gold underline body_text"href="#">
@@ -55,6 +63,8 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         <p className="body_text">
         <strong>Inscrivez-vous dès maintenant à nos courriers exclusifs</strong> pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Révie Services et ses partenaires, à travers des études de cas et témoignages d’entreprises.
         </p>
+      </div>
+      </div>
       </div>
 
       {/* Subscription Form */}

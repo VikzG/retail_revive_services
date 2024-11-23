@@ -1,5 +1,5 @@
 import Image from "next/image";
-import {gsap} from "gsap";
+import { gsap } from "gsap";
 import { useEffect, useRef,useState } from "react";
 import { Star } from "lucide-react";
 
@@ -11,6 +11,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
 
   const clubSectionRef = useRef<HTMLDivElement>(null);
   const starsRef = useRef<HTMLDivElement[]>([]);
+  const clubRefMobile = useRef<HTMLDivElement>(null);
 
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
 
@@ -25,6 +26,30 @@ export default function Club({ setIsSubVisible }: ClubProps) {
     mediaQuery.addEventListener("change", handleResize); // Écoute les changements
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (isMobile) {
+      // Animation d'opacité pour la section entière en mobile uniquement
+      if (clubRefMobile.current) {
+        gsap.fromTo(
+          clubRefMobile.current,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            delay:0.5,
+            duration: 1.5,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: clubRefMobile.current,
+              start: "top 50%", // Déclenchement au défilement
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+    }
+  }, [isMobile]);
+  
 
   useEffect(() => {
      {
@@ -84,6 +109,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
       </div>
 
       {/* Main Content */}
+      <div ref={clubRefMobile}>
       <div className="text-center mb-6 px-4 pt-6">
         <h2 className="citations">Pourquoi rejoindre le</h2>
         <h1 className="text-gold grand_titre_s mt-1">CLUB RETAIL AFRICA ?</h1>
@@ -109,6 +135,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
                     }}
         >formulaire
         d’inscription</button>
+      </div>
       </div>
     </section>
     )

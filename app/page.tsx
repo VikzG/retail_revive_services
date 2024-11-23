@@ -15,20 +15,23 @@ import Services from "@/components/Services";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 
+
 export default function Home() {
 
   gsap.registerPlugin(ScrollTrigger);
 
   const headerTitleRef = useRef(null);
   const headerSpanRef = useRef(null);
+  const introductionRef = useRef<HTMLDivElement>(null);
 
   const [isSubVisible, setIsSubVisible] = useState<boolean>(false);
   const subContainerRef = useRef<HTMLDivElement>(null);
 
 
+
   useEffect(() => {
     // Timeline GSAP pour enchaîner les animations
-    const tl = gsap.timeline({ delay: 0.5 });
+    const tl = gsap.timeline({ delay: 2.5 });
     tl.fromTo(
       headerTitleRef.current,
       { opacity: 0 },
@@ -53,6 +56,25 @@ export default function Home() {
     }
   }, [isSubVisible]);
 
+  useEffect(() => {
+    if (introductionRef.current) {
+      gsap.fromTo(
+        introductionRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: introductionRef.current,
+            start: "top 70%", // L'animation démarre lorsque 80% du viewport dépasse le trigger
+            end: "top 30%", // L'animation est terminée lorsque le haut du trigger atteint 30% du viewport
+            toggleActions: "play none none none", // Options pour démarrer l'animation
+          },
+        }
+      );
+    }
+  }, []);
 
   return (
     
@@ -101,7 +123,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <section className="introduction min-h-[30vh] flex flex-row items-center justify-center p-2">
+      <section ref={introductionRef} className="introduction min-h-[30vh] flex flex-row items-center justify-center p-2">
         <span className="citations text-center w-3/6">
           Nous propulsons les entreprises vers{" "}
           <em className="text-blond">l’innovation & le succès </em>sur le

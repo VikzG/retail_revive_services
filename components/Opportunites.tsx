@@ -23,6 +23,11 @@ export default function Opportunites() {
   const retailRef = useRef(null);
   const africaRef = useRef(null);
   const animationRef = useRef(null);
+  const opportuniteRef = useRef(null);
+  const clubRefMobile = useRef(null);
+  const retailRefMobile = useRef(null);
+  const africaRefMobile = useRef(null);
+  const opportuniteTitleRef = useRef(null);
 
 
   useEffect(() => {
@@ -62,27 +67,109 @@ export default function Opportunites() {
 
   }, []);
 
+  useEffect(() => {
+    // Vérifier si nous sommes en mobile
+    if (isMobile) {
+      // Créer la timeline GSAP
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".opportunite_mobile",
+          start: "top 50%",
+          end: "bottom top",
+          toggleActions: "play none none none",
+        },
+      });
+  
+      // Ajouter les animations
+      timeline
+        .fromTo(
+          clubRefMobile.current,
+          { x: "-100%", opacity: 0 },
+          { x: "0%", opacity: 1, duration: 0.8, ease: "power2.out" }
+        )
+        .fromTo(
+          retailRefMobile.current,
+          { x: "100%", opacity: 0 },
+          { x: "0%", opacity: 1, duration: 0.6, ease: "power2.out" },
+          "-=0.5"
+        )
+        .fromTo(
+          africaRefMobile.current,
+          { x: "-100%", opacity: 0 },
+          { x: "0%", opacity: 1, duration: 1, ease: "power2.out" },
+          "-=0.2"
+        );
+  
+      // Nettoyage : détruire la timeline et le ScrollTrigger associé
+      return () => {
+        timeline.kill();
+      };
+    }
+  }, [isMobile]);
+
+
+  useEffect(() => {
+    if (isMobile && opportuniteRef.current) {
+      gsap.fromTo(
+        opportuniteRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          delay:1,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: opportuniteRef.current,
+            start: "top 60%", // Animation déclenchée quand l'élément est visible à 90% dans le viewport
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (isMobile && opportuniteTitleRef.current) {
+      gsap.fromTo(
+        opportuniteTitleRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          delay:1,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: opportuniteTitleRef.current,
+            start: "top 60%", // Animation déclenchée quand l'élément est visible à 90% dans le viewport
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
+  }, [isMobile]);
+
  if (isMobile) {
   return (
-    <section className="bg-dark_brown_grey text-white p-6 flex flex-col items-center text-center py-16 space-y-6">
+    <section className="opportunite_mobile bg-dark_brown_grey text-white p-6 flex flex-col items-center text-center py-16 space-y-6">
  
     {/* Main Title */}
     <h1 className="grand_titre flex flex-col w-[400px]">
-      <span className="text-start ps-8">CLUB</span>        
+      <span ref={clubRefMobile} className="text-start ps-11">CLUB</span>        
 
-           <div className="relative"><span className="text-end ps-10 ms-8">RETAIL</span> 
-            <Star className="star_mobile_opportunite absolute bottom-14 right-24 w-5 h-5 fill-current text-gold" /></div> 
-            <span className="text-start ps-10">AFRICA</span>
+           <div ref={retailRefMobile} className="relative"><span className="text-end ps-10 ms-8">RETAIL</span> 
+            <Star className="star_mobile_opportunite absolute bottom-14 right-24 w-5 h-5 fill-current text-gold" />
+            </div> 
+            <span ref={africaRefMobile} className="text-start ps-12">AFRICA</span>
             <span className="absolute right-10 sous_titre_opportunite_mobile uppercase text-gold">Le coin des opportunités</span>
           </h1>
     
     {/* Subtitle/Description Text */}
-    <p className="sous_titre text-end">
+    <p ref={opportuniteTitleRef} className="sous_titre text-end">
       VOUS OUVRE LES PORTES D'UN RÉSEAU<br/>EXCLUSIF DE LEADERS DU RETAIL EN AFRIQUE.
     </p>
     
     {/* Description Paragraph */}
-    <p className="body_text text-white px-2">
+    <p ref={opportuniteRef} className="body_text text-white px-2">
       Le <span className="font-semibold">Club Retail Africa</span> est un réseau privilégié dédié aux
       acteurs clés du retail en Afrique, offrant à ses membres l’accès à des opportunités uniques.
       En rejoignant ce cercle exclusif, vous bénéficiez d’un environnement stimulant pour

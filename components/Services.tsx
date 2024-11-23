@@ -22,6 +22,7 @@ type ServicesProps = {
 
 export default function Services({ setIsSubVisible }: ServicesProps) {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+  const sectionRef = useRef(null);
   
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -106,12 +107,31 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
       );
   }, []);
 
+  useEffect(() => {
+    if (isMobile && sectionRef.current) {
+      gsap.fromTo(
+        sectionRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            end: "top 50%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }
+  }, [isMobile]);
+
   if (isMobile) {
     // Code de la version mobile
     return (
-      <section id="services" className="flex flex-col items-center justify-center text-center min-h-screen p-6 bg-light_beige">
-        <h2 ref={h2ServicesRef} className="grand_titre mb-4">NOS SERVICES</h2>
-        <p ref={textServicesRef} className="body_text">
+      <section ref={sectionRef} id="services" className="flex flex-col items-center justify-center text-center min-h-screen p-6 bg-light_beige">
+        <h2 className="grand_titre mb-4">NOS SERVICES</h2>
+        <p className="body_text">
           Chez <strong>Retail Revive Services</strong>, nous croyons en des solutions personnalisées pour la transformation des organisations retail en Afrique. Nous vous aidons dans 4 domaines clés.
         </p>
         <Swiper
