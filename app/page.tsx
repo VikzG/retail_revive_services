@@ -45,16 +45,10 @@ export default function Home() {
       );
   }, []);
 
-  useEffect(() => {
-    if (isSubVisible && subContainerRef.current) {
-      // Animation d'apparition de Sub
-      gsap.fromTo(
-        subContainerRef.current,
-        { y: "100%", opacity: 0 },
-        { y: "0%", opacity: 1, duration: 0.8, ease: "power3.out" }
-      );
-    }
-  }, [isSubVisible]);
+ // const toggleSubVisibility = () => {
+ //   setIsSubVisible((prev) => !prev);
+ // };
+
 
   useEffect(() => {
     if (introductionRef.current) {
@@ -123,12 +117,22 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <section ref={introductionRef} className="introduction min-h-[30vh] flex flex-row items-center justify-center p-2">
+      <section ref={introductionRef} className="introduction min-h-[30vh] flex flex-row items-center justify-around p-2 py-0">
+      <svg className="wave_left" width="86" height="96" viewBox="0 0 86 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 45.7676C0 30.6162 3.78295 19.2191 11.3544 11.5782C13.5089 9.40319 15.858 7.53708 18.3979 5.98168C25.7174 1.49934 33.0906 0.455048 41.1826 0.120435C59.5268 -0.638879 77.38 2.37448 86 4.05858C79.8254 10.0007 73.6508 15.9429 67.4761 21.885C62.5891 21.4107 45.0119 20.0005 34.1577 25.6669C31.4066 27.1028 29.8542 28.5184 29.0576 29.5333C26.3621 32.9714 25.0152 38.3858 25.0152 45.7676V96H0V45.7676Z" fill="#F4F2E9"/>
+<path d="M49.7762 60.5255C56.9168 60.5255 62.7053 54.7808 62.7053 47.6944C62.7053 40.6079 56.9168 34.8632 49.7762 34.8632C42.6357 34.8632 36.8472 40.6079 36.8472 47.6944C36.8472 54.7808 42.6357 60.5255 49.7762 60.5255Z" fill="#F4F2E9"/>
+</svg>
+
         <span className="citations text-center w-3/6">
           Nous propulsons les entreprises vers{" "}
           <em className="text-blond">l’innovation & le succès </em>sur le
           continent africain
         </span>
+        <svg className="wave_right" width="86" height="96" viewBox="0 0 86 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M86 50.2324C86 65.3838 82.2171 76.7809 74.6456 84.4218C72.4911 86.5968 70.142 88.4629 67.6021 90.0183C60.2826 94.5007 52.9094 95.5449 44.8174 95.8796C26.4732 96.6389 8.62001 93.6255 3.54812e-07 91.9414C6.17461 85.9993 12.3492 80.0571 18.5239 74.115C23.4109 74.5893 40.9881 75.9995 51.8423 70.3331C54.5934 68.8972 56.1458 67.4816 56.9424 66.4667C59.6379 63.0286 60.9848 57.6142 60.9848 50.2324L60.9848 -2.1869e-06L86 0L86 50.2324Z" fill="#F4F2E9"/>
+<path d="M36.2235 35.4745C29.083 35.4745 23.2944 41.2192 23.2944 48.3056C23.2944 55.3921 29.083 61.1368 36.2235 61.1368C43.364 61.1368 49.1526 55.3921 49.1526 48.3056C49.1526 41.2192 43.364 35.4745 36.2235 35.4745Z" fill="#F4F2E9"/>
+</svg>
+
       </section>
       <main>
         <Services setIsSubVisible={setIsSubVisible}/>
@@ -142,11 +146,9 @@ export default function Home() {
         <Loader/>
       </main>
       <Footer />
-      {isSubVisible && (
-        <div ref={subContainerRef} className="fixed min-h-screen overflow-hidden inset-0 z-20 bg-white">
+        <div ref={subContainerRef}className={`sub-container fixed min-h-screen overflow-hidden inset-0 z-20 bg-white ${isSubVisible ? "visible" : ""}`}>
           <Sub />
         </div>
-      )}
-    </div>
+        </div>
   );
 }

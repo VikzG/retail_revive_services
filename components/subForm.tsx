@@ -2,10 +2,10 @@ import { useState,useRef,useEffect } from "react";
 import gsap from "gsap";
 
 interface MultiStepFormProps {
-  onComplete: () => void; // Définition du type pour onComplete
+  onComplete: () => void;
+  onBack: () => void;
 }
-
-export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
+export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps) {
   const [step, setStep] = useState(1);
   const [forfait, setForfait] = useState("");
   const [formData, setFormData] = useState({
@@ -44,7 +44,11 @@ export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
   };
 
   const handlePrevious = () => {
-    setStep((prev) => prev - 1);
+    if (step > 1) {
+      setStep((prev) => prev - 1);
+    } else {
+      onBack(); // Appel de la prop pour retourner à l'écran précédent
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -202,7 +206,7 @@ export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
     )}
 
     {/* Pagination et navigation */}
-    <div className="flex items-center justify-center gap-8 mt-6">
+    <div className="flex items-center justify-between gap-8 mt-6">
       {/* Bouton précédent */}
       {step > 1 && (
         <button
@@ -212,6 +216,15 @@ export default function MultiStepForm({ onComplete }: MultiStepFormProps) {
           Retour
         </button>
       )}
+
+      {step === 1 && (
+            <button
+              className="sous_titre py-2 px-4 bg-white text-gold rounded-lg"
+              onClick={onBack}
+            >
+              Retour
+            </button>
+          )}
 
       {/* Pagination */}
       <div className="flex space-x-2">

@@ -52,34 +52,32 @@ export default function Expertise() {
     },
   ];
 
-//  
-//  useEffect(() => {
-//    if (isMobile) return; // Ne pas exécuter si mobile
-//
-//    const timeline = gsap.timeline({
-//      scrollTrigger: {
-//        trigger: expertiseTitle.current,
-//        start: "top 95%",
-//        toggleActions: "play none none none",
-//      },
-//    });
-//
-//    timeline
-//      .fromTo(
-//        [expertiseTitle.current, expertiseIntro.current],
-//        { opacity: 0 },
-//        { opacity: 1, duration: 0.6, stagger: 0 }
-//      )
-//      .fromTo(
-//        expertiseList.current,
-//        { opacity: 0, y: 30 },
-//        { opacity: 1, y: 0, duration: 0.6 },
-//        "+=0.5"
-//      );
-//
-//    // Nettoyage
-//    return () => timeline.kill();
-//  }, [isMobile]);
+  
+  useEffect(() => {
+    if (isMobile) return; // Ne pas exécuter si mobile
+
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: expertiseIntro.current,
+        start: "top 95%",
+        toggleActions: "play none none none",
+      },
+    });
+
+    timeline
+      .fromTo(
+        [expertiseTitle.current, expertiseIntro.current],
+        { opacity: 0 },
+        { opacity: 1, duration: 0.6, stagger: 0 }
+      )
+      .fromTo(
+        expertiseList.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.6 },
+        "+=0.5"
+      );
+
+  }, [isMobile]);
 
 useEffect(() => {
   if (isMobile && expertiseRef.current) {
@@ -88,12 +86,12 @@ useEffect(() => {
       { opacity: 0 },
       {
         opacity: 1,
-        delay:2,
-        duration: 1.5,
+        delay:0.2,
+        duration: 1,
         ease: "power2.out",
         scrollTrigger: {
           trigger: expertiseRef.current,
-          start: "top 60%", // Animation déclenchée quand l'élément est visible à 90% dans le viewport
+          start: "top 90%", // Animation déclenchée quand l'élément est visible à 90% dans le viewport
           toggleActions: "play none none none",
         },
       }

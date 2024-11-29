@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
 import MultiStepForm from "./subForm";
 
 export default function Sub() {
@@ -9,10 +10,54 @@ export default function Sub() {
   const [error, setError] = useState("");
   const [isCompleted, setIsCompleted] = useState(false); // Nouvel état pour gérer la fin de l'inscription
 
-  const handleFormComplete = () => {
-    setIsCompleted(true); // Marque l'inscription comme terminée
-    setShowForm(false); // Ferme le formulaire
+  // Références pour les animations
+  const clubRef = useRef(null);
+  const retailRef = useRef(null);
+  const africaRef = useRef(null);
+
+  // Fonction pour animer la sortie des mots (ensemble)
+  const animateOut = () => {
+    const timeline = gsap.timeline();
+    const targets = [clubRef.current, retailRef.current, africaRef.current]; // Grouping
+    timeline.to(targets, {
+      x: (i) => (i === 1 ? "100%" : "-100%"), // Déplace à gauche/droite selon l'index
+      opacity: 0,
+      duration: 1,
+      ease: "power2.in",
+      stagger: 0, // Pas de délai entre les animations
+    });
   };
+
+  // Fonction pour ramener les mots au centre (ensemble)
+  const animateBackToCenter = () => {
+    const timeline = gsap.timeline();
+    const targets = [clubRef.current, retailRef.current, africaRef.current]; // Grouping
+    timeline.to(targets, {
+      x: "0%",
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out",
+      stagger: 0, // Pas de délai entre les animations
+    });
+  };
+
+  const handleShowForm = () => {
+    animateOut(); // Animer la sortie des mots
+    setTimeout(() => {
+      setShowForm(true); // Afficher le formulaire après l'animation
+    }, 1500); // Temps synchronisé avec la durée de l'animation
+  };
+
+  const handleFormComplete = () => {
+    setShowForm(false); // Ferme le formulaire
+    setIsCompleted(true); // Marque l'inscription comme terminée
+    animateBackToCenter(); // Ramène les mots au centre
+  };
+
+  const handleBack = () => {
+    setShowForm(false); // Ferme le formulaire lorsque l'utilisateur clique sur "Retour"
+  };
+
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Empêche le rechargement de la page
@@ -25,12 +70,13 @@ export default function Sub() {
     }
   };
 
+
   return (
     <div className="min-h-screen min-w-full bg-light_beige flex justify-center items-center overflow-hidden">
       <h1 className="cra_sub grand_titre_xl min-w-[1450px] text-center text-blond flex flex-col gap-40">
-        <span className="text-start ms-28">CLUB</span>
-        <span className="text-end me-28">RETAIL</span>
-        <span className="text-start ms-28">AFRICA</span>
+        <span ref={clubRef} className="text-start ms-28">CLUB</span>
+        <span ref={retailRef} className="text-end me-28">RETAIL</span>
+        <span ref={africaRef} className="text-start ms-28">AFRICA</span>
       </h1>
 
       {/* Contenu de "sticker" */}
@@ -99,7 +145,7 @@ export default function Sub() {
               <div className="sticker_left w-1/2 flex flex-col gap-8 justify-start items-start">
                 <div>
                   <h2 className="sous_titre">DEVENEZ MEMBRE DU</h2>
-                  <h3 className="grand_titre_xs">CLUB RETAIL AFRICA</h3>
+                  <h3 className="grand_titre_xxs">CLUB RETAIL AFRICA</h3>
                 </div>
                 <div>
                   <p className="body_text underline mb-4">
@@ -150,7 +196,7 @@ export default function Sub() {
                   </span>
                 </div>
                 <button
-                  onClick={() => setShowForm(true)}
+                  onClick={handleShowForm}
                   className="sub_bouton sous_titre bg-gold text-white px-8 py-2 rounded-md self-start mt-4"
                 >
                   INSCRIPTION
@@ -164,7 +210,7 @@ export default function Sub() {
       {/* Formulaire */}
       {showForm && !isCompleted && (
         <div className="fixed inset-0 z-30">
-          <MultiStepForm onComplete={handleFormComplete} />
+          <MultiStepForm onComplete={handleFormComplete} onBack={handleBack} />
         </div>
       )}
     </div>

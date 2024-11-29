@@ -109,7 +109,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
       </div>
 
       {/* Main Content */}
-      <div ref={clubRefMobile}>
+      <div className="w-full" ref={clubRefMobile}>
       <div className="text-center mb-6 px-4 pt-6">
         <h2 className="citations">Pourquoi rejoindre le</h2>
         <h1 className="text-gold grand_titre_s mt-1">CLUB RETAIL AFRICA ?</h1>

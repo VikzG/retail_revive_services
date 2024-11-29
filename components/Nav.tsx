@@ -102,19 +102,40 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
       </div>
 
       {/* Center logo */}
-      <div className="retail_revive_svg_container items-center justify-center flex-none px-4">
-        <Link href="/">
-          <svg
-            className="retail_revive_svg"
-            version="1.1"
-            id="Calque_1"
-            xmlns="http://www.w3.org/2000/svg"
-            x="0px"
-            y="0px"
-            viewBox="0 0 372 206"
-            width="70" // Ajouter des dimensions explicites
-            height="35"
-          >
+      <div 
+      onClick={() => setIsSubVisible(false)}
+      className="retail_revive_svg_container items-center justify-center flex-none px-4">
+      {isMobile && isSubVisible ? (
+          <span className="flex items-center text-black cursor-pointer nav_anchor">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            Retour au site
+          </span>
+        ) : (
+          <Link href="/">
+            <svg
+              className="retail_revive_svg"
+              version="1.1"
+              id="Calque_1"
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              viewBox="0 0 372 206"
+              width="70"
+              height="35"
+            >
             <g transform="translate(0.000000,206.000000) scale(0.100000,-0.100000)">
               <path
                 d="M1450,1745v-85h-55h-55v-90v-90h54h54l4-147c4-168,18-216,86-286c34-36,99-77,120-77c5,0,17,39,25,87c14,76,15,89,2,103
@@ -166,11 +187,13 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
             </g>
             <circle fill="#B69F61" className="st0" cx="333.1" cy="29.5" r="11.5" />
           </svg>
-        </Link>
+          </Link>
+        )}
       </div>
 
       {/* Right section */}
-      <div className="flex items-center flex-1 justify-end">
+      <div 
+      className="flex items-center flex-1 justify-end">
         {isMobile ? (
           <>
             {/* Vos anciens SVG pour la navigation mobile */}
@@ -224,7 +247,12 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
                   </svg>
                   </Link>
                       )}
-            <Link href="#contact">
+            <Link 
+            href="#contact"
+            onClick={(e) => {
+              setIsSubVisible(false);
+            }} 
+            >
               <svg
                 className="enveloppe_icon"
                 version="1.0"
@@ -278,7 +306,12 @@ l-105 -85 0 176 c0 96 2 175 4 175 2 0 51 -39 108 -86z m162 -125 c19 -9 32
         ) : (
           <>
             {/* Vos anciens SVG pour la navigation desktop */}
-            <Link href="#contact">
+            <Link href="#contact"
+             onClick={(e) => {
+               setIsSubVisible(false);
+             }} 
+            
+            >
               <svg
                 className="user_icon"
                 version="1.0" xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState,useEffect,useRef } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 
 type ClubProps = {
@@ -11,6 +10,7 @@ type ClubProps = {
 export default function Actualites({ setIsSubVisible }: ClubProps) {
   const [isMobile, setIsMobile] = useState(false);
   const actualitesRef = useRef(null);
+  const actualitesRefDesktop = useRef(null);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -25,7 +25,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   }, []);
 
   useEffect(() => {
-    if (isMobile && actualitesRef.current) {
+    if (isMobile) {
       gsap.fromTo(
         actualitesRef.current,
         { opacity: 0 },
@@ -43,6 +43,24 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         }
       );
     }
+    if (!isMobile) {
+      gsap.fromTo(
+        actualitesRefDesktop.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1.5,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: actualitesRefDesktop.current,
+            start: "top 50%",
+            end: "bottom 20%",
+            scrub: false,
+            once: true,
+          },
+        }
+      );
+    }
   }, [isMobile]);
 
   if (isMobile) {
@@ -50,10 +68,9 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
       <section id="actualites" className="bg-white py-10 text-center flex flex-col items-center">
       {/* Header */}
       <div ref={actualitesRef} >
-      <div className="actualites_animation_mobile">
       <div className="mb-4">
         <h2 className="grand_titre_s">NOS ACTUALITÉS</h2>
-        <Link className="text-gold underline body_text"href="#">
+        <Link className="text-gold underline body_text" href="#">
            <strong>Téléchargez notre étude annuelle gratuite sur<br/> le retail en Afrique</strong> 
         </Link>
       </div>
@@ -63,7 +80,6 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         <p className="body_text">
         <strong>Inscrivez-vous dès maintenant à nos courriers exclusifs</strong> pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Révie Services et ses partenaires, à travers des études de cas et témoignages d’entreprises.
         </p>
-      </div>
       </div>
       </div>
 
@@ -127,7 +143,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   }
   return (
     <section id="actualites" className="actualites_animation min-h-[80vh] max-h-screen py-16 px-4 bg-white">
-      <div className="grid grid-cols-3 gap-10 p-8">
+      <div ref={actualitesRefDesktop} className="actualites_trigger grid grid-cols-3 gap-10 p-8">
         
         {/* Colonne 1 : Nos Actualités */}
         <div className="p-6">
