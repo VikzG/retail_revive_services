@@ -88,17 +88,22 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         <div className="flex flex-row gap-2 px-4 py-6">
         <input
           type="text"
+          disabled
+          required
           placeholder="Votre nom"
           className="border border-[#D5C5A6] rounded-md p-2 mb-2 w-full max-w-xs"
         />
         <input
           type="email"
+          disabled
+          required
           placeholder="Votre email"
           className="border border-[#D5C5A6] rounded-md p-2 mb-2 w-full max-w-xs"
         />
         </div>
         <button 
               type="submit" 
+              disabled
               className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
             >
               OK
@@ -163,15 +168,20 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
             <input 
               type="text" 
               placeholder="Votre nom" 
+              disabled
+              required
               className="border border-gray-300 p-2 mt-4 rounded-lg w-full"
             />
             <input 
               type="email" 
               placeholder="Votre email" 
+              disabled
+              required
               className="border border-gray-300 p-2 rounded-lg w-full"
             />
             <button 
               type="submit" 
+              disabled
               className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
             >
               OK

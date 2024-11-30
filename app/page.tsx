@@ -17,6 +17,19 @@ import Loader from "@/components/Loader";
 
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 576px)");
+    const handleResize = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleResize(); // Vérifie la condition dès que le composant est monté
+
+    mediaQuery.addEventListener("change", handleResize); // Écoute les changements
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -45,9 +58,6 @@ export default function Home() {
       );
   }, []);
 
- // const toggleSubVisibility = () => {
- //   setIsSubVisible((prev) => !prev);
- // };
 
 
   useEffect(() => {
@@ -89,9 +99,9 @@ export default function Home() {
             </span>
           </div>
           <h1 className="grand_titre text-center absolute inset-0 flex items-center justify-center text-white">
-            expansion retail
-            <br />
-            en afrique
+            expansion retail&nbsp;
+            {!isMobile && <br />}
+            en {isMobile && <br />} afrique
           </h1>
           </div>
 
@@ -123,7 +133,7 @@ export default function Home() {
 <path d="M49.7762 60.5255C56.9168 60.5255 62.7053 54.7808 62.7053 47.6944C62.7053 40.6079 56.9168 34.8632 49.7762 34.8632C42.6357 34.8632 36.8472 40.6079 36.8472 47.6944C36.8472 54.7808 42.6357 60.5255 49.7762 60.5255Z" fill="#F4F2E9"/>
 </svg>
 
-        <span className="citations text-center w-3/6">
+        <span className="citations text-center w-3/6 min-w-[335px]">
           Nous propulsons les entreprises vers{" "}
           <em className="text-blond">l’innovation & le succès </em>sur le
           continent africain

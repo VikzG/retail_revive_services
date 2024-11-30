@@ -238,7 +238,7 @@ export default function Opportunites() {
         </div>
 
         {/* Right column - Image positioned to the right */}
-        <div className="opportunite_img_container relative bottom-36 w-[350px] h-[550px] ml-auto">
+        <div className="opportunite_img_container relative bottom-36 w-[350px] h-[550px] ml-[65vw]">
           <div className="absolute inset-0 overflow-hidden rounded-t-full">
             <Image
               src="/opportunites/opportunite_img.png"

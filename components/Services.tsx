@@ -139,7 +139,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     dynamicBullets: true,
   }}
   modules={[Pagination]}
-  className="mySwiper w-full h-[60vh] mt-6 rounded-2xl overflow-hidden"
+  className="mySwiper w-full h-[60vh] max-w-[750px] mt-6 rounded-2xl overflow-hidden"
 >
   {services.flatMap((service, index) => {
     const slides = [

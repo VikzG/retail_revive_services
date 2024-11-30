@@ -7,7 +7,7 @@ export default function Expertise() {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1250px)");
+    const mediaQuery = window.matchMedia("(max-width: 1100px)");
     const handleResize = () => {
       setIsMobile(mediaQuery.matches);
     };
@@ -130,14 +130,14 @@ useEffect(() => {
     // Code de la version mobile
   return (
     <section id="expertise" className="expertise flex flex-col items-center bg-dark_brown_grey text-white px-6 py-12">
-      <div ref={expertiseRef} className="text-center mb-8">
-        <h1 className="expertise_titre mb-4">EXPERTISE</h1>
+      <div ref={expertiseRef} className="text-end mb-8 flex flex-col w-full">
+        <h1 className="expertise_titre">EXPERTISE</h1>
         <p className="citations text-end">
-          Nos secteurs clés pour<br/>répondre aux <span className="text-gold">besoins<br/>du marché africain</span>.
+          Nos secteurs clés pour<br/>répondre aux <strong><span className="text-gold">besoins<br/>du marché africain.</span></strong>
         </p>
       </div>
 
-      <div className="flex flex-col items-center gap-10">
+      <div className="flex flex-col items-center gap-2 w-full">
         {sectors.map((sector,index) => (
             <div
             key={sector.number}
@@ -147,11 +147,11 @@ useEffect(() => {
               }
             }}
             className={`${
-              index === 0 || index === 2 || index === 4 ? "self-start text-left" : "self-end text-right"
+              index === 0 || index === 2 || index === 4 ? "self-start text-left w-4/6" : "self-end text-right w-4/6"
             }`}
           >
-            <h3 className="text-gold grand_titre_s_expertise">{sector.number}</h3>
-            <h4 className="sous_titre">{sector.title}</h4>
+            <h3 className="text-gold grand_titre_s_expertise mb-2">{sector.number}</h3>
+            <h4 className="sous_titre mb-4">{sector.title}</h4>
             <p className="text-white body_text">{sector.description}</p>
           </div>
         ))}
@@ -168,7 +168,7 @@ useEffect(() => {
         pour répondre <br/> <span className="text-gold">aux besoins spécifiques</span> du marché africain.</p>
       </div>
 
-      <div ref={expertiseList} className={`${isMobile ? "flex-col" : "flex"} flex-wrap justify-center gap-8 mb-8`}>
+      <div ref={expertiseList} className={`${isMobile ? "flex-col" : "flex"} justify-center gap-8 mb-8`}>
         {sectors.map((sector,index) => (
           <div
           key={sector.number}

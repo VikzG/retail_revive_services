@@ -62,7 +62,7 @@ body {
 
 .nav_anchor:hover{
   color: #B69F61;
-  margin-bottom: 5px;
+  transform: translateY(-5px);
 }
 
 .retail_revive_svg:hover{
@@ -84,13 +84,11 @@ body {
 }
 
 .enveloppe_icon g:hover {
-  transform: scale(1.1);
   color: #B69F61 !important;
 
 }
 
 .user_icon g:hover {
-  transform: scale(1.1);
   color: #B69F61 !important;
 }
 
@@ -607,15 +605,6 @@ body {
 
 @media (max-width: 1250px) {
 
-  .expertise_titre {
-    font-size: 50px;
-    letter-spacing: 0.2rem;
-  }
-
-  .grand_titre_s_expertise {
-    font-size: 45px;
-  }
-
   .opportunite_titre{
     font-size: 132px;
     line-height: 110px;
@@ -632,6 +621,18 @@ body {
   }
 
 }
+
+@media (max-width: 1100px) {
+
+  .expertise_titre {
+    font-size: 55px;
+    letter-spacing: 0.2rem;
+  }
+
+  .grand_titre_s_expertise {
+    font-size: 45px;
+  }
+  }
 
 @media (max-width: 1050px) {
 
@@ -686,17 +687,19 @@ body {
   .sticker_right {
     width: 100%;
   } 
+  
   .wave_left{
     align-self: end;
-    width: 65px;
-    height: 30px;
+    width: 85px;
+    height: 20px;
+    transform: translateX(20px) scale(2);
   }
   
   .wave_right{
     align-self: end;
-    width: 65px;
-    height: 30px;
-    transform: rotateX(0.5turn);
+    width: 85px;
+    height: 20px;
+    transform: rotateX(0.5turn) translateX(-20px) scale(2);
   }
 }
 

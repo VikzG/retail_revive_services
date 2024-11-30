@@ -63,8 +63,11 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
             ) : (
               <>
                 <Link
-                  href="#club-retail"
-                  onClick={() => setIsSubVisible(true)}
+                  href="#"
+                      onClick={(e) => {
+                      e.preventDefault();
+                      setIsSubVisible(true);
+                    }} 
                   className="nav_anchor text-black flex items-center justify-center gap-1"
                 >
                   <svg
@@ -124,7 +127,7 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
             Retour au site
           </span>
         ) : (
-          <Link href="/">
+          <Link href="#club-retail">
             <svg
               className="retail_revive_svg"
               version="1.1"
