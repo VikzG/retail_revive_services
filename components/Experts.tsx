@@ -64,7 +64,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     },
     {
       name: "ANGÉLIQUE",
-      role: "Communication & Event",
+      role: "Communication",
       image: "/experts/angelique_img.png",
     },
     {
@@ -82,7 +82,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     },
     {
       name: "DOMINIQUE",
-      role: "Division Conseil & Stratégie",
+      role: "Division Conseil",
       image: "/experts/dominique_img.png",
     },
     {
