@@ -54,22 +54,22 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     },
     {
       name: "NELLY",
-      role: "Communication/Événements",
+      role: "Division Distribution",
       image: "/experts/nelly_img.png",
     },
     {
       name: "LESLIE",
-      role: "Chargée Social Media",
+      role: "Social Media & RP",
       image: "/experts/leslie_img.png",
     },
     {
       name: "ANGÉLIQUE",
-      role: "Chargée Social Media",
+      role: "Communication & Event",
       image: "/experts/angelique_img.png",
     },
     {
       name: "CLAUDIA",
-      role: "Directrice Générale",
+      role: "Fondatrice",
       image: "/experts/claudia_img.png",
     },
   ];
@@ -77,27 +77,27 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
   const experts = [
     {
       name: "STEVE",
-      role: "Consultant en Analyse",
+      role: "Division Conseil",
       image: "/experts/steve_img.png",
     },
     {
       name: "DOMINIQUE",
-      role: "Consultante Exp. Client",
+      role: "Division Conseil & Stratégie",
       image: "/experts/dominique_img.png",
     },
     {
       name: "EVA",
-      role: "Directrice des Opérations",
+      role: "Division Formation",
       image: "/experts/eva_img.png",
     },
     {
       name: "SANDRA",
-      role: "Directrice de Formation",
+      role: "Division Formation",
       image: "/experts/sandra_img.png",
     },
     {
       name: "KAREN",
-      role: "Consultante Formation",
+      role: "Division Formation",
       image: "/experts/karen_img.png",
     },
   ];
