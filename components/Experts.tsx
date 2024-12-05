@@ -48,7 +48,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
 
   const topTeam = [
     {
-      name: "EXPERTE",
+      name: "BAKA",
       role: "Division Formation",
       image: "/experts/experte_img.jpg",
     },
