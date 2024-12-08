@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
@@ -36,7 +35,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
-  const [hoveredService, setHoveredService] = useState<Service>({
+ ({
     image: "/services/services_img_1.png",
     title: "CONSEIL & STRATEGIE",
     href: "",
@@ -70,7 +69,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     },
     {
       title: "DISTRIBUTION & IMPLANTATION",
-      image: "/services/services_img_3.png",
+      image: "/services/services_img_33.png",
       href: "",
       phrases: [
         <span><strong>Go-to-Market sur mesure</strong> pour les marques internationales cherchant à s'établir en Afrique.</span>,
@@ -81,7 +80,9 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
   ];
 
 
-
+  const [hoveredService, setHoveredService] = useState<Service | null>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const activeService = selectedService || hoveredService || services[0];
   const h2ServicesRef = useRef(null);
   const textServicesRef = useRef(null);
 
@@ -250,17 +251,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
               key={service.title}
               className="service_card gap-2 flex flex-col w-full"
               onMouseEnter={() => setHoveredService(service)} 
-              onMouseLeave={() => setHoveredService({
-                image: "/services/services_img_1.png",
-                title: "CONSEIL & STRATEGIE",
-                href:"",
-                phrases: [
-                  <span><strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.</span>,
-                  <span><strong>Stratégie d'implantation</strong> et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.</span>,
-                  <span><strong>Optimisation de l'expérience client</strong> pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux.</span>
-                ]
-              })}
-            >
+              onMouseLeave={() => setHoveredService(null)}>
               <div className="services_image relative overflow-hidden rounded-lg shadow-lg flex-grow h-[300px] w-full">
                 <Image
                   src={service.image}
@@ -275,10 +266,11 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
                   </h3>
                 </div>
               </div>
-              <button className="service_bouton mt-2 w-full bg-white text-gold shadow-lg">
-                <Link className="sous_titre" href={"#expertise"}>
-                  DECOUVRIR
-                </Link>
+              <button
+                className="service_bouton mt-2 w-full bg-white text-gold shadow-lg"
+                onClick={() => setSelectedService(service)} // Mise à jour du service sélectionné
+              >
+                <span className="sous_titre">DECOUVRIR</span>
               </button>
             </div>
           ))}
@@ -289,87 +281,27 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
         <Card className="max-w-2xl w-3/4 h-5/6 overflow-hidden">
           <div className="relative">
           <Image
-              src={hoveredService.image}
-              alt={hoveredService.title}
+            src={activeService.image} // Image du service actif (sélectionné ou survolé)
+            alt={activeService.title}
               width={600}
               height={400}
               className="services_big_card w-full object-cover h-[450px]"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
               <h2 className="mt-72 citations text-white max-w-72 text-center">
-              {hoveredService.title}
+              {activeService.title}
               </h2>
             </div>
           </div>
           <CardContent className="p-6 space-y-6 mt-5 flex flex-col items-center justify-between">
           <ul className="space-y-4 body_text">
-  {hoveredService.title === "CONSEIL & STRATEGIE" && (
-    <>
-      <li className="flex gap-2">
-        <span className="text-primary fon">•</span>
-        <span>
-          <strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance
-        </span>
-      </li>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Stratégie d'implantation clé en main</strong> pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable
-        </span>
-      </li>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Optimisation de l'expérience client</strong> pour les marques souhaitant entrer sur le marché africain avec une feuille de route claire et réalisable.
-        </span>
-      </li>
-    </>
-  )}
-  {hoveredService.title === "FORMATION & RECRUTEMENT" && (
-    <>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Audit des compétences</strong> pour évaluer et développer les talents de vos équipes retail.
-        </span>
-      </li>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Formations spécialisées pour les équipes de vente</strong> pour maximiser les performances commerciales.
-        </span>
-      </li>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Recrutement de talents stratégique</strong> pour les postes clés du secteur retail.
-        </span>
-      </li>
-    </>
-  )}
-  {hoveredService.title === "DISTRIBUTION & IMPLANTATION" && (
-    <>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Go-to-Market sur mesure</strong> pour les marques internationales cherchant à s'établir en Afrique.
-        </span>
-      </li>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Mise en réseau stratégique</strong> pour faciliter les partenariats locaux et accéder aux financements nécessaires à votre succès.
-        </span>
-      </li>
-      <li className="flex gap-2">
-        <span className="text-primary font-bold">•</span>
-        <span>
-          <strong>Gestion clé en main de l’implantation</strong> pour vous accompagner dans toutes les phases, de l'ouverture à la mise en marché.
-        </span>
-      </li>
-    </>
-  )}
-</ul>
+            {activeService.phrases.map((phrase, i) => (
+              <li key={`phrase-${i}`} className="flex gap-2">
+                <span className="text-primary font-bold">•</span>
+                <span>{phrase}</span>
+              </li>
+            ))}
+          </ul>
 
             <button className="service_bouton_2 w-[250px] py-2 sous_titre rounded-lg bg-gold text-white">
             <a href="#contact"> JE SUIS INTÉRESSÉ(E)</a> 

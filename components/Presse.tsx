@@ -23,7 +23,7 @@ export default function Presse() {
       title: '"Dîner-Débat des décideurs"',
       phrase:
         "Le 10 octobre 2024, La Résidence Abidjan a accueilli le tout premier Dîner-Débat des Décideurs, un événement exclusif organisé par Retail Revive Services (RRS), un cabinet panafricain spécialisé...",
-      imgSrc: "/presse/presse_1.png",
+      imgSrc: "/presse/presse_11.jpg",
       imgLogo: "/presse/logo_elle.png",
       link: "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars",
     },
@@ -33,9 +33,9 @@ export default function Presse() {
         '"Retail en Afrique"',
       phrase:
         "Organisé par Retail Revive Services (RRS), le cabinet panafricain spécialisé dans la transformation des organisations retail, cet événement visait à poser les bases de la stratégie future du retail africain...",
-      imgSrc: "/presse/presse_2.png",
+      imgSrc: "/presse/presse_22.jpg",
       imgLogo: "/presse/logo_ivorian.png",
-      link: "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars",
+      link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
     },
     {
       id: 3,
@@ -43,9 +43,9 @@ export default function Presse() {
         '"Vision collective et transformation"',
       phrase:
         "En Afrique, le secteur du retail connaît une transformation rapide, avec un marché estimé à près de 1000 milliards de dollars d’ici 2030. D’après les dernières analyses du Baromètre Retail en Afrique de Deloitte...",
-      imgSrc: "/presse/presse_3.png",
+      imgSrc: "/presse/photo-33.png",
       imgLogo: "/presse/ecofin_logo.png",
-      link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
+      link: "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars",
     },
   ];
 
