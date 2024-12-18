@@ -1,12 +1,13 @@
 'use client'
-
-import { useState, useEffect,useRef } from "react"
+import { useState, useEffect, useRef } from "react"
+import emailjs from '@emailjs/browser';
 import gsap from "gsap/all"
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const contactMobileTitle = useRef(null);
   const contactMobileText = useRef(null);
+  
   const [formData, setFormData] = useState({
     subject: '',
     name: '',
@@ -61,7 +62,7 @@ export default function Contact() {
           toggleActions: "play none none none",
         },
       });
-  
+
       // Animation du titre
       timeline.fromTo(
         contactMobileTitle.current,
@@ -72,7 +73,7 @@ export default function Contact() {
           ease: "power2.out",
         }
       );
-  
+
       // Animation du texte, avec un délai de 0.5s après le titre
       timeline.fromTo(
         contactMobileText.current,
@@ -94,33 +95,53 @@ export default function Contact() {
       [name]: value,
     }));
   }
+  
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-    // Simuler une validation de formulaire
+    // Validation du formulaire
     const newErrors = {
-      subject: formData.subject ? '' : 'Le sujet est requis.',
-      name: formData.name ? '' : 'Le nom est requis.',
-      email: formData.email ? '' : 'L\'email est requis.',
-      message: formData.message ? '' : 'Le message est requis.',
+        subject: formData.subject ? '' : 'Le sujet est requis.',
+        name: formData.name ? '' : 'Le nom est requis.',
+        email: formData.email ? '' : 'L\'email est requis.',
+        message: formData.message ? '' : 'Le message est requis.',
     };
-
     setErrors(newErrors);
 
-    // Si aucune erreur, simuler un envoi de formulaire réussi
-    if (!Object.values(newErrors).some(err => err)) {
-      setSuccessMessage("Merci pour votre message ! Nous reviendrons vers vous bientôt.");
-      setFormData({ subject: '', name: '', email: '', message: '' }); // Réinitialiser le formulaire
+    if (Object.values(newErrors).some(err => err)) {
+        setIsSubmitting(false);
+        return;
     }
 
-    setIsSubmitting(false);
-  }
+    try {
+        const result = await emailjs.send(
+          process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+          process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+            {
+                subject: formData.subject,
+                name: formData.name,
+                email: formData.email,
+                message: formData.message,
+            },
+            process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        );
+        console.log('Email envoyé avec succès :', result.text);
+        setSuccessMessage("Nous avons bien reçu votre message !");
+        setFormData({ subject: '', name: '', email: '', message: '' });
+    } catch (error) {
+        console.error('Erreur lors de l\'envoi de l\'email :', error);
+        alert("Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.");
+    } finally {
+        setIsSubmitting(false);
+    }
+};
+
 
   const renderForm = () => (
     <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
-      <input 
+      <input
         type="text"
         name="subject"
         value={formData.subject}
@@ -133,44 +154,44 @@ export default function Contact() {
 
       <div className="flex space-x-2">
         <div className="flex-1">
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            placeholder="Votre nom*" 
-            className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold" 
-            required 
+            placeholder="Votre nom*"
+            className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold"
+            required
           />
           {errors.name && <p className="text-red-500">{errors.name}</p>}
         </div>
         <div className="flex-1">
-          <input 
-            type="email" 
+          <input
+            type="email"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="Votre email*" 
-            className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold" 
-            required 
+            placeholder="Votre email*"
+            className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold"
+            required
           />
           {errors.email && <p className="text-red-500">{errors.email}</p>}
         </div>
       </div>
 
-      <textarea 
+      <textarea
         name="message"
         value={formData.message}
         onChange={handleInputChange}
-        placeholder="Votre message*" 
-        className="w-full min-h-[200px] p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold" 
-        required 
+        placeholder="Votre message*"
+        className="w-full min-h-[200px] p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold"
+        required
       ></textarea>
       {errors.message && <p className="text-red-500">{errors.message}</p>}
 
       <div className="flex justify-center">
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="contact_bouton w-2/6 sous_titre bg-gold text-white py-3 rounded-xl"
           disabled={isSubmitting}
         >
@@ -184,14 +205,14 @@ export default function Contact() {
     return (
       <section id="contact" className="flex flex-col bg-dark_brown_grey text-white">
         <div className="w-full py-20 px-4 bg-dark-brown flex flex-col items-center text-center gap-8">
-          <h2 ref={contactMobileTitle}className="grand_titre_s">CONTACTEZ<br/>NOUS</h2>
+          <h2 ref={contactMobileTitle} className="grand_titre_s">CONTACTEZ<br />NOUS</h2>
           <p ref={contactMobileText} className="w-5/6 sous_titre">
             VOUS AVEZ UN PROJET ? UNE QUESTION ?<br />
             CONTACTEZ-NOUS ET LAISSEZ-NOUS VOUS ACCOMPAGNER DANS VOTRE TRANSFORMATION RETAIL EN AFRIQUE.
           </p>
         </div>
 
-        <div 
+        <div
           className="w-full py-8 px-4 bg-cover bg-center flex flex-col items-center justify-center"
           style={{ backgroundImage: "url('/contact/contact_img.png')" }}
         >
@@ -199,27 +220,35 @@ export default function Contact() {
         </div>
 
         {successMessage && (
-          <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
-            <div className="p-8 bg-white text-black text-center rounded-md shadow-lg">
-              <p className="text-xl font-semibold">{successMessage}</p>
+          <div className="fixed inset-0 transparent bg-opacity-90 flex items-center justify-center z-50">
+            <div className="w-full px-10 py-44 bg-beige_grey text-black text-center rounded-md shadow-lg relative">
+            <button
+              onClick={() => setSuccessMessage("")}
+              className="absolute top-3 right-3 text-xl"
+            >
+              &times;
+            </button>
+              <p className="citations">Nous avons bien reçu<br/>votre message !</p>
+              <p className="body_text mt-4">Un expert vous répondra dans les plus brefs délais.</p>
             </div>
           </div>
-        )}
+               )}
+
       </section>
     )
   }
 
   return (
-    <section id="contact" className="h-screen flex flex-row bg-dark_brown_grey text-white">   
+    <section id="contact" className="h-screen flex flex-row bg-dark_brown_grey text-white">
       <div className="w-2/5 h-screen flex-shrink-0">
-        <img 
-          src="/contact/contact_img.png" 
-          alt="Sculpture en terre cuite" 
+        <img
+          src="/contact/contact_img.png"
+          alt="Sculpture en terre cuite"
           className="w-full h-screen object-cover"
         />
       </div>
 
-      <div className="contact-animation w-3/4 flex flex-col items-center gap-20 justify-center px-4">
+      <div className="contact-animation w-3/4 flex flex-col items-center gap-20 justify-center px-4 relative">
         <h2 className="grand_titre_s">CONTACTEZ-NOUS</h2>
         <p className="w-3/4 sous_titre text-center">
           VOUS AVEZ UN PROJET ? UNE QUESTION ?<br />
@@ -227,15 +256,40 @@ export default function Contact() {
         </p>
 
         {renderForm()}
-
         {successMessage && (
-          <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
-            <div className="p-8 bg-white text-black text-center rounded-md shadow-lg">
-              <p className="text-xl font-semibold">{successMessage}</p>
+          <div className="absolute -bottom-[30%] left-1/2 transform -translate-x-1/2 -translate-y-full w-full bg-transparent text-white p-4 rounded-md flex justify-center items-center">
+            <div className="py-36 px-20 bg-beige_grey  text-black text-center rounded-md shadow-lg relative">
+            <button
+               onClick={() => setSuccessMessage("")}
+              className="absolute top-3 right-3 text-xl"
+            >
+              &times;
+            </button>
+              <p className="citations">Nous avons bien reçu<br/>votre message !</p>
+              <p className="body_text mt-4">Un expert vous répondra dans les plus brefs délais.</p>
             </div>
           </div>
-        )}
+          )}
       </div>
     </section>
   )
 }
+
+// desktop ---->
+//{successMessage && (
+//  <div className="inset-0 bg-opacity-90 flex items-center justify-center z-50">
+//    <div className="p-8 bg-beige_grey  text-black text-center rounded-md shadow-lg">
+//      <p className="citations">{successMessage}</p>
+//      <p className="text_body">Un expert vous répondra dans les plus brefs délais.</p>
+//    </div>
+//  </div>
+//)}
+
+// mobile --->
+//{successMessage && (
+//  <div className="fixed inset-0 bg-white bg-opacity-90 flex items-center justify-center z-50">
+//    <div className="p-8 bg-white text-black text-center rounded-md shadow-lg">
+//      <p className="text-xl font-semibold">{successMessage}</p>
+//    </div>
+//  </div>
+//)}

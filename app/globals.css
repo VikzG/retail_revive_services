@@ -17,20 +17,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* priority */
-
-.service_card {
-  filter: grayscale(100);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.service_card:hover {
-  filter: grayscale(0);
-  transform: scale(1.05); /* Agrandir légèrement la carte */
-  opacity: 0.9; /* Rendre la carte un peu plus transparente */
-}
-
-
 /* banner */
 
 .banner_text_container {
@@ -127,8 +113,29 @@ body {
   letter-spacing: 0.02em; /* Utilise 0.02em pour un espacement de 2% */
 }
 
-.service_card img{
+.service_card img {
   object-fit: cover;
+  filter: grayscale(100); /* Image en noir et blanc par défaut */
+  transition: filter 0.3s ease; /* Ajoutez une transition fluide */
+}
+
+.service_card {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.service_card:hover {
+  transform: scale(1.05); /* Agrandir légèrement la carte */
+  opacity: 0.9; /* Rendre la carte un peu plus transparente */
+}
+
+.service_card:hover img {
+  filter: grayscale(0); /* Annule le noir et blanc sur l'image */
+}
+
+.service_card:hover > button {
+  background-color: rgb(182, 159, 97);; /* Changer la couleur du bouton */
+  color: white; /* Changer la couleur du texte */
+  transition: transform 0.3s ease,
 }
 
 
@@ -141,15 +148,10 @@ body {
   height: 2.5rem;
   border-radius: 10px;
   margin: auto;
+  filter: grayscale(0);
   margin-top: 1rem;
 }
 
-.service_bouton:hover {
-  background-color: rgb(182, 159, 97);
-  color: #ffffff;
-  transform: scale(1.1);
-  transition: all 300ms ease-in-out;
-}
 
 .service_bouton_2:hover {
   background-color: #ffffff;
@@ -577,6 +579,13 @@ body {
   color: #ffffff;
   border-radius: 10px;
   letter-spacing: 1px;
+}
+
+button:disabled {
+  background-color: #d3d3d3; /* Gris clair */
+  color: #9e9e9e; /* Gris foncé pour le texte */
+  cursor: not-allowed; /* Curseur interdit */
+  opacity: 0.6; /* Ajoute un effet de transparence */
 }
 
 /* Slider */ 

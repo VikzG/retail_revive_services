@@ -1,4 +1,5 @@
 import { useState,useRef,useEffect } from "react";
+import emailjs from '@emailjs/browser';
 import gsap from "gsap";
 
 interface MultiStepFormProps {
@@ -35,11 +36,33 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
     setForfait(value);
   };
 
+  const isNextDisabled = () => {
+    if (step === 1) return !forfait;
+    if (step === 2) return !formData.nom || !formData.prenom || !formData.email;
+    if (step === 3) return !formData.entreprise || !formData.secteur || !formData.fonction;
+    return false;
+  };
+
   const handleNext = () => {
     if (step === 1 && !forfait) {
       alert("Veuillez sélectionner un forfait.");
       return;
     }
+  
+    if (step === 2) {
+      if (!formData.nom || !formData.prenom || !formData.email) {
+        alert("Veuillez remplir tous les champs de cette étape.");
+        return;
+      }
+    }
+  
+    if (step === 3) {
+      if (!formData.entreprise || !formData.secteur || !formData.fonction) {
+        alert("Veuillez remplir tous les champs de cette étape.");
+        return;
+      }
+    }
+  
     setStep((prev) => prev + 1);
   };
 
@@ -56,20 +79,35 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
   };
 
   const handleSubmit = () => {
-    // Validation globale avant soumission
+    // Validation
     if (!forfait || !formData.nom || !formData.prenom || !formData.email || !formData.entreprise || !formData.secteur || !formData.fonction) {
       alert("Veuillez remplir tous les champs avant de soumettre.");
       return;
     }
 
-    // Soumission des données (exemple : affichage dans une alerte)
-    alert(`Formulaire soumis : ${JSON.stringify({ forfait, ...formData })}`);
+    // Données à envoyer
+    const templateParams = {
+      forfait,
+      ...formData,
+    };
 
-    // Appeler la fonction `onComplete` pour désactiver le formulaire
-    if (onComplete) {
-      onComplete(); // Signale que le formulaire est terminé
-    }
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_EMAILJS_TEMPLATE_ID_SUB!,
+         templateParams,
+         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        )
+      .then(() => {
+        alert("Votre formulaire a été envoyé avec succès !");
+        onComplete(); // Signal que le formulaire est terminé
+      })
+      .catch((error) => {
+        alert("Une erreur s'est produite lors de l'envoi du formulaire.");
+        console.error("Erreur EmailJS:", error);
+      });
   };
+
   return (
     <div className="form-container flex flex-col justify-center items-center bg-light_beige h-screen w-full">
     <div ref={stepContainerRef} className="max-w-xl min-w-[220px] p-6 bg-light_beige">
@@ -243,6 +281,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
         className={`py-2 px-4 sous_titre ${
           step === 3 ? "bg-gold text-white" : "bg-gold text-white"
         } text-white rounded-lg`}
+        disabled={isNextDisabled()}
         onClick={step === 3 ? handleSubmit : handleNext}
       >
         {step === 3 ? "Terminer" : "Suivant"}

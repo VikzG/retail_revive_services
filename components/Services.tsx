@@ -249,7 +249,8 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
         {services.map((service) => (
             <div
               key={service.title}
-              className="service_card gap-2 flex flex-col w-full"
+              className="service_card gap-2 flex flex-col w-full cursor-pointer"
+              onClick={() => setSelectedService(service)}
               onMouseEnter={() => setHoveredService(service)} 
               onMouseLeave={() => setHoveredService(null)}>
               <div className="services_image relative overflow-hidden rounded-lg shadow-lg flex-grow h-[300px] w-full">
