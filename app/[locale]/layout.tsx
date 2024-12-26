@@ -29,20 +29,22 @@ export const metadata: Metadata = {
   description: "Nous propulsons les entreprises vers l’innovation & le succès sur le continent africain",
 };
 
-export default function RootLayout({
+
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: {
-    locale: string;
-  }
+  params: Promise<{ locale: string }>;
 }>) {
+  // Attendre que la promesse de `params` soit résolue
+  const { locale } = await params;
+
   return (
-    <html lang="fr" className={`${roasterThinFont.variable} ${roasterLightFont.variable}`}>
+    <html lang={locale} className={`${roasterThinFont.variable} ${roasterLightFont.variable}`}>
       <body>
-        <Providers locale={params.locale}>
-        {children}
+        <Providers locale={locale}>
+          {children}
         </Providers>
       </body>
     </html>
