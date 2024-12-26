@@ -252,7 +252,9 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
         {services.map((service) => (
             <div
               key={service.title}
-              className="service_card gap-2 flex flex-col w-full cursor-pointerh"
+              className={`service_card gap-2 flex flex-col w-full cursor-pointer ${
+                selectedService?.title === service.title ? " selected_service" : ""
+              }`}
               onClick={() => setSelectedService(service)}
               onMouseEnter={() => setHoveredService(service)} 
               onMouseLeave={() => setHoveredService(null)}>

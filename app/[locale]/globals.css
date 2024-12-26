@@ -133,6 +133,15 @@ body {
   filter: grayscale(0); /* Annule le noir et blanc sur l'image */
 }
 
+.service_card.selected_service {
+  filter: grayscale(0) !important;
+  transform: scale(1.05) !important;
+}
+
+.service_card.selected_service img {
+  filter: grayscale(0) !important;
+}
+
 .service_card:hover > button {
   background-color: rgb(182, 159, 97);; /* Changer la couleur du bouton */
   color: white; /* Changer la couleur du texte */

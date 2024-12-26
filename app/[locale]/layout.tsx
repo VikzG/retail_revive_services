@@ -27,6 +27,20 @@ const poppins = Poppins({ weight: ['300'], subsets: ['latin'] });
 export const metadata: Metadata = {
   title: "Retail Revive Services",
   description: "Nous propulsons les entreprises vers l’innovation & le succès sur le continent africain",
+  openGraph: {
+    title: "Retail Revive Services",
+    description: "Nous propulsons les entreprises vers l’innovation & le succès sur le continent africain",
+    url: "https://test-retail-revive-services.netlify.app/",
+    images: [
+      {
+        url:"/r-logo-mobile.png", // L'URL de votre image de prévisualisation
+        width: 1200,
+        height: 630,
+        alt: "Image de prévisualisation pour Retail Revive Services",
+      },
+    ],
+    siteName: "Retail Revive Services",
+  },
 };
 
 
