@@ -2,21 +2,24 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Nav from "@/components/Nav";
-import Expertise from "@/components/Expertise";
-import Experts from "@/components/Experts";
-import Opportunites from "@/components/Opportunites";
-import Club from "@/components/Club";
-import Actualites from "@/components/Actualités";
-import Contact from "@/components/Contact";
-import Presse from "@/components/Presse";
-import Sub from "@/components/Sub";
-import Services from "@/components/Services";
-import Footer from "@/components/Footer";
-import Loader from "@/components/Loader";
+import Nav from "@/app/[locale]/components/Nav";
+import Expertise from "@/app/[locale]/components/Expertise";
+import Experts from "@/app/[locale]/components/Experts";
+import Opportunites from "@/app/[locale]/components/Opportunites";
+import Club from "@/app/[locale]/components/Club";
+import Actualites from "@/app/[locale]/components/Actualités";
+import Contact from "@/app/[locale]/components/Contact";
+import Presse from "@/app/[locale]/components/Presse";
+import Sub from "@/app/[locale]/components/Sub";
+import Services from "@/app/[locale]/components/Services";
+import Footer from "@/app/[locale]/components/Footer";
+import Loader from "@/app/[locale]/components/Loader";
+import { useI18n } from '../../locales/client'
+
 
 
 export default function Home() {
+  const t = useI18n()
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
 
   useEffect(() => {
@@ -43,7 +46,6 @@ export default function Home() {
 
 
   useEffect(() => {
-    // Timeline GSAP pour enchaîner les animations
     const tl = gsap.timeline({ delay: 2.5 });
     tl.fromTo(
       headerTitleRef.current,
@@ -85,48 +87,43 @@ export default function Home() {
     <div>
       <Loader />
       <header className="bg-light_beige min-h-screen relative">
-       <Nav isSubVisible={isSubVisible} setIsSubVisible={setIsSubVisible}/>
-        <div className="banner_container relative h-screen w-full">
-          <img
-            className="brightness-50 w-full h-full object-cover"
-            src="/banner/banner_rss.png"
-            alt="banniere africa retail services"
-          />
-          <div ref={ headerTitleRef } >
+      <Nav isSubVisible={isSubVisible} setIsSubVisible={setIsSubVisible} />
+      <div className="banner_container relative h-screen w-full">
+        <img
+          className="brightness-50 w-full h-full object-cover"
+          src="/banner/banner_rss.png"
+          alt={t('bannerAlt')} // Traduction pour l'attribut alt
+        />
+        <div ref={headerTitleRef}>
           <div className="span_header_container absolute w-full flex justify-center p-4">
             <span className="sous_titre justify-center text-white">
-              votre partenaire
+              {t('partner')} {/* Traduction pour "votre partenaire" */}
             </span>
           </div>
           <h1 className="grand_titre text-center absolute inset-0 flex items-center justify-center text-white">
-            expansion retail&nbsp;
+            {t('title')} {/* Traduction pour "expansion retail en afrique" */}
             {!isMobile && <br />}
-            en {isMobile && <br />} afrique
+            {t('title_2')} {isMobile && <br />}{t('title_3')}
           </h1>
-          </div>
-
-          {/* Conteneur pour le paragraphe centré en bas */}
-          <div className="banner_text_container absolute bottom-28 flex justify-center p-4">
-            <p ref={ headerSpanRef } className="body_text text-center text-white max-w-4xl">
-              Bienvenue sur <strong>Retail Revive Services</strong>, le cabinet
-              panafricain qui accompagne les entreprises locales et
-              internationales dans leur{" "}
-              <strong>implantation et expansion en Afrique.</strong> Que vous
-              soyez une marque à la recherche d'un marché porteur ou un
-              distributeur désireux d’optimiser vos processus, nous sommes là
-              pour vous aider à chaque étape.
-            </p>
-          </div>
-          <div className="absolute bottom-8 w-full flex justify-center p-4">
-            <button 
-            className="btn_border_1 bouton_page_garde sous_titre">
-              <a href="#services" >
-              EN SAVOIR+
-              </a>
-            </button>
-          </div>
         </div>
-      </header>
+
+        {/* Conteneur pour le paragraphe centré en bas */}
+        <div className="banner_text_container absolute bottom-28 flex justify-center p-4">
+          <p
+            ref={headerSpanRef}
+            className="body_text text-center text-white max-w-4xl"
+          >
+            {t('welcome')} <strong>{t('welcome_2')}</strong> {t('welcome_3')} <strong>{t('welcome_4')}</strong> {t('welcome_5')}
+          </p>
+        </div>
+
+        <div className="absolute bottom-8 w-full flex justify-center p-4">
+          <button className="btn_border_1 bouton_page_garde sous_titre">
+            <a href="#services">{t('learnMore')}</a> {/* Traduction pour "EN SAVOIR+" */}
+          </button>
+        </div>
+      </div>
+    </header>
       <section ref={introductionRef} className="introduction min-h-[30vh] flex flex-row items-center justify-around p-2 py-0">
       <svg className="wave_left" width="86" height="96" viewBox="0 0 86 96" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0 45.7676C0 30.6162 3.78295 19.2191 11.3544 11.5782C13.5089 9.40319 15.858 7.53708 18.3979 5.98168C25.7174 1.49934 33.0906 0.455048 41.1826 0.120435C59.5268 -0.638879 77.38 2.37448 86 4.05858C79.8254 10.0007 73.6508 15.9429 67.4761 21.885C62.5891 21.4107 45.0119 20.0005 34.1577 25.6669C31.4066 27.1028 29.8542 28.5184 29.0576 29.5333C26.3621 32.9714 25.0152 38.3858 25.0152 45.7676V96H0V45.7676Z" fill="#F4F2E9"/>
@@ -134,9 +131,8 @@ export default function Home() {
 </svg>
 
         <span className="citations text-center w-3/6 min-w-[335px]">
-          Nous propulsons les entreprises vers{" "}
-          <em className="text-blond">l’innovation & le succès </em>sur le
-          continent africain
+        {t('subtitle')}{" "}
+          <em className="text-blond">{t('subtitle_2')} </em>{t('subtitle_3')}
         </span>
         <svg className="wave_right" width="86" height="96" viewBox="0 0 86 96" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M86 50.2324C86 65.3838 82.2171 76.7809 74.6456 84.4218C72.4911 86.5968 70.142 88.4629 67.6021 90.0183C60.2826 94.5007 52.9094 95.5449 44.8174 95.8796C26.4732 96.6389 8.62001 93.6255 3.54812e-07 91.9414C6.17461 85.9993 12.3492 80.0571 18.5239 74.115C23.4109 74.5893 40.9881 75.9995 51.8423 70.3331C54.5934 68.8972 56.1458 67.4816 56.9424 66.4667C59.6379 63.0286 60.9848 57.6142 60.9848 50.2324L60.9848 -2.1869e-06L86 0L86 50.2324Z" fill="#F4F2E9"/>

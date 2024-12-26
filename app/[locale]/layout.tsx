@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Archivo } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const roasterThinFont = localFont({
   src: '/fonts/Roaster-Thin.woff',  // Chemin vers la police
@@ -30,13 +31,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: {
+    locale: string;
+  }
 }>) {
   return (
     <html lang="fr" className={`${roasterThinFont.variable} ${roasterLightFont.variable}`}>
       <body>
+        <Providers locale={params.locale}>
         {children}
+        </Providers>
       </body>
     </html>
   );

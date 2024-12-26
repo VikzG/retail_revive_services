@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
+import { useI18n } from '../../[locale]/../../locales/client'
 
 export default function Presse() {
   const [currentArticle, setCurrentArticle] = useState(0);
-  const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef(null);
+  const t = useI18n()
 
   type Article = {
     id: number;
@@ -16,33 +18,27 @@ export default function Presse() {
     link: string;
   };
 
-  // Liste fictive d'articles de presse
   const articles: Article[] = [
     {
       id: 1,
-      title: '"Dîner-Débat des décideurs"',
-      phrase:
-        "Le 10 octobre 2024, La Résidence Abidjan a accueilli le tout premier Dîner-Débat des Décideurs, un événement exclusif organisé par Retail Revive Services (RRS), un cabinet panafricain spécialisé...",
+      title: t('Presse.articles.0.title'),
+      phrase:t('Presse.articles.0.phrase'),
       imgSrc: "/presse/presse_11.jpg",
       imgLogo: "/presse/logo_elle.png",
       link: "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars",
     },
     {
       id: 2,
-      title:
-        '"Retail en Afrique"',
-      phrase:
-        "Organisé par Retail Revive Services (RRS), le cabinet panafricain spécialisé dans la transformation des organisations retail, cet événement visait à poser les bases de la stratégie future du retail africain...",
+      title: t('Presse.articles.1.title'),
+      phrase:t('Presse.articles.1.phrase'),
       imgSrc: "/presse/presse_22.jpg",
       imgLogo: "/presse/logo_ivorian.png",
       link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
     },
     {
       id: 3,
-      title:
-        '"Vision collective et transformation"',
-      phrase:
-        "En Afrique, le secteur du retail connaît une transformation rapide, avec un marché estimé à près de 1000 milliards de dollars d’ici 2030. D’après les dernières analyses du Baromètre Retail en Afrique de Deloitte...",
+      title: t('Presse.articles.2.title'),
+      phrase:t('Presse.articles.2.phrase'),
       imgSrc: "/presse/photo-33.png",
       imgLogo: "/presse/ecofin_logo.png",
       link: "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars",
@@ -109,13 +105,13 @@ export default function Presse() {
                 ref={containerRef} 
                   src={article.imgSrc}
                   alt={article.title}
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   className="rounded-t-lg"
                 />
               </div>
               <div className="absolute w-full top-0 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-70 p-2 py-8 rounded-t-lg shadow-lg flex flex-col items-center">
-                <p className="sous_titre mb-2 text-black">ILS PARLENT DE NOUS</p>
+                <p className="sous_titre mb-2 text-black">{t('Presse.cta.title')}</p>
                 <Image
                   src={article.imgLogo} 
                   alt={`Logo article ${index + 1}`}
@@ -140,7 +136,7 @@ export default function Presse() {
           onClick={() => window.open(current.link, "_blank")}
           className="border-x border-y sous_titre text-black px-8 py-2 bg-transparent border-black rounded-lg"
         >
-          Voir l'article complet
+          {t('Presse.cta.buttonText')}
         </button>
         <div className="flex mt-6 mb-4 space-x-2">
         {articles.map((_, index: number) => (
@@ -166,8 +162,8 @@ export default function Presse() {
         ref={containerRef} 
         src={current.imgSrc}
         alt={current.title}
-        layout="fill"
-        objectFit="cover"
+        fill
+        style={{ objectFit: "cover" }}
         className="absolute top-0 left-0 w-full h-full"
       />
 
@@ -184,7 +180,7 @@ export default function Presse() {
           />
         </div>
         <h3 className="sous_titre text-black uppercase tracking-widest">
-          Ils parlent de nous
+        {t('Presse.cta.title')}
         </h3>
         </div>
         <div className="flex flex-col">
@@ -197,7 +193,7 @@ export default function Presse() {
               onClick={() => window.open(current.link, "_blank")}
               className="presse_bouton border-x border-y mt-2 sous_titre text-black px-8 py-2 bg-transparent border-black rounded-lg"
             ><strong>
-              Voir l'article complet</strong>
+              {t('Presse.cta.buttonText')}</strong>
             </button>
             {/* Points radio */}
             <div className="flex gap-2 me-6 items-center justify-center">

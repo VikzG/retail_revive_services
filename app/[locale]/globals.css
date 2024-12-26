@@ -120,6 +120,7 @@ body {
 }
 
 .service_card {
+  cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
@@ -289,7 +290,6 @@ body {
   line-height: 19px;
   letter-spacing: 1px; /* Utilise 0.01em pour un espacement de 1% */
 }
-
 
 /* Actualités */
 .actualite_bouton:hover {

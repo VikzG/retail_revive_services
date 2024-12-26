@@ -1,4 +1,5 @@
 import { useState,useRef,useEffect } from "react";
+import { useI18n } from '../../[locale]/../../locales/client';
 import emailjs from '@emailjs/browser';
 import gsap from "gsap";
 
@@ -17,6 +18,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
     secteur: "",
     fonction: "",
   });
+  const t = useI18n()
 
   const stepContainerRef = useRef<HTMLDivElement>(null);
 
@@ -45,20 +47,20 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
 
   const handleNext = () => {
     if (step === 1 && !forfait) {
-      alert("Veuillez sélectionner un forfait.");
+      alert(t('subForm.step1Alert'));
       return;
     }
   
     if (step === 2) {
       if (!formData.nom || !formData.prenom || !formData.email) {
-        alert("Veuillez remplir tous les champs de cette étape.");
+        alert(t('subForm.step2Alert'));
         return;
       }
     }
   
     if (step === 3) {
       if (!formData.entreprise || !formData.secteur || !formData.fonction) {
-        alert("Veuillez remplir tous les champs de cette étape.");
+        alert(t('subForm.step3Alert'));
         return;
       }
     }
@@ -81,9 +83,11 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
   const handleSubmit = () => {
     // Validation
     if (!forfait || !formData.nom || !formData.prenom || !formData.email || !formData.entreprise || !formData.secteur || !formData.fonction) {
-      alert("Veuillez remplir tous les champs avant de soumettre.");
+      alert(t('subForm.formValidationAlert'));
       return;
     }
+
+    emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!);
 
     // Données à envoyer
     const templateParams = {
@@ -99,11 +103,11 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
          process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
         )
       .then(() => {
-        alert("Votre formulaire a été envoyé avec succès !");
+        alert(t('subForm.formSuccessMessage'));
         onComplete(); // Signal que le formulaire est terminé
       })
       .catch((error) => {
-        alert("Une erreur s'est produite lors de l'envoi du formulaire.");
+        alert(t('subForm.formErrorMessage'));
         console.error("Erreur EmailJS:", error);
       });
   };
@@ -114,7 +118,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
       {step === 1 && (
         <>
           <h1 className="citations text-center mb-4">
-            1 - Sélectionnez votre forfait :
+          {t('subForm.step1Title')}
           </h1>
           <button
             className={`body_text w-full py-3 px-4 my-2 text-black rounded-md transition-colors ${
@@ -124,7 +128,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             }`}
             onClick={() => handleSelect("1 personne")}
           >
-            1 personne - 1 200 000 CFA HT
+            {t('subForm.step1Option1')}
           </button>
           <button
             className={`body_text w-full py-3 px-4 my-2 text-black rounded-md transition-colors ${
@@ -134,7 +138,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             }`}
             onClick={() => handleSelect("5-9 personnes")}
           >
-            5-9 personnes - 900 000 CFA HT
+            {t('subForm.step1Option2')}
           </button>
           <button
             className={`body_text w-full py-3 px-4 my-2 text-black rounded-md transition-colors ${
@@ -144,7 +148,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             }`}
             onClick={() => handleSelect("10+ personnes")}
           >
-            10+ personnes - 790 000 CFA HT
+            {t('subForm.step1Option3')}
           </button>
         </>
       )}
@@ -152,7 +156,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
       {step === 2 && (
         <>
           <h1 className="citations text-center mb-4">
-            2 - Vos coordonnées :
+          {t('subForm.step2Title')}
           </h1>
           <label htmlFor="nom" className="block text-gray-700">
           </label>
@@ -160,7 +164,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             type="text"
             id="nom"
             name="nom"
-            placeholder="Nom"
+            placeholder={t('subForm.step2LabelLastName')}
             value={formData.nom}
             onChange={handleChange}
             className="body_text w-full mt-1 mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -172,7 +176,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             type="text"
             id="prenom"
             name="prenom"
-            placeholder="Prénom"
+            placeholder={t('subForm.step2LabelFirstName')}
             value={formData.prenom}
             onChange={handleChange}
             className="body_text w-full mt-1 mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -184,7 +188,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             type="email"
             id="email"
             name="email"
-            placeholder="Email"
+            placeholder={t('subForm.step2LabelEmail')}
             value={formData.email}
             onChange={handleChange}
             className="body_text w-full mt-1 mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -196,7 +200,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
       {step === 3 && (
         <>
           <h1 className="citations text-center mb-4">
-            3 - Votre entreprise :
+          {t('subForm.step3Title')}
           </h1>
           <label
             htmlFor="entreprise"
@@ -207,7 +211,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             type="text"
             id="entreprise"
             name="entreprise"
-            placeholder="Nom de l'entreprise"
+            placeholder={t('subForm.step3LabelCompanyName')}
             value={formData.entreprise}
             onChange={handleChange}
             className="body_text w-full mt-1 mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -222,7 +226,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             type="text"
             id="secteur"
             name="secteur"
-            placeholder="Secteur de l'entreprise"
+            placeholder={t('subForm.step3LabelSector')}
             value={formData.secteur}
             onChange={handleChange}
             className="body_text w-full mt-1 mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -234,7 +238,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
             type="text"
             id="fonction"
             name="fonction"
-            placeholder="Votre fonction"
+            placeholder={t('subForm.step3LabelPosition')}
             value={formData.fonction}
             onChange={handleChange}
             className="body_text w-full mt-1 mb-4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -251,7 +255,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
           className="sous_titre py-2 px-4 bg-white text-gold rounded-lg"
           onClick={handlePrevious}
         >
-          Retour
+          {t('subForm.buttonBack')}
         </button>
       )}
 
@@ -260,7 +264,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
               className="sous_titre py-2 px-4 bg-white text-gold rounded-lg"
               onClick={onBack}
             >
-              Retour
+              {t('subForm.buttonBack')}
             </button>
           )}
 
@@ -284,7 +288,7 @@ export default function MultiStepForm({ onComplete, onBack }: MultiStepFormProps
         disabled={isNextDisabled()}
         onClick={step === 3 ? handleSubmit : handleNext}
       >
-        {step === 3 ? "Terminer" : "Suivant"}
+        {step === 3 ? t('subForm.buttonFinish') : t('subForm.buttonNext')}
       </button>
     </div>
   </div>

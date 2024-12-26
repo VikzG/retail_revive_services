@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState,useEffect,useRef } from "react";
 import { gsap } from "gsap";
+import { useI18n } from '../../[locale]/../../locales/client'
 
 type ClubProps = {
   setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -11,6 +12,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   const [isMobile, setIsMobile] = useState(false);
   const actualitesRef = useRef(null);
   const actualitesRefDesktop = useRef(null);
+  const t = useI18n()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -69,16 +71,16 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
       {/* Header */}
       <div ref={actualitesRef} >
       <div className="mb-4">
-        <h2 className="grand_titre_s">NOS ACTUALITÉS</h2>
+        <h2 className="grand_titre_s">{t('actualites.mobile.sectionTitle')}</h2>
         <Link className="text-gold underline body_text" href="#">
-           <strong>Téléchargez notre étude annuelle gratuite sur<br/> le retail en Afrique</strong> 
+           <strong>{t('actualites.mobile.subheadingLink')}<br/> {t('actualites.mobile.subheadingLink_2')}</strong> 
         </Link>
       </div>
 
       {/* Description */}
       <div className="text-sm mb-4 px-4">
         <p className="body_text">
-        <strong>Inscrivez-vous dès maintenant à nos courriers exclusifs</strong> pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Révie Services et ses partenaires, à travers des études de cas et témoignages d’entreprises.
+        <strong>{t('actualites.mobile.description')}</strong> {t('actualites.mobile.description_2')}
         </p>
       </div>
       </div>
@@ -90,14 +92,14 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
           type="text"
           disabled
           required
-          placeholder="Votre nom"
+          placeholder={t('actualites.mobile.subscriptionForm.namePlaceholder')}
           className="border border-[#D5C5A6] rounded-md p-2 mb-2 w-full max-w-xs"
         />
         <input
           type="email"
           disabled
           required
-          placeholder="Votre email"
+          placeholder={t('actualites.mobile.subscriptionForm.emailPlaceholder')}
           className="border border-[#D5C5A6] rounded-md p-2 mb-2 w-full max-w-xs"
         />
         </div>
@@ -115,18 +117,18 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         <Image
           src="/actualites/debat_img.png" // Replace with the actual image path
           alt="Dernier événement"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
         />
       </div>
 
       {/* Event Description */}
       <div className="px-4">
         <p className="sous_titre py-4">
-         <strong> DERNIER ÉVÉNEMENT </strong>: <br /> LE DÎNER-DÉBAT DES DÉCIDEURS
+         <strong> {t('actualites.mobile.eventDescription.title')} </strong>: <br /> {t('actualites.mobile.eventDescription.description')}
         </p>
         <p className="mt-2 body_text">
-          Vous souhaitez participer aux événements et être au cœur de l’innovation du retail en Afrique ?<strong>Inscrivez-vous à nos dîners privés et accédez aux dernières tendances, études et opportunités du marché.</strong> 
+        {t('actualites.mobile.eventDescription_bottom.description')}<strong> {t('actualites.mobile.eventDescription_bottom.description_2')}</strong> 
         </p>
       </div>
 
@@ -140,7 +142,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
           href="/club"
           className="inline-block actualite_bouton sous_titre bg-white text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
           >
-              REJOINDRE LE CLUB
+              {t('actualites.mobile.ctaButton.label')}
           </Link>
       </div>
     </section>
@@ -152,29 +154,26 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         
         {/* Colonne 1 : Nos Actualités */}
         <div className="p-6">
-          <h2 className="grand_titre_s text-dark_brown_grey mb-6">NOS <br/>ACTUALITÉS</h2>
+          <h2 className="grand_titre_s text-dark_brown_grey mb-6">{t('actualites.desktop.sectionTitle')} <br/>{t('actualites.desktop.sectionTitle_2')}</h2>
           <p className="text-gold sous_titre mt-16 underline uppercase mb-2">
-            TÉLÉCHARGEZ NOTRE ÉTUDE ANNUELLE GRATUITE SUR LE RETAIL EN AFRIQUE.
+          {t('actualites.desktop.columns.0.subheading')}
           </p>
           <p className="body_text text-gray-700 mb-8">
-            <strong>Inscrivez-vous dès maintenant</strong> à nos courriers exclusifs pour rester informé(e) 
-            des dernières tendances du retail en Afrique et des projets innovants portés 
-            par Retail Revive Services et ses partenaires, à travers des études de cas et 
-            témoignages d'entreprises.
+            <strong>{t('actualites.desktop.columns.0.description')}</strong> {t('actualites.desktop.columns.0.description_2')}
           </p>
           
           {/* Formulaire d'inscription */}
           <form className="flex flex-row gap-2 mt-14 space-y-4">
             <input 
               type="text" 
-              placeholder="Votre nom" 
+              placeholder={t('actualites.desktop.columns.0.subscriptionForm.namePlaceholder')}
               disabled
               required
               className="border border-gray-300 p-2 mt-4 rounded-lg w-full"
             />
             <input 
               type="email" 
-              placeholder="Votre email" 
+              placeholder={t('actualites.desktop.columns.0.subscriptionForm.emailPlaceholder')}
               disabled
               required
               className="border border-gray-300 p-2 rounded-lg w-full"
@@ -221,32 +220,28 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
         {/* Colonne 3 : Dernier Événement */}
         <div className="flex flex-col justify-between">
           <h3 className="sous_titre underline mb-2">
-            DERNIER ÉVÉNEMENT : LE DÎNER-DÉBAT DES DÉCIDEURS
+          {t('actualites.desktop.columns.2.eventDescription.title')}
           </h3>
           <div>
           <p className="body_text mb-4">
-            Nous organisons régulièrement des <span className="font-bold">événements exclusifs</span> dédiés 
-            aux décideurs et <span className="font-bold">acteurs du retail en Afrique.</span> Chaque événement organisé 
-            par Retail Revive Services est une opportunité de partage, d'apprendre et de collaborer pour 
-            faire avancer l'industrie du retail en Afrique.
+          {t('actualites.desktop.columns.2.eventDescription.description')} <span className="font-bold">{t('actualites.desktop.columns.2.eventDescription.description_2')}</span> {t('actualites.desktop.columns.2.eventDescription.description_3')}
           </p>
           <p className="body_text">
-            Vous souhaitez participer à nos événements et être au cœur de l'innovation dans le retail en Afrique ? 
-            <span className="font-bold"> Inscrivez-vous à nos dîners privés et accédez aux dernières tendances, études 
-            et opportunités du marché.</span>
+          {t('actualites.desktop.columns.2.eventDescription.description_4')}
+            <span className="font-bold"> {t('actualites.desktop.columns.2.eventDescription.description_5')}</span>
           </p>
           </div>
           <Link 
-                               onClick={(e) => {
-                                e.preventDefault();
-                                setIsSubVisible(true);
-                              }}
+             onClick={(e) => {
+              e.preventDefault();
+              setIsSubVisible(true);
+            }}
           href="/club"
           className="inline-block actualite_bouton sous_titre bg-white w-[230px] text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
           >
-              REJOINDRE LE CLUB
+              {t('actualites.desktop.columns.2.ctaButton.label')}
           </Link>
-          <h2 className="grand_titre_s mt-10 text-dark_brown_grey uppercase text-end mb-6">réseau <br/>& événements</h2>
+          <h2 className="grand_titre_s mt-10 text-dark_brown_grey uppercase text-end mb-6">{t('actualites.desktop.columns.2.footerTitle')} <br/>{t('actualites.desktop.columns.2.footerTitle_2')}</h2>
         </div>
       </div>
     </section>

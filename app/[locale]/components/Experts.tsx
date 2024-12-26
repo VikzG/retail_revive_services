@@ -3,6 +3,7 @@ import { gsap } from "gsap";
 import React, { useRef, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Pagination } from "swiper/modules";
+import { useI18n } from '../../[locale]/../../locales/client'
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -14,6 +15,7 @@ type ExpertProps = {
 export default function Experts({ setIsSubVisible }: ExpertProps) {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const t = useI18n()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -49,27 +51,27 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
   const topTeam = [
     {
       name: "BAKA",
-      role: "Division Formation",
+      role: t('team.roles.BAKA'),
       image: "/experts/experte_img.jpg",
     },
     {
       name: "NELLY",
-      role: "Division Distribution",
+      role: t('team.roles.NELLY'),
       image: "/experts/nelly_img.png",
     },
     {
       name: "LESLIE",
-      role: "Social Media & RP",
+      role: t('team.roles.LESLIE'),
       image: "/experts/leslie_img.png",
     },
     {
       name: "ANGÉLIQUE",
-      role: "Communication",
+      role: t('team.roles.ANGÉLIQUE'),
       image: "/experts/angelique_img.png",
     },
     {
       name: "CLAUDIA",
-      role: "Fondatrice",
+      role: t('team.roles.CLAUDIA'),
       image: "/experts/claudia_img.png",
     },
   ];
@@ -77,27 +79,27 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
   const experts = [
     {
       name: "STEVE",
-      role: "Division Conseil",
+      role: t('team.roles.STEVE'),
       image: "/experts/steve_img.png",
     },
     {
       name: "DOMINIQUE",
-      role: "Division Conseil",
+      role: t('team.roles.DOMINIQUE'),
       image: "/experts/dominique_img.png",
     },
     {
       name: "EVA",
-      role: "Division Formation",
+      role: t('team.roles.EVA'),
       image: "/experts/eva_img.png",
     },
     {
       name: "SANDRA",
-      role: "Division Formation",
+      role: t('team.roles.SANDRA'),
       image: "/experts/sandra_img.png",
     },
     {
       name: "KAREN",
-      role: "Division Formation",
+      role: t('team.roles.KAREN'),
       image: "/experts/karen_img.png",
     },
   ];
@@ -153,7 +155,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     return (
       <section ref={sectionRef} className="experts bg-light_beige text-center py-10 px-4">
         <h2 className="grand_titre_s">
-          NOS <br /> EXPERTS
+        {t('team.sectionTitle.part1_mobile')} <br /> {t('team.sectionTitle.part2')}
         </h2>
 
         <Swiper
@@ -194,20 +196,20 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
           ))}
         </Swiper>
         <h2 className="citations text-center py-8 pt-0">
-          "Réinventer l'avenir des marques sur le continent, en alliant{" "}
-          <span className="text-gold">ambition locale</span> et{" "}
-          <span className="text-gold">excellence internationale</span>."
+          "{t('team.intro_phrase')}{" "}
+          <span className="text-gold">{t('team.intro_phrase_2')}</span> {t('team.intro_phrase_3')}{" "}
+          <span className="text-gold">{t('team.intro_phrase_4')}</span>."
         </h2>
         <div className="body_text mb-4">
-          Vous désirez{" "}
+        {t('team.ctaText')}{" "}
           <strong>
-            <span>réserver un service</span>? Rejoindre notre réseau?
+            <span>{t('team.ctaText_2')}</span>? {t('team.ctaText_4')}?
           </strong>
         </div>
 
         <div className="flex justify-center gap-4 py-2">
           <button className="experts_bouton_2 px-4 py-2 rounded-md sous_titre text-gold bg-white">
-            <a href="#contact">CONTACTER</a>
+            <a href="#contact">{t('team.ctaContact')}</a>
           </button>
           <button
             onClick={(e) => {
@@ -216,7 +218,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
             }}
             className="experts_bouton px-4 py-2 rounded-md sous_titre bg-gold text-white"
           >
-            REJOINDRE
+            {t('team.ctaJoin')}
           </button>
         </div>
       </section>
@@ -241,8 +243,8 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                     <Image
                       src={member.image}
                       alt={member.name}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: "cover" }}
                       className="rounded-lg experts-img"
                     />
                   </div>
@@ -255,20 +257,20 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
             {/* Texte à côté des images */}
             <div className="flex flex-col ms-10 justify-center gap-6 space-y-4 max-w-md">
               <h2 className="top-slider-content citations text-end">
-                "Réinventer l'avenir des marques sur le continent, en alliant{" "}
-                <span className="text-gold">ambition locale</span> et{" "}
-                <span className="text-gold">excellence internationale</span>."
+                "{t('team.intro_phrase')}{" "}
+                <span className="text-gold">{t('team.intro_phrase_2')}</span> {t('team.intro_phrase_3')}{" "}
+                <span className="text-gold">{t('team.intro_phrase_4')}</span>."
               </h2>
               <div className="space-y-2 flex flex-col items-end">
                 <p className="body_text">
-                  Vous désirez{" "}
-                  <strong className="body_text">réserver un service</strong> ou{" "}
-                  <strong className="body_text">rejoindre notre réseau</strong>{" "}
+                {t('team.ctaText')}{" "}
+                  <strong className="body_text">{t('team.ctaText_2')}</strong> {t('team.ctaText_3')}{" "}
+                  <strong className="body_text">{t('team.ctaText_4')}</strong>{" "}
                   ?
                 </p>
                 <div className="flex justify-center gap-4">
                   <button className="experts_bouton_2 bg-white text-gold rounded-lg sous_titre py-2 w-44">
-                    <a href="#contact">CONTACTER</a>
+                    <a href="#contact">{t('team.ctaJoin')}</a>
                   </button>
                   <button
                     onClick={(e) => {
@@ -277,7 +279,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                     }}
                     className="bg-gold experts_bouton text-white sous_titre rounded-lg py-2 w-48"
                   >
-                    DEVENIR MEMBRE
+                    {t('team.ctaJoin_desktop')}
                   </button>
                 </div>
               </div>
@@ -287,10 +289,10 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
 
         <div className="flex justify-between items-center mb-8">
           <div className="bottom-slider-content flex flex-col items-start text-center space-y-4 me-8 max-w-md">
-            <h2 className="citations mb-2">Rencontrez</h2>
+            <h2 className="citations mb-2">{t('team.pre_intro')}</h2>
             <p className="equipe_experts_bottom text-start">
-              L'ÉQUIPE D'
-              <span className="text-gold">EXPERTS</span>
+            {t('team.sectionTitle.part1')} {t('team.sectionTitle.part1_2')}
+              <span className="text-gold">{t('team.sectionTitle.part2')}</span>
             </p>
           </div>
           <div ref={bottomSlider} className="experts_slider flex gap-3 mb-8">
@@ -303,8 +305,8 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                   <Image
                     src={expert.image}
                     alt={expert.name}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     className="experts-img rounded-lg"
                   />
                 </div>
@@ -325,8 +327,8 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                   <Image
                     src={expert.image}
                     alt={expert.name}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                     className="rounded-lg"
                   />
                 </div>

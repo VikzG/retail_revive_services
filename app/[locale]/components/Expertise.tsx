@@ -2,9 +2,11 @@
 'use client'
 import { useEffect, useRef,useState } from "react";
 import { gsap } from "gsap";
+import { useI18n } from '../../[locale]/../../locales/client'
 
 export default function Expertise() {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+  const t = useI18n()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1100px)");
@@ -27,28 +29,28 @@ export default function Expertise() {
   const sectors = [
     {
       number: "01",
-      title: "GRANDE DISTRIBUTION",
-      description: "Des stratégies de distribution efficaces pour les produits de grande consommation.",
+      title: t('expertise.sectors.0.title'),
+      description: t('expertise.sectors.0.description'),
     },
     {
       number: "02",
-      title: "RETAIL DE LUXE",
-      description: "Accompagnement des marques haut de gamme dans leur implantation et leur développement sur le continent.",
+      title: t('expertise.sectors.1.title'),
+      description: t('expertise.sectors.1.description'),
     },
     {
       number: "03",
-      title: "FMCG",
-      description: "Optimisation des chaînes de distribution pour les biens de consommation courante.",
+      title: t('expertise.sectors.2.title'),
+      description: t('expertise.sectors.2.description'),
     },
     {
       number: "04",
-      title: "HOSPITALITY",
-      description: "Amélioration de l'expérience client dans les secteurs hôteliers et de la restauration.",
+      title: t('expertise.sectors.3.title'),
+      description: t('expertise.sectors.3.description'),
     },
     {
       number: "05",
-      title: "LOGISTIQUE ET SUPPLY CHAIN",
-      description: "Partenariats pour répondre aux divers défis logistiques du retail en Afrique.",
+      title: t('expertise.sectors.4.title'),
+      description: t('expertise.sectors.4.description'),
     },
   ];
 
@@ -131,9 +133,9 @@ useEffect(() => {
   return (
     <section id="expertise" className="expertise flex flex-col items-center bg-dark_brown_grey text-white px-6 py-12">
       <div ref={expertiseRef} className="text-end mb-8 flex flex-col w-full">
-        <h1 className="expertise_titre">EXPERTISE</h1>
+        <h1 className="expertise_titre">{t('expertise.sectionTitle')}</h1>
         <p className="citations text-end">
-          Nos secteurs clés pour<br/>répondre aux <strong><span className="text-gold">besoins<br/>du marché africain.</span></strong>
+        {t('expertise.intro')}<br/>{t('expertise.intro_2')} <strong><span className="text-gold">{t('expertise.post_intro')}<br/>{t('expertise.post_intro_2')}.</span></strong>
         </p>
       </div>
 
@@ -164,8 +166,8 @@ useEffect(() => {
     <section id="expertise" className="expertise flex flex-col items-center justify-center gap-4 bg-dark_brown_grey text-white px-6 py-10">
       <div className="text-center mb-8">
         <p ref={expertiseIntro} className="citations text-center text-sm">
-        Nous intervenons dans les <span className="text-gold">secteurs clés du retail </span> 
-        pour répondre <br/> <span className="text-gold">aux besoins spécifiques</span> du marché africain.</p>
+        {t('expertise.pre_intro')} <span className="text-gold">{t('expertise.intro')} </span> 
+        {t('expertise.intro_2')} <br/> <span className="text-gold">{t('expertise.post_intro')}</span> {t('expertise.post_intro_2')}.</p>
       </div>
 
       <div ref={expertiseList} className={`${isMobile ? "flex-col" : "flex"} justify-center gap-8 mb-8`}>
@@ -186,7 +188,7 @@ useEffect(() => {
           </div>
         ))}
       </div>
-      <h1 ref={expertiseTitle} className="expertise_titre mb-4">EXPERTISE</h1>
+      <h1 ref={expertiseTitle} className="expertise_titre mb-4">{t('expertise.sectionTitle')}</h1>
     </section>
   );
 }

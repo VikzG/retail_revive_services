@@ -1,11 +1,13 @@
 import { FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 import { useState, useEffect } from 'react';
+import { useI18n } from '../../[locale]/../../locales/client'
 
 
 export default function Footer() {
 
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
+  const t = useI18n()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1000px)");
@@ -24,9 +26,9 @@ if (isMobile) {
         <div className="flex flex-row items-center justify-between gap-4 py-8">
         {/* Left Column: Legal Mentions and Copyright */}
         <div className="flex flex-col">
-          <p className="footer_text text-white">mentions legales</p>
-          <p className="footer_text text-white">© 2024 retail revive services</p>
-          <p className="footer_text text-white">tous droits réservés</p>
+          <p className="footer_text text-white">{t('footer.legal_mentions')}</p>
+          <p className="footer_text text-white">{t('footer.copyright_mobile')}</p>
+          <p className="footer_text text-white">{t('footer.copyright_mobile_2')}</p>
         </div>
         
         {/* Right Column: Social Media Icons */}
@@ -48,10 +50,10 @@ if (isMobile) {
     return(
         <footer>
             <div className="w-full bg-blond h-16 flex flex-row items-center justify-between px-12">
-            <p className="footer_text text-white">© 2024 retail revive services - tous droits réservés</p>
+            <p className="footer_text text-white">{t('footer.copyright')}</p>
             <div className="flex flex-row items-center gap-4">
-                <p className="footer_text text-white">contact@retailreviveservices.com</p>
-                <p className="footer_text text-white">mentions legales</p>
+                <p className="footer_text text-white">{t('footer.email')}</p>
+                <p className="footer_text text-white">{t('footer.legal_mentions')}</p>
                 <div className="flex items-center gap-4">
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
                     <FaLinkedin className="text-white text-2xl" />

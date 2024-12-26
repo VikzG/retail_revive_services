@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/app/[locale]/components/ui/card";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import Link from "next/link";
 import Image from "next/image";
+import { useI18n } from '../../[locale]/../../locales/client'
 
 type Service = {
   title: string;
@@ -22,7 +23,8 @@ type ServicesProps = {
 export default function Services({ setIsSubVisible }: ServicesProps) {
   const [isMobile, setIsMobile] = useState(false); // Initialiser avec une valeur par défaut côté serveur
   const sectionRef = useRef(null);
-  
+  const t = useI18n()
+
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
     const handleResize = () => {
@@ -37,44 +39,44 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
 
  ({
     image: "/services/services_img_1.png",
-    title: "CONSEIL & STRATEGIE",
+    title: t('services.categories.consulting'),
     href: "",
     phrases: [
-      <span><strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.</span>,
-      <span><strong>Stratégie d'implantation</strong> et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.</span>,
-      <span><strong>Optimisation de l'expérience client</strong> pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux.</span>
+      <span><strong>{t('services.details.consulting.0.title')}</strong> {t('services.details.consulting.0.description')}</span>,
+      <span><strong>{t('services.details.consulting.1.title')}</strong> {t('services.details.consulting.1.description')}</span>,
+      <span><strong>{t('services.details.consulting.2.title')}</strong> {t('services.details.consulting.2.description')}</span>
     ]
   });
 
   const services: Service[] = [
     {
-      title: "CONSEIL & STRATEGIE",
+      title: t('services.categories.consulting'),
       image: "/services/services_img_1.png",
       href: "",
       phrases: [
-        <span><strong>Études de marché détaillées</strong> pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance.</span>,
-        <span><strong>Stratégie d'implantation</strong> et en mise pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable.</span>,
-        <span><strong>Optimisation de l'expérience client</strong> pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux.</span>,
+        <span><strong>{t('services.details.consulting.0.title')}</strong> {t('services.details.consulting.0.description')}</span>,
+        <span><strong>{t('services.details.consulting.1.title')}</strong> {t('services.details.consulting.1.description')}</span>,
+        <span><strong>{t('services.details.consulting.2.title')}</strong> {t('services.details.consulting.2.description')}</span>
       ]
     },
     {
-      title: "FORMATION & RECRUTEMENT",
+      title: t('services.categories.training'),
       image: "/services/services_img_2.png",
       href: "",
       phrases: [
-        <span><strong>Audit des compétences</strong> pour évaluer et développer les talents de vos équipes retail.</span>,
-        <span><strong>Formations spécialisées</strong> pour les équipes de vente pour maximiser les performances commerciales.</span>,
-        <span><strong>Recrutement de talents stratégiques</strong> pour les postes clés du secteur retail.</span>,
+        <span><strong>{t('services.details.training.0.title')}</strong> {t('services.details.training.0.description')}</span>,
+        <span><strong>{t('services.details.training.1.title')}</strong> {t('services.details.training.1.description')}</span>,
+        <span><strong>{t('services.details.training.2.title')}</strong> {t('services.details.training.2.description')}</span>,
       ]
     },
     {
-      title: "DISTRIBUTION & IMPLANTATION",
+      title: t('services.categories.distribution'),
       image: "/services/services_img_33.png",
       href: "",
       phrases: [
-        <span><strong>Go-to-Market sur mesure</strong> pour les marques internationales cherchant à s'établir en Afrique.</span>,
-        <span><strong>Mise en réseau stratégique</strong> pour faciliter les partenariats locaux et accéder aux financements nécessaires à votre succès.</span>,
-        <span><strong>Gestion clé en main de l’implantation</strong> pour vous accompagner dans toutes les phases, de l'ouverture à la mise en marché.</span>,
+        <span><strong>{t('services.details.distribution.0.title')}</strong> {t('services.details.distribution.0.description')}</span>,
+        <span><strong>{t('services.details.distribution.1.title')}</strong> {t('services.details.distribution.1.description')}</span>,
+        <span><strong>{t('services.details.distribution.2.title')}</strong> {t('services.details.distribution.2.description')}</span>,
       ]
     },
   ];
@@ -131,9 +133,10 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     // Code de la version mobile
     return (
       <section ref={sectionRef} id="services" className="flex flex-col items-center justify-center text-center min-h-screen p-6 bg-light_beige">
-        <h2 className="grand_titre mb-4">NOS SERVICES</h2>
+        <h2 className="grand_titre mb-4">            {t('services.sectionTitle.part1')} <br />
+        {t('services.sectionTitle.part2')}</h2>
         <p className="body_text">
-          Chez <strong>Retail Revive Services</strong>, nous croyons en des solutions personnalisées pour la transformation des organisations retail en Afrique. Nous vous aidons dans 4 domaines clés.
+        {t('services.pre_intro')} <strong>{t('rrs')}</strong>, {t('services.intro')}<strong> {t('services.post_intro')}</strong> 
         </p>
         <Swiper
   pagination={{
@@ -200,7 +203,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
 </Swiper>
 
           <p className="text-sm mt-4">
-            <strong>Vous souhaitez aller encore plus loin ?</strong><br/>
+            <strong>{t('services.learnMore')}</strong><br/>
             <Link
                onClick={(e) => {
                 e.preventDefault();
@@ -209,7 +212,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     href="#"
     className="text-gold underline"
   >
-    <strong>Découvrez le Club Retail Africa.</strong>
+    <strong>{t('services.cta')}</strong>
   </Link>
           </p>
       </section>
@@ -222,15 +225,15 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
       <div className="services_block_1 flex flex-col justify-around ps-12 w-1/2">
         <div className="flex flex-col gap-14 text-start">
           <h2 ref={h2ServicesRef} className="grand_titre">
-            NOS <br />
-            SERVICES
+            {t('services.sectionTitle.part1')} <br />
+            {t('services.sectionTitle.part2')}
           </h2>
           <div className="flex flex-col gap-5 w-4/6">
             <p ref={textServicesRef} className="text-black body_text">
-              Chez <strong>Retail Revive Services</strong>, nous croyons en des solutions sur mesure pour accompagner la transformation des organisations retail en Afrique. Grâce à des solutions personnalisées pour répondre aux divers besoins, nos experts vous accompagnent dans <strong>quatre domaines clés</strong>.
+            {t('services.pre_intro')} <strong>{t('rrs')}</strong>, {t('services.intro')}<strong> {t('services.post_intro')}</strong>.
             </p>
             <strong className="text-black body_text">
-              Vous souhaitez aller encore plus loin ?{" "}
+            {t('services.learnMore')}{" "}
               <Link href="#"
                 onClick={(e) => {
                   e.preventDefault();
@@ -238,7 +241,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
                 }}
               >
                 <span className="text-gold underline">
-                  Découvrez le Club Retail Africa
+                {t('services.cta')}
                 </span>
               </Link>
             </strong>
@@ -249,7 +252,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
         {services.map((service) => (
             <div
               key={service.title}
-              className="service_card gap-2 flex flex-col w-full cursor-pointer"
+              className="service_card gap-2 flex flex-col w-full cursor-pointerh"
               onClick={() => setSelectedService(service)}
               onMouseEnter={() => setHoveredService(service)} 
               onMouseLeave={() => setHoveredService(null)}>
@@ -271,7 +274,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
                 className="service_bouton mt-2 w-full bg-white text-gold shadow-lg"
                 onClick={() => setSelectedService(service)} // Mise à jour du service sélectionné
               >
-                <span className="sous_titre">DECOUVRIR</span>
+                <span className="sous_titre">{t('services.ctaDiscover')}</span>
               </button>
             </div>
           ))}
@@ -305,7 +308,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
           </ul>
 
             <button className="service_bouton_2 w-[250px] py-2 sous_titre rounded-lg bg-gold text-white">
-            <a href="#contact"> JE SUIS INTÉRESSÉ(E)</a> 
+            <a href="#contact">{t('services.ctaContact')}</a> 
             </button>
           </CardContent>
         </Card>

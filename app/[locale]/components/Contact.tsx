@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from "react"
+import { useI18n } from '../../[locale]/../../locales/client'
 import emailjs from '@emailjs/browser';
 import gsap from "gsap/all"
 
@@ -7,6 +8,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const contactMobileTitle = useRef(null);
   const contactMobileText = useRef(null);
+  const t = useI18n()
   
   const [formData, setFormData] = useState({
     subject: '',
@@ -103,10 +105,10 @@ export default function Contact() {
 
     // Validation du formulaire
     const newErrors = {
-        subject: formData.subject ? '' : 'Le sujet est requis.',
-        name: formData.name ? '' : 'Le nom est requis.',
-        email: formData.email ? '' : 'L\'email est requis.',
-        message: formData.message ? '' : 'Le message est requis.',
+        subject: formData.subject ? '' : t('contact.error_messages.subject'),
+        name: formData.name ? '' : t('contact.error_messages.name'),
+        email: formData.email ? '' : t('contact.error_messages.email'),
+        message: formData.message ? '' : t('contact.error_messages.message'),
     };
     setErrors(newErrors);
 
@@ -146,7 +148,7 @@ export default function Contact() {
         name="subject"
         value={formData.subject}
         onChange={handleInputChange}
-        placeholder="Selectionner un sujet*"
+        placeholder={t('contact.form.subject_placeholder')}
         className="w-full p-3 placeholder-gold bg-white border border-gold rounded-xl text-gold"
         required
       />
@@ -159,7 +161,7 @@ export default function Contact() {
             name="name"
             value={formData.name}
             onChange={handleInputChange}
-            placeholder="Votre nom*"
+            placeholder={t('contact.form.name_placeholder')}
             className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold"
             required
           />
@@ -171,7 +173,7 @@ export default function Contact() {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="Votre email*"
+            placeholder={t('contact.form.email_placeholder')}
             className="w-full p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold"
             required
           />
@@ -183,7 +185,7 @@ export default function Contact() {
         name="message"
         value={formData.message}
         onChange={handleInputChange}
-        placeholder="Votre message*"
+        placeholder={t('contact.form.message_placeholder')}
         className="w-full min-h-[200px] p-3 bg-white border border-gold rounded-xl text-blond placeholder-gold"
         required
       ></textarea>
@@ -195,7 +197,7 @@ export default function Contact() {
           className="contact_bouton w-2/6 sous_titre bg-gold text-white py-3 rounded-xl"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'ENVOI...' : 'ENVOYER'}
+          {isSubmitting ? t('contact.form.sending_status') : t('contact.form.submit_button')}
         </button>
       </div>
     </form>
@@ -205,10 +207,10 @@ export default function Contact() {
     return (
       <section id="contact" className="flex flex-col bg-dark_brown_grey text-white">
         <div className="w-full py-20 px-4 bg-dark-brown flex flex-col items-center text-center gap-8">
-          <h2 ref={contactMobileTitle} className="grand_titre_s">CONTACTEZ<br />NOUS</h2>
+          <h2 ref={contactMobileTitle} className="grand_titre_s">{t('contact.title_mobile_1')}<br />{t('contact.title_mobile_2')}</h2>
           <p ref={contactMobileText} className="w-5/6 sous_titre">
-            VOUS AVEZ UN PROJET ? UNE QUESTION ?<br />
-            CONTACTEZ-NOUS ET LAISSEZ-NOUS VOUS ACCOMPAGNER DANS VOTRE TRANSFORMATION RETAIL EN AFRIQUE.
+          {t('contact.description')}<br />
+          {t('contact.description_2')}
           </p>
         </div>
 
@@ -228,8 +230,8 @@ export default function Contact() {
             >
               &times;
             </button>
-              <p className="citations">Nous avons bien reçu<br/>votre message !</p>
-              <p className="body_text mt-4">Un expert vous répondra dans les plus brefs délais.</p>
+              <p className="citations">{t('contact.success_message.title')}<br/>{t('contact.success_message.title_2')}</p>
+              <p className="body_text mt-4">{t('contact.success_message.description')}</p>
             </div>
           </div>
                )}
@@ -249,10 +251,10 @@ export default function Contact() {
       </div>
 
       <div className="contact-animation w-3/4 flex flex-col items-center gap-20 justify-center px-4 relative">
-        <h2 className="grand_titre_s">CONTACTEZ-NOUS</h2>
+        <h2 className="grand_titre_s">{t('contact.title')}</h2>
         <p className="w-3/4 sous_titre text-center">
-          VOUS AVEZ UN PROJET ? UNE QUESTION ?<br />
-          CONTACTEZ-NOUS ET LAISSEZ-NOUS VOUS ACCOMPAGNER DANS VOTRE TRANSFORMATION RETAIL EN AFRIQUE.
+        {t('contact.description')}<br />
+        {t('contact.description_2')}
         </p>
 
         {renderForm()}
@@ -265,8 +267,8 @@ export default function Contact() {
             >
               &times;
             </button>
-              <p className="citations">Nous avons bien reçu<br/>votre message !</p>
-              <p className="body_text mt-4">Un expert vous répondra dans les plus brefs délais.</p>
+              <p className="citations">{t('contact.success_message.title')}<br/>{t('contact.success_message.title_2')}</p>
+              <p className="body_text mt-4">{t('contact.success_message.description')}</p>
             </div>
           </div>
           )}

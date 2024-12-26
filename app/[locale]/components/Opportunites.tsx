@@ -2,6 +2,7 @@ import Image from "next/image"
 import { useEffect, useRef,useState } from "react";
 import { Star } from "lucide-react"
 import { gsap } from "gsap";
+import { useI18n } from '../../[locale]/../../locales/client';
 
 
 export default function Opportunites() {
@@ -19,6 +20,7 @@ export default function Opportunites() {
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
 
+  const t = useI18n()
   const clubRef = useRef(null);
   const retailRef = useRef(null);
   const africaRef = useRef(null);
@@ -160,21 +162,18 @@ export default function Opportunites() {
             <Star className="star_mobile_opportunite absolute bottom-14 right-24 w-5 h-5 fill-current text-gold" />
             </div> 
             <span ref={africaRefMobile} className="text-start ps-12">AFRICA</span>
-            <span className="absolute right-10 sous_titre_opportunite_mobile uppercase text-gold">Le coin des opportunités</span>
+            <span className="absolute right-10 sous_titre_opportunite_mobile uppercase text-gold">{t('opportunities.sectionTitle')}</span>
           </h1>
     
     {/* Subtitle/Description Text */}
     <p ref={opportuniteTitleRef} className="sous_titre text-end">
-      VOUS OUVRE LES PORTES D'UN RÉSEAU<br/>EXCLUSIF DE LEADERS DU RETAIL EN AFRIQUE.
+    {t('opportunities.intro.part_1')}<br/>{t('opportunities.intro.part_2')}
     </p>
     
     {/* Description Paragraph */}
     <p ref={opportuniteRef} className="body_text text-white px-2">
-      Le <span className="font-semibold">Club Retail Africa</span> est un réseau privilégié dédié aux
-      acteurs clés du retail en Afrique, offrant à ses membres l’accès à des opportunités uniques.
-      En rejoignant ce cercle exclusif, vous bénéficiez d’un environnement stimulant pour
-      <span className="font-semibold"> accélérer la croissance de votre entreprise</span> et rester
-      à la pointe des évolutions du marché africain.
+    {t('opportunities.description.part_1')} <span className="font-semibold">{t('opportunities.description.part_2')}</span> {t('opportunities.description.part_3')}
+      <span className="font-semibold"> {t('opportunities.description.part_4')}</span> {t('opportunities.description.part_5')} {t('opportunities.description.part_6')}
     </p>
     
     {/* Image */}
@@ -187,7 +186,7 @@ export default function Opportunites() {
                   <button 
               className="opportunite_bouton z-10 bg-gold text-white sous_titre uppercase py-3 px-8 rounded-xl"
             >
-             <a href="#club">Dévoiler les avantages</a> 
+             <a href="#club">{t('opportunities.ctaRevealBenefits')}</a> 
             </button>
     </div>
     
@@ -202,7 +201,7 @@ export default function Opportunites() {
       {/* Top right corner badge */}
       <div className="absolute top-12 right-12 flex items-center gap-2 text-gold">
         <Star className="w-11 h-11 fill-current stroke-none text-gold" />
-        <span className="sous_titre uppercase text-gold">Le coin des opportunités</span>
+        <span className="sous_titre uppercase text-gold">{t('opportunities.sectionTitle')}</span>
       </div>
 
       {/* Main content container */}
@@ -217,22 +216,18 @@ export default function Opportunites() {
           <div ref={animationRef} className="opportunite_animation">
           <div className="flex flex-row gap-32 ms-12">
             <p className="sous_titre">
-              VOUS OUVRE LES PORTES D'UN RÉSEAU <br/>
-              EXCLUSIF DE LEADERS DU RETAIL EN AFRIQUE.
+            {t('opportunities.intro.part_1')}<br/>{t('opportunities.intro.part_2')}
             </p>
             <button 
               className="opportunite_bouton z-10 bg-gold text-white sous_titre uppercase py-3 px-8 rounded-xl"
             >
-            <a href="#club"> Dévoiler les avantages</a> 
+            <a href="#club"> {t('opportunities.ctaRevealBenefits')}</a> 
             </button>
           </div>
           <div className="absolute bottom-10">
           <p className="body_text w-3/6">
-            Le <strong>Club Retail Africa</strong> est un réseau privilégié dédié aux acteurs clés du retail en Afrique,
-            offrant à ses membres des opportunités uniques de collaboration, d'échange et d'accès à
-            des ressources stratégiques. En rejoignant ce cercle exclusif, vous bénéficierez d'un
-            environnement stimulant pour <strong className="body_text">accélérer la croissance de votre entreprise</strong> et{" "}
-            <strong className="body_text">rester à la pointe des évolutions du marché africain.</strong>
+            {t('opportunities.description.part_1')} <strong>{t('opportunities.description.part_2')}</strong> {t('opportunities.description.part_3')} <strong className="body_text">{t('opportunities.description.part_4')}</strong> {t('opportunities.description.part_5')}{" "}
+            <strong className="body_text">{t('opportunities.description.part_6')}</strong>
           </p>
         </div>
         </div>

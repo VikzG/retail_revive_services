@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import MultiStepForm from "./subForm";
+import { useI18n } from '../../[locale]/../../locales/client';
 
 export default function Sub() {
   const [showForm, setShowForm] = useState(false);
@@ -10,7 +11,7 @@ export default function Sub() {
   const [error, setError] = useState("");
   const [isCompleted, setIsCompleted] = useState(false); // Nouvel état pour gérer la fin de l'inscription
 
-  // Références pour les animations
+  const t = useI18n()
   const clubRef = useRef(null);
   const retailRef = useRef(null);
   const africaRef = useRef(null);
@@ -63,7 +64,7 @@ export default function Sub() {
     e.preventDefault(); // Empêche le rechargement de la page
 
     if (name.trim() === "") {
-      setError("Veuillez entrer un nom."); // Affiche une erreur si le champ est vide
+      setError(t('sub.form_error_empty_name')); // Affiche une erreur si le champ est vide
     } else {
       setError(""); // Efface l'erreur si le champ est valide
       setStickerStep(2); // Passe à l'étape suivante
@@ -103,19 +104,19 @@ export default function Sub() {
                 type="text"
                 id="name"
                 className="border min-w-[180px] w-1/2 body_text text-center border-gray-300 p-1 px-4 rounded-md"
-                placeholder="Votre nom"
+                placeholder={t('sub.form_name_placeholder')}
                 required
               />
               <h2 className="sous_titre_sub">
-                Vous êtes invité(e) à rejoindre un
+              {t('sub.invitation_message')}
                 <br />
-                réseau exclusif de décideurs
+                {t('sub.invitation_message_2')}
               </h2>
               <button
                 type="submit"
                 className="sub_bouton sous_titre w-[150px] bg-gold text-white px-8 py-2 rounded-md"
               >
-                Accepter
+                {t('sub.button_accept')}
               </button>
             </form>
           </div>
@@ -134,8 +135,8 @@ export default function Sub() {
           />
           </div>
               <h2 className="sous_titre_sub">
-                Votre inscription
-                <br /> a bien été prise en compte !
+              {t('sub.form_complete_message')}
+                <br /> {t('sub.form_complete_message_2')}
               </h2>
             </div>
           ) : (
@@ -144,27 +145,27 @@ export default function Sub() {
               {/* Colonne gauche */}
               <div className="sticker_left w-1/2 flex flex-col gap-8 justify-start items-start">
                 <div>
-                  <h2 className="sous_titre">DEVENEZ MEMBRE DU</h2>
-                  <h3 className="grand_titre_xxs">CLUB RETAIL AFRICA</h3>
+                  <h2 className="sous_titre">{t('sub.section_membership.title')}</h2>
+                  <h3 className="grand_titre_xxs">{t('sub.section_membership.subtitle')}</h3>
                 </div>
                 <div>
                   <p className="body_text underline mb-4">
-                    Tarifs valables jusqu'au 31 Octobre :
+                  {t('sub.section_membership.pricing_note')}
                   </p>
                   <div className="space-y-4">
                     <div className="flex flex-col gap-3">
-                      <h4 className="font-bold">OFFRE SOLO</h4>
+                      <h4 className="font-bold">{t('sub.section_membership.solo_offer')}</h4>
                       <p className="body_text">
-                        1 200 000 CFA HT / an / personne
+                      {t('sub.section_membership.solo_price')}
                       </p>
                     </div>
                     <div className="flex flex-col gap-3">
-                      <h4 className="font-bold">OFFRE ENTREPRISES</h4>
+                      <h4 className="font-bold">{t('sub.section_membership.company_offer')}</h4>
                       <ul className="list-disc list-inside body_text">
                         <li>
-                          Pour 5 à 9 pers : 900 000 CFA HT / an / personne
+                        {t('sub.section_membership.company_pricing.group_5_9')}
                         </li>
-                        <li>Pour 10+ pers : 790 000 CFA HT / an / personne</li>
+                        <li>{t('sub.section_membership.company_pricing.group_10_plus')}</li>
                       </ul>
                     </div>
                   </div>
@@ -174,32 +175,30 @@ export default function Sub() {
               {/* Colonne droite */}
               <div className="sticker_right w-1/2 flex flex-col gap-4 body_text justify-center items-start">
                 <div className="flex flex-col border-b border-black pb-2 w-full">
-                  <strong>2 dîners par an</strong>
-                  <span>aux côtés des décideurs influents du retail.</span>
+                  <strong>{t('sub.benefits.dinners.title')}</strong>
+                  <span>{t('sub.benefits.dinners.description')}</span>
                 </div>
                 <div className="flex flex-col border-b border-black pb-2">
-                  <strong>Une étude annuelle</strong>
+                  <strong>{t('sub.benefits.annual_study.title')}</strong>
                   <span>
-                    sur l'évolution du marché et les tendances de consommation
-                    en Afrique.
+                  {t('sub.benefits.annual_study.description')}
                   </span>
                 </div>
                 <div className="flex flex-col border-b border-black pb-2 w-full">
-                  <strong>"La Brève Confidentielle du Retail"</strong>
-                  <span>par RRS, envoyée chaque semestre.</span>
+                  <strong>{t('sub.benefits.newsletter.title')}</strong>
+                  <span>{t('sub.benefits.newsletter.description')}</span>
                 </div>
                 <div className="flex flex-col pb-2">
-                  <strong>Accès exclusif à nos événements</strong>
+                  <strong>{t('sub.benefits.events.title')}</strong>
                   <span>
-                    Workshops, séminaires thématiques et rencontres
-                    stratégiques.
+                  {t('sub.benefits.events.description')}
                   </span>
                 </div>
                 <button
                   onClick={handleShowForm}
                   className="sub_bouton sous_titre bg-gold text-white px-8 py-2 rounded-md self-start mt-4"
                 >
-                  INSCRIPTION
+                  {t('sub.button_register')}
                 </button>
               </div>
             </>

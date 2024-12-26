@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useI18n } from '../../[locale]/../../locales/client';
+import { LocaleSelect } from "./LocaleSelect";
 
 
 type NavProps = {
@@ -9,6 +11,7 @@ type NavProps = {
 
 function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const t = useI18n()
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1050px)");
@@ -57,7 +60,7 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
     d="M15 19l-7-7 7-7"
   />
 </svg>
-                Retour au site
+{t('navigation.retour')}
 
               </Link>
             ) : (
@@ -96,7 +99,7 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
                   EXPERTISE
                 </Link>
                 <Link href="#actualites" className="nav_anchor text-black">
-                  ACTUALITÉS
+                {t('navigation.actualites')}
                 </Link>
               </>
             )}
@@ -200,6 +203,7 @@ function Nav({ isSubVisible, setIsSubVisible }: NavProps) {
         {isMobile ? (
           <>
             {/* Vos anciens SVG pour la navigation mobile */}
+            <LocaleSelect/>
             {isSubVisible ? (
                     <Link
                     href="#"
@@ -309,6 +313,7 @@ l-105 -85 0 176 c0 96 2 175 4 175 2 0 51 -39 108 -86z m162 -125 c19 -9 32
         ) : (
           <>
             {/* Vos anciens SVG pour la navigation desktop */}
+            <LocaleSelect/>
             <Link href="#contact"
              onClick={(e) => {
                setIsSubVisible(false);
@@ -354,7 +359,6 @@ l-105 -85 0 176 c0 96 2 175 4 175 2 0 51 -39 108 -86z m162 -125 c19 -9 32
 -98 -20 -136 -1 -36 19 -33 19 -50 -7z"/>
                 </g>
               </svg>
-
             </Link>
           </>
         )}
