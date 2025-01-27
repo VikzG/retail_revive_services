@@ -44,7 +44,6 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     phrases: [
       <span><strong>{t('services.details.consulting.0.title')}</strong> {t('services.details.consulting.0.description')}</span>,
       <span><strong>{t('services.details.consulting.1.title')}</strong> {t('services.details.consulting.1.description')}</span>,
-      <span><strong>{t('services.details.consulting.2.title')}</strong> {t('services.details.consulting.2.description')}</span>
     ]
   });
 
@@ -56,7 +55,6 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
       phrases: [
         <span><strong>{t('services.details.consulting.0.title')}</strong> {t('services.details.consulting.0.description')}</span>,
         <span><strong>{t('services.details.consulting.1.title')}</strong> {t('services.details.consulting.1.description')}</span>,
-        <span><strong>{t('services.details.consulting.2.title')}</strong> {t('services.details.consulting.2.description')}</span>
       ]
     },
     {
@@ -76,7 +74,6 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
       phrases: [
         <span><strong>{t('services.details.distribution.0.title')}</strong> {t('services.details.distribution.0.description')}</span>,
         <span><strong>{t('services.details.distribution.1.title')}</strong> {t('services.details.distribution.1.description')}</span>,
-        <span><strong>{t('services.details.distribution.2.title')}</strong> {t('services.details.distribution.2.description')}</span>,
       ]
     },
   ];

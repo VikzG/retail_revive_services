@@ -2,10 +2,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState,useEffect,useRef } from "react";
 import { gsap } from "gsap";
+import emailjs from '@emailjs/browser';
 import { useI18n } from '../../[locale]/../../locales/client'
 
 type ClubProps = {
   setIsSubVisible: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type FormData = {
+  name: string;
+  email: string;
+};
+
+type Errors = {
+  name: string;
+  email: string;
 };
 
 export default function Actualites({ setIsSubVisible }: ClubProps) {
@@ -13,6 +24,69 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   const actualitesRef = useRef(null);
   const actualitesRefDesktop = useRef(null);
   const t = useI18n()
+
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+  });
+
+  const [errors, setErrors] = useState<Errors>({
+    name: "",
+    email: "",
+  });
+
+  const [isSuccess, setIsSuccess] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
+  const validateForm = (): boolean => {
+    let isValid = true;
+    const newErrors: Errors = {
+      name: "",
+      email: "",
+    };
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Le nom est requis.";
+      isValid = false;
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "L'email est requis.";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "L'email est invalide.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      emailjs
+        .send(process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!, process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!, formData, process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!)
+        .then(
+          (result) => {
+            console.log("Email sent successfully:", result.text);
+            setIsSuccess(true);
+            setFormData({ name: "", email: "" });
+          },
+          (error) => {
+            console.error("Error sending email:", error.text);
+            alert("Une erreur est survenue.");
+          }
+        );
+    }
+  };
+  
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 1250px)");
@@ -25,6 +99,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
     mediaQuery.addEventListener("change", handleResize); // Écoute les changements
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, []);
+  
 
   useEffect(() => {
     if (isMobile) {
@@ -65,6 +140,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
     }
   }, [isMobile]);
 
+
   if (isMobile) {
     return (
       <section id="actualites" className="bg-white py-10 text-center flex flex-col items-center">
@@ -79,37 +155,75 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
 
       {/* Description */}
       <div className="text-sm mb-4 px-4">
-        <p className="body_text">
-        <strong>{t('actualites.mobile.description')}</strong> {t('actualites.mobile.description_2')}
-        </p>
+      <p className="body_text">
+    <strong>{t('actualites.mobile.description')}</strong>
+    <br />
+    {t('actualites.mobile.description_2')}{" "}
+    <strong>{t('actualites.mobile.description_3')}</strong>
+    <br />
+    {t('actualites.mobile.description_4')}{" "}
+    <strong>{t('actualites.mobile.description_5')}</strong>
+  </p>
       </div>
       </div>
 
       {/* Subscription Form */}
       <div className="flex flex-col items-center mb-6 w-full">
-        <div className="flex flex-row gap-2 px-4 py-6">
-        <input
-          type="text"
-          disabled
-          required
-          placeholder={t('actualites.mobile.subscriptionForm.namePlaceholder')}
-          className="border border-[#D5C5A6] rounded-md p-2 mb-2 w-full max-w-xs"
-        />
-        <input
-          type="email"
-          disabled
-          required
-          placeholder={t('actualites.mobile.subscriptionForm.emailPlaceholder')}
-          className="border border-[#D5C5A6] rounded-md p-2 mb-2 w-full max-w-xs"
-        />
-        </div>
-        <button 
-              type="submit" 
-              disabled
+      <form onSubmit={handleSubmit} className="flex flex-col items-center mb-6 w-full">
+  <div className="flex flex-row gap-2 px-4 py-6 w-full max-w-xs">
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleInputChange}
+      placeholder={t('actualites.mobile.subscriptionForm.namePlaceholder')}
+      className={`border p-2 mb-2 rounded-md w-full ${
+        errors.name ? 'border-red-500' : 'border-[#D5C5A6]'
+      }`}
+    />
+    {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleInputChange}
+      placeholder={t('actualites.mobile.subscriptionForm.emailPlaceholder')}
+      className={`border p-2 mb-2 rounded-md w-full ${
+        errors.email ? 'border-red-500' : 'border-[#D5C5A6]'
+      }`}
+    />
+    {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+  </div>
+
+  <button 
+    type="submit" 
+    className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
+  >
+    OK
+  </button>
+</form>
+      {/* Pop-up de succès */}
+      {isSuccess && (
+        <div className="actualites_modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg text-center space-y-4">
+            <h2 className="sous_titre font-semibold text-gold">
+            {t('actualites.mobile.setIsSuccess_1')}
+            </h2>
+            <p className="text-gray-600 body_text">
+              <strong>
+              {t('actualites.mobile.setIsSuccess_2')}
+              </strong>
+            </p>
+            <button
+              onClick={() => setIsSuccess(false)}
               className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
             >
               OK
             </button>
+          </div>
+        </div>
+      )}
       </div>
 
       {/* Image Section */}
@@ -159,33 +273,69 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
           {t('actualites.desktop.columns.0.subheading')}
           </p>
           <p className="body_text text-gray-700 mb-8">
-            <strong>{t('actualites.desktop.columns.0.description')}</strong> {t('actualites.desktop.columns.0.description_2')}
+            <strong>{t('actualites.desktop.columns.0.description')}</strong>
+            <br/>
+            {t('actualites.desktop.columns.0.description_2')}{" "}
+            <strong>{t('actualites.desktop.columns.0.description_3')}</strong>
+            <br />
+            {t('actualites.desktop.columns.0.description_4')}{" "}
+            <strong>{t('actualites.desktop.columns.0.description_5')}</strong>
           </p>
           
           {/* Formulaire d'inscription */}
-          <form className="flex flex-row gap-2 mt-14 space-y-4">
-            <input 
-              type="text" 
-              placeholder={t('actualites.desktop.columns.0.subscriptionForm.namePlaceholder')}
-              disabled
-              required
-              className="border border-gray-300 p-2 mt-4 rounded-lg w-full"
-            />
-            <input 
-              type="email" 
-              placeholder={t('actualites.desktop.columns.0.subscriptionForm.emailPlaceholder')}
-              disabled
-              required
-              className="border border-gray-300 p-2 rounded-lg w-full"
-            />
-            <button 
-              type="submit" 
-              disabled
+          <form onSubmit={handleSubmit} className="flex flex-row gap-2 mt-14 space-y-4">
+  <input 
+    type="text" 
+    name="name"
+    value={formData.name}
+    onChange={handleInputChange}
+    placeholder={t('actualites.desktop.columns.0.subscriptionForm.namePlaceholder')}
+    className={`border p-2 mt-4 rounded-lg w-full ${
+      errors.name ? 'border-red-500' : 'border-gray-300'
+    }`}
+  />
+  {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+
+  <input 
+    type="email" 
+    name="email"
+    value={formData.email}
+    onChange={handleInputChange}
+    placeholder={t('actualites.desktop.columns.0.subscriptionForm.emailPlaceholder')}
+    className={`border p-2 rounded-lg w-full ${
+      errors.email ? 'border-red-500' : 'border-gray-300'
+    }`}
+  />
+  {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+
+  <button 
+    type="submit" 
+    className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
+  >
+    OK
+  </button>
+</form>
+      {/* Pop-up de succès */}
+      {isSuccess && (
+        <div className="actualites_modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg text-center space-y-4">
+            <h2 className="sous_titre font-semibold text-gold">
+            {t('actualites.mobile.setIsSuccess_1')}
+            </h2>
+            <p className="text-gray-600 body_text">
+              <strong>
+              {t('actualites.mobile.setIsSuccess_2')}
+              </strong>
+            </p>
+            <button
+              onClick={() => setIsSuccess(false)}
               className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
             >
               OK
             </button>
-          </form>
+          </div>
+        </div>
+      )}
         </div>
 
         {/* Colonne 2 : Images */}
@@ -208,7 +358,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
           </div>
           <div className="relative h-48 w-5/6">
             <Image
-              src="/actualites/presse_img_3.png"
+              src="/actualites/presse_img_3.jpg"
               alt="Image 3"
               fill
               className="object-cover"

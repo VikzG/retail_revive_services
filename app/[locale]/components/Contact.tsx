@@ -15,12 +15,14 @@ export default function Contact() {
     name: '',
     email: '',
     message: '',
+    company: '',
   })
   const [errors, setErrors] = useState({
     subject: '',
     name: '',
     email: '',
     message: '',
+    company: '',
   })
   const [successMessage, setSuccessMessage] = useState('')
   const [isMobile, setIsMobile] = useState(false);
@@ -109,6 +111,7 @@ export default function Contact() {
         name: formData.name ? '' : t('contact.error_messages.name'),
         email: formData.email ? '' : t('contact.error_messages.email'),
         message: formData.message ? '' : t('contact.error_messages.message'),
+        company: formData.company ? '' : t('contact.error_messages.company'),
     };
     setErrors(newErrors);
 
@@ -126,12 +129,13 @@ export default function Contact() {
                 name: formData.name,
                 email: formData.email,
                 message: formData.message,
+                company: formData.company,
             },
             process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
         );
         console.log('Email envoyé avec succès :', result.text);
         setSuccessMessage("Nous avons bien reçu votre message !");
-        setFormData({ subject: '', name: '', email: '', message: '' });
+        setFormData({ subject: '', name: '', email: '', company:'', message: '' });
     } catch (error) {
         console.error('Erreur lors de l\'envoi de l\'email :', error);
         alert("Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.");
@@ -180,6 +184,16 @@ export default function Contact() {
           {errors.email && <p className="text-red-500">{errors.email}</p>}
         </div>
       </div>
+      <input
+  type="text"
+  name="company"
+  value={formData.company}
+  onChange={handleInputChange}
+  placeholder={t('contact.form.company_placeholder')}
+  className="w-full p-3 placeholder-gold bg-white border border-gold rounded-xl text-gold"
+  required
+/>
+{errors.company && <p className="text-red-500">{errors.company}</p>}
 
       <textarea
         name="message"

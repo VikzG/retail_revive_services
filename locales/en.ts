@@ -26,29 +26,29 @@ export default {
     },
     "pre_intro": "At",
     "intro": "we believe in tailored solutions to support the transformation of retail organizations in Africa. Through customized strategies to meet diverse needs, our experts assist you in",
-    "post_intro": "four key areas",
+    "post_intro": "three key areas",
     "learnMore": "Want to go even further?",
     "cta": "Discover the Retail Africa Club",
     "categories": {
-      "consulting": "CONSULTING & STRATEGY",
+      "consulting": "CONSULTING",
       "training": "TRAINING & RECRUITMENT",
-      "distribution": "DISTRIBUTION & IMPLEMENTATION"
+      "distribution": "GLOBAL BRAND DISTRIBUTION"
     },
 "details": {
   "consulting": [
-    { "title": "Detailed market studies", "description": "to understand urban consumer behavior and identify growth opportunities." },
-    { "title": "Market entry strategy", "description": "and planning for brands looking to enter the African market with an agile and profitable approach." },
-    { "title": "Customer experience optimization", "description": "to help companies meet the changing expectations of local consumers." }
+    { "title": "Sectoral and city/country market studies", 
+      "description": "we provide tailored consultancy services to help your business identify and capitalize on growth opportunities across key markets, cities, and countries. Our expertise spans Africa, the Middle East, Europe, and the Americas, delivering deep insights into consumer behavior and market dynamics. With our in-depth analysis and regularly updated data, we guide your strategic decisions to ensure sustained success in a competitive landscape."},
+    { "title": "Customer experience and network management", 
+      "description": "optimize your customer interactions and retail performance, both in-store and remotely, with our comprehensive solutions. We offer mystery audits, sales benchmarks, management tools, and tailored technological support in collaboration with our trusted partners." }
   ],
   "training": [
     { "title": "Skills audit", "description": "to assess and develop the talents of your retail teams." },
-    { "title": "Specialized training", "description": "for sales teams to maximize commercial performance." },
+    { "title": "Specialized training", "description": "for sales teams to maximize commercial performance (Customer Relations, Management, and Train the Trainer)." },
     { "title": "Recruitment of strategic talents", "description": "for key positions in the retail sector." }
   ],
   "distribution": [
-    { "title": "Tailor-made Go-to-Market strategy", "description": "for international brands seeking to establish themselves in Africa." },
-    { "title": "Strategic networking", "description": "to facilitate local partnerships and access the funding needed for your success." },
-    { "title": "Turnkey implementation management", "description": "to support you through all phases, from opening to market launch." }
+    { "title": "We ensure the distribution of your brand", "description": "across a global network of points of sale, including concept stores, department stores, hotel boutiques, and independent retailers." },
+    { "title": "Go-to-Market and comprehensive Implementation Management", "description": "we support you through every phase of your retail strategy, from opening to market launch, ensuring a seamless process aligned with your brand image. Whether you choose a company-owned store or a franchise model, we provide comprehensive guidance on strategic aspects such as location scouting, contract negotiation, store design, legal compliance, recruitment, and more. Let us simplify your market entry and drive your success." },
   ]
 },
     "ctaContact": "I AM INTERESTED",
@@ -148,7 +148,7 @@ export default {
   "clubName_2": "AFRICA ?",
   "benefits": [
     {
-      "title": "2 dinners per year",
+      "title": "1 dinner per year",
       "description": "with influential retail decision-makers."
     },
     {
@@ -161,12 +161,14 @@ export default {
     },
     {
       "title": "Exclusive access to our events",
-      "description": "Workshops, thematic seminars, and strategic meetings."
+      "description": "Workshops, thematic seminars, and strategic networking sessions designed to inspire and empower your business."
     }
   ],
   "ctaTitle": "Do you want to be part of this exceptional network?",
   "ctaDescription": "Join the Club Retail Africa",
   "ctaDescription_2": "today to propel your business to excellence by connecting with the right partners and accessing strategic information.",
+  "ctaDescription_3": "Minimum one-year commitment.",
+  "ctaDescription_4": "For the prices: 1,000,000 CFA (1,500€) /year.",
   "ctaButton": "registration form",
   "ctaButton_desktop": "Access the registration",
   "ctaButton_desktop_2": "form",
@@ -176,10 +178,14 @@ export default {
 "actualites": {
   "mobile": {
     "sectionTitle": "OUR NEWS",
-    "subheadingLink": "Download our free annual study on retail in Africa.",
-    "subheadingLink_2": "retail in Africa.",
-    "description": "Sign up now to our exclusive newsletters",
-    "description_2":"to stay informed about the latest retail trends in Africa and innovative projects driven by Retail Revive Services and its partners, through case studies and business testimonials.",
+    "subheadingLink": "Download the digest in March 2025 and stay at the heart",
+    "subheadingLink_2": "of the trends redefining the industry.",
+    "description": "Discover the insights from the Decision Makers' Dinner-Debate on the future of retail in Africa.",
+    "description_2": "Download the exclusive digest from our latest event, focused on the theme",
+    "description_3": "\"Innovation & Diversification: What new standards for an African retail industry undergoing transformation?\".",
+    "description_4": "This document highlights industry leaders' reflections on strategic topics such as",
+    "description_5": "talent development and retention, Made in Africa, customer experience and digitalization, offer diversification, and logistics and supply chain.",
+  
     "subscriptionForm": {
       "namePlaceholder": "Your name",
       "emailPlaceholder": "Your email",
@@ -199,7 +205,11 @@ export default {
     },
     "ctaButton": {
       "label": "JOIN THE CLUB NOW"
-    }
+    },
+"subscriptionSuccessMessage": "Thank you for your interest! You will receive the digest as of March 2025",
+"subscriptionErrorMessage": "An error occurred. Please try again.",
+    "setIsSuccess_1": "Thank you for registering !",
+    "setIsSuccess_2": "The digest will be available in March 2025."
   },
   "desktop": {
     "sectionTitle": "OUR",
@@ -207,9 +217,13 @@ export default {
     "columns": [
       {
         "title": "OUR NEWS",
-        "subheading": "Download our free annual study on retail in Africa.",
-        "description": "Sign up now to our exclusive newsletters",
-        "description_2":"to stay informed about the latest retail trends in Africa and innovative projects driven by Retail Revive Services and its partners, through case studies and business testimonials.",
+        "subheading": "Download the digest in March 2025 and stay at the heart of the trends redefining the industry.",
+        "description": "Discover the insights from the Decision Makers' Dinner-Debate on the future of retail in Africa.",
+        "description_2": "Download the exclusive digest from our latest event, focused on the theme",
+        "description_3": "\"Innovation & Diversification: What new standards for an African retail industry undergoing transformation?\".",
+        "description_4": "This document highlights industry leaders' reflections on strategic topics such as",
+        "description_5": "talent development and retention, Made in Africa, customer experience and digitalization, offer diversification, and logistics and supply chain.",
+      
         "subscriptionForm": {
           "namePlaceholder": "Your name",
           "emailPlaceholder": "Your email",
@@ -290,6 +304,7 @@ export default {
     "subject_placeholder": "Select a subject*",
     "name_placeholder": "Your name*",
     "email_placeholder": "Your email*",
+    "company_placeholder": "Your company*",
     "message_placeholder": "Your message*",
     "submit_button": "SEND",
     "sending_status": "SENDING..."
@@ -303,6 +318,7 @@ export default {
     "subject": "Subject is required.",
     "name": "Name is required.",
     "email": "Email is required.",
+    "company": "Company is required.",
     "message": "Message is required."
   }
 },

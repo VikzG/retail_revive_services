@@ -147,6 +147,9 @@ export default function Club({ setIsSubVisible }: ClubProps) {
             <p className="body_text text-white py-4">
               <strong>{t("club.ctaDescription")}</strong>{" "}
               {t("club.ctaDescription_2")}
+              <br/><br/>
+              <strong> {t("club.ctaDescription_3")}<br/></strong>
+              {t("club.ctaDescription_4")}
             </p>
             <button
               className="btn_border_2 bouton_page_garde sous_titre text-center p-4"
@@ -242,7 +245,9 @@ export default function Club({ setIsSubVisible }: ClubProps) {
             <p className="body_text text-white">
               {" "}
               <strong>{t("club.ctaDescription")}</strong>{" "}
-              {t("club.ctaDescription_2")}
+              {t("club.ctaDescription_2")}<br/><br/>
+              <strong> {t("club.ctaDescription_3")}<br/></strong>
+              {t("club.ctaDescription_4")}
             </p>
           </div>
           <button

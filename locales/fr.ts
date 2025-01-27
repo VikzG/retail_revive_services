@@ -26,56 +26,48 @@ export default {
 },
     "pre_intro":"Chez",
     "intro": "nous croyons en des solutions sur mesure pour accompagner la transformation des organisations retail en Afrique. Grâce à des solutions personnalisées pour répondre aux divers besoins, nos experts vous accompagnent dans",
-    "post_intro":"quatre domaines clés",
+    "post_intro":"trois domaines clés",
     "learnMore": "Vous souhaitez aller encore plus loin ?",
     "cta": "Découvrez le Club Retail Africa",
     "categories": {
-      "consulting": "CONSEIL & STRATEGIE",
+      "consulting": "CONSEIL",
       "training": "FORMATION & RECRUTEMENT",
       "distribution": "DISTRIBUTION & IMPLANTATION"
     },
     "details": {
       "consulting": [
         {
-          "title": "Études de marché détaillées",
-          "description": "Pour comprendre les comportements des consommateurs urbains et identifier les opportunités de croissance."
+          "title": "Études de marché sectorielle et par ville/pays",
+          "description": "analyser les comportements des consommateurs et identifiez des opportunités de croissance grâce à des études approfondies sur des marchés clés, des villes et des pays en Afrique, au Moyen-Orient, en Europe et en Amérique. Profitez de mises à jour régulières pour orienter vos décisions stratégiques."
         },
         {
-          "title": "Stratégie d'implantation",
-          "description": "Pour les marques souhaitant entrer sur le marché africain avec une approche agile et rentable."
-        },
-        {
-          "title": "Optimisation de l'expérience client",
-          "description": "Pour aider les entreprises à répondre aux attentes changeantes des consommateurs locaux."
+          "title": "Expérience client et gestion de réseau",
+          "description": "en optimisant vos interactions client et vos performances retail, en boutique comme à distance, grâce à des audits mystères, des référentiels de vente, des outils managériaux et un accompagnement technologique sur mesure avec nos partenaires."
         }
       ],
       "training": [
         {
           "title": "Audit des compétences",
-          "description": "Pour évaluer et développer les talents de vos équipes retail."
+          "description": "pour évaluer et développer les talents de vos équipes retail."
         },
         {
           "title": "Formations spécialisées",
-          "description": "Pour les équipes de vente pour maximiser les performances commerciales."
+          "description": "pour les équipes de vente pour maximiser les performances commerciales (Relation client, Management et Train the Trainer)."
         },
         {
           "title": "Recrutement de talents stratégiques",
-          "description": "Pour les postes clés du secteur retail."
+          "description": "pour les postes clés du secteur retail."
         }
       ],
       "distribution": [
         {
-          "title": "Go-to-Market sur mesure",
-          "description": "Pour les marques internationales cherchant à s'établir en Afrique."
+          "title": "Nous assurons la distribution de votre marque",
+          "description": "dans un réseau mondial de points de vente, incluant concept stores, grands magasins, boutiques d'hôtel, et enseignes indépendantes."
         },
         {
-          "title": "Mise en réseau stratégique",
-          "description": "Pour faciliter les partenariats locaux et accéder aux financements nécessaires à votre succès."
+          "title": "Go-to-Market et gestion clé en main de l’implantation",
+          "description": "pour vous accompagner dans toutes les phases, de l'ouverture à la mise en marché.vous accompagne dans votre stratégie retail  avec la création de points de ventes en accord avec votre image de marque.Que ce soit en succursale ou en franchise, nous vous accompagnons sur les aspects stratégiques (recherche de lieux, contractualisation, aménagement, juridique, recrutement etc) afin de faciliter votre implantation."
         },
-        {
-          "title": "Gestion clé en main de l’implantation",
-          "description": "Pour vous accompagner dans toutes les phases, de l'ouverture à la mise en marché."
-        }
       ]
     },
     "ctaContact": "JE SUIS INTÉRESSÉ(E)",
@@ -173,7 +165,7 @@ export default {
   "clubName_2": "AFRICA ?",
   "benefits": [
     {
-      "title": "2 dîners par an",
+      "title": "1 dîner par an",
       "description": "aux côtés des décideurs influents du retail."
     },
     {
@@ -186,12 +178,14 @@ export default {
     },
     {
       "title": "Accès exclusif à nos événements",
-      "description": "Workshops, séminaires thématiques et rencontres stratégiques."
+      "description": "workshops, séminaires thématiques et rencontres stratégiques (avec 1 invité)."
     }
   ],
   "ctaTitle": "Vous souhaitez faire partie de ce réseau d’exception ?",
   "ctaDescription" :"Rejoignez le Club Retail Africa",
   "ctaDescription_2": "dès aujourd'hui pour propulser votre entreprise vers l'excellence en vous connectant aux bons partenaires et en accédant à des informations stratégiques.",
+  "ctaDescription_3": "Engagement d'un an minimum",
+  "ctaDescription_4": "Pour les prix : 1 000 000 CFA (1500€) /an",
   "ctaButton": "formulaire d’inscription",
   "ctaButton_desktop": "Accéder au formulaire",
   "ctaButton_desktop_2": "d’inscription",
@@ -201,10 +195,13 @@ export default {
 "actualites": {
   "mobile": {
     "sectionTitle": "NOS ACTUALITÉS",
-    "subheadingLink": "Téléchargez notre étude annuelle gratuite sur",
-    "subheadingLink_2": " le retail en Afrique.",
-    "description": "Inscrivez-vous dès maintenant à nos courriers exclusifs",
-    "description_2" : "pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Revive Services et ses partenaires, à travers des études de cas et témoignages d’entreprises.",
+    "subheadingLink": "Téléchargez le digest dès Mars 2025 et soyez au cœur",
+    "subheadingLink_2": "des tendances qui redéfinissent le secteur.",
+    "description": "Découvrez les insights du Dîner-Débat des Décideurs sur l'avenir du retail en Afrique.",
+    "description_2" : "Téléchargez le digest exclusif de notre dernier événement, centré sur le thème",
+    "description_3": "\"Innovation & Diversification : Quels nouveaux standards pour un retail africain en pleine transformation ?\".",
+    "description_4" : "Ce document met en lumière les réflexions des leaders du secteur sur des sujets stratégiques tels que",
+    "description_5" : "la formation et la rétention des talents, le Made in Africa, l'expérience client et la digitalisation, la diversification de l'offre et la logistique et la chaîne d'approvisionnement.",
     "subscriptionForm": {
       "namePlaceholder": "Votre nom",
       "emailPlaceholder": "Votre email",
@@ -223,7 +220,12 @@ export default {
     },
     "ctaButton": {
       "label": "REJOINDRE LE CLUB"
-    }
+    },
+    "subscriptionSuccessMessage": "Merci pour votre intérêt ! Vous recevrez le digest dès le mois de Mars 2025",
+    "subscriptionErrorMessage": "Une erreur s'est produite. Veuillez réessayer.",
+    "setIsSuccess_1": "Merci pour votre inscription !",
+    "setIsSuccess_2": "Le digest sera disponible en mars 2025."
+    
   },
   "desktop": {
     "sectionTitle": "NOS",
@@ -231,9 +233,12 @@ export default {
     "columns": [
       {
         "title": "NOS ACTUALITÉS",
-        "subheading": "Téléchargez notre étude annuelle gratuite sur le retail en Afrique.",
-        "description": "Inscrivez-vous dès maintenant à nos courriers exclusifs",
-        "description_2" : "pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Revive Services et ses partenaires, à travers des études de cas et témoignages d’entreprises.",
+        "subheading": "Téléchargez le digest dès Mars 2025 et soyez au cœur des tendances qui redéfinissent le secteur.",
+        "description": "Découvrez les insights du Dîner-Débat des Décideurs sur l'avenir du retail en Afrique.",
+        "description_2" : "Téléchargez le digest exclusif de notre dernier événement, centré sur le thème",
+        "description_3": "\"Innovation & Diversification : Quels nouveaux standards pour un retail africain en pleine transformation ?\".",
+        "description_4" : "Ce document met en lumière les réflexions des leaders du secteur sur des sujets stratégiques tels que",
+        "description_5" : "la formation et la rétention des talents, le Made in Africa, l'expérience client et la digitalisation, la diversification de l'offre et la logistique et la chaîne d'approvisionnement.",
         "subscriptionForm": {
           "namePlaceholder": "Votre nom",
           "emailPlaceholder": "Votre email",
@@ -313,6 +318,7 @@ export default {
       "subject_placeholder": "Sélectionnez un sujet*",
       "name_placeholder": "Votre nom*",
       "email_placeholder": "Votre email*",
+      "company_placeholder": "Votre entreprise*",
       "message_placeholder": "Votre message*",
       "submit_button": "ENVOYER",
       "sending_status": "ENVOI..."
@@ -326,6 +332,7 @@ export default {
       "subject": "Le sujet est requis.",
       "name": "Le nom est requis.",
       "email": "L'email est requis.",
+      "company": "L'entreprise est requise",
       "message": "Le message est requis."
     }
   },
