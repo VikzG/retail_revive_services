@@ -371,9 +371,9 @@ export default {
 },
 "subForm": {
   "step1Title": "1 - Select your package:",
-  "step1Option1": "1 person - 1,200,000 CFA excl. VAT",
-  "step1Option2": "5-9 people - 900,000 CFA excl. VAT",
-  "step1Option3": "10+ people - 790,000 CFA excl. VAT",
+  "step1Option1": "1 person - 1,000,000 CFA excl. VAT (1500€)",
+  "step1Option2": "5-9 people - 700,000 CFA excl. VAT (1060€)",
+  "step1Option3": "10+ people - 500,000 CFA excl. VAT (760€)",
   "step1Alert": "Please select a package.",
   
   "step2Title": "2 - Your contact information:",

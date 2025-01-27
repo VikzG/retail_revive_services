@@ -385,9 +385,9 @@ export default {
   },
   "subForm": {
     "step1Title": "1 - Sélectionnez votre forfait :",
-    "step1Option1": "1 personne - 1 200 000 CFA HT",
-    "step1Option2": "5-9 personnes - 900 000 CFA HT",
-    "step1Option3": "10+ personnes - 790 000 CFA HT",
+    "step1Option1": "1 personne - 1 000 000 CFA HT (1500€)",
+    "step1Option2": "5-9 personnes - 700 000 CFA HT (1060€)",
+    "step1Option3": "10+ personnes - 500 000 CFA HT (760€)",
     "step1Alert": "Veuillez sélectionner un forfait.",
     
     "step2Title": "2 - Vos coordonnées :",
