@@ -124,6 +124,13 @@ body {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
+.service_card_body_text {
+  font-family: 'Poppins';
+  font-size: 11.5px;
+  line-height: 19px;
+  letter-spacing: 1px;
+}
+
 .service_card:hover {
   transform: scale(1.05); /* Agrandir légèrement la carte */
   opacity: 0.9; /* Rendre la carte un peu plus transparente */
@@ -764,6 +771,12 @@ button:disabled {
 
   .body_text {
     font-size: 10.5px;
+    line-height: 16.5px;
+    letter-spacing: 1px;
+  }
+
+  .service_card_body_text {
+    font-size: 10px;
     line-height: 16.5px;
     letter-spacing: 1px;
   }

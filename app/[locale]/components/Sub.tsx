@@ -161,7 +161,7 @@ export default function Sub() {
                     </div>
                     <div className="flex flex-col gap-3">
                       <h4 className="font-bold">{t('sub.section_membership.company_offer')}</h4>
-                      <ul className="list-disc list-inside body_text">
+                      <ul className="list-disc list-inside body_text max-w-[400px]">
                         <li>
                         {t('sub.section_membership.company_pricing.group_5_9')}
                         </li>

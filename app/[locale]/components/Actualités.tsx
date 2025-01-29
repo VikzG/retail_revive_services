@@ -361,7 +361,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
               src="/actualites/presse_img_3.jpg"
               alt="Image 3"
               fill
-              className="object-cover"
+              className="object-cover object-[center_35%]"
             />
           </div>
         </div>

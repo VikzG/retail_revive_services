@@ -30,7 +30,7 @@ export default {
     "learnMore": "Vous souhaitez aller encore plus loin ?",
     "cta": "Découvrez le Club Retail Africa",
     "categories": {
-      "consulting": "CONSEIL",
+      "consulting": "CONSEIL & STRATEGIE",
       "training": "FORMATION & RECRUTEMENT",
       "distribution": "DISTRIBUTION & IMPLANTATION"
     },
@@ -324,7 +324,7 @@ export default {
       "sending_status": "ENVOI..."
     },
     "success_message": {
-      "title": "Nous avons bien reçu votre message !",
+      "title": "Nous avons bien reçu",
       "title_2": "votre message !",
       "description": "Un expert vous répondra dans les plus brefs délais."
     },
@@ -349,18 +349,18 @@ export default {
     "button_accept": "Accepter",
     "form_name_placeholder": "Votre nom",
     "form_error_empty_name": "Veuillez entrer un nom.",
-    "form_complete_message": "Votre inscription a bien été prise en compte !",
+    "form_complete_message": "Votre inscription",
     "form_complete_message_2": "a bien été prise en compte !",
     "section_membership": {
       "title": "DEVENEZ MEMBRE DU",
       "subtitle": "CLUB RETAIL AFRICA",
       "pricing_note": "Tarifs valables jusqu'au 31 Octobre :",
       "solo_offer": "OFFRE SOLO",
-      "solo_price": "1 200 000 CFA HT / an / personne",
+      "solo_price": "1 000 000 CFA HT (1500€) / an / personne",
       "company_offer": "OFFRE ENTREPRISES",
       "company_pricing": {
-        "group_5_9": "Pour 5 à 9 pers : 900 000 CFA HT / an / personne",
-        "group_10_plus": "Pour 10+ pers : 790 000 CFA HT / an / personne"
+        "group_5_9": "Pour 5 à 9 pers : 700 000 CFA HT (1060€) / an / personne",
+        "group_10_plus": "Pour 10+ pers : 500 000 CFA HT (760€) / an / personne"
       }
     },
     "benefits": {

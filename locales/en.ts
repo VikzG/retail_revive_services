@@ -30,7 +30,7 @@ export default {
     "learnMore": "Want to go even further?",
     "cta": "Discover the Retail Africa Club",
     "categories": {
-      "consulting": "CONSULTING",
+      "consulting": "CONSULTING & STRATEGY",
       "training": "TRAINING & RECRUITMENT",
       "distribution": "GLOBAL BRAND DISTRIBUTION"
     },
@@ -342,11 +342,11 @@ export default {
     "subtitle": "CLUB RETAIL AFRICA",
     "pricing_note": "Rates valid until October 31:",
     "solo_offer": "SOLO OFFER",
-    "solo_price": "1,200,000 CFA excl. tax / year / person",
+    "solo_price": "1,000,000 CFA excl. VAT (1500€) / year / person",
     "company_offer": "COMPANY OFFERS",
     "company_pricing": {
-      "group_5_9": "For 5 to 9 people: 900,000 CFA excl. tax / year / person",
-      "group_10_plus": "For 10+ people: 790,000 CFA excl. tax / year / person"
+      "group_5_9": "For 5 to 9 people: 700,000 CFA excl. VAT (1060€) / year / person",
+      "group_10_plus": "For 10+ people: 500,000 CFA excl. VAT (760€) / year / person"
     }
   },
   "benefits": {

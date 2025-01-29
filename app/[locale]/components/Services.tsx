@@ -180,12 +180,12 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
         </svg>
         </Link>
         <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center px-4 text-center">
-          <ul className="text-white text-start space-y-6 body_text">
+          <ul className="text-white text-start space-y-6 service_card_body_text">
             {service.phrases.map((phrase, i) => (
               <li key={`phrase-${i}`} className="flex items-start gap-2">
                 {/* Point et phrase avec <strong> */}
                 <span className="text-white font-bold">•</span>
-                <span>
+                <span className="text-justify">
                   {phrase}
                 </span>
               </li>
@@ -288,7 +288,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
             alt={activeService.title}
               width={600}
               height={400}
-              className="services_big_card w-full object-cover h-[450px]"
+              className="services_big_card w-full brightness-90 object-cover object-[center_30%] h-[400px]"
             />
             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
               <h2 className="mt-72 citations text-white max-w-72 text-center">
@@ -296,8 +296,8 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
               </h2>
             </div>
           </div>
-          <CardContent className="p-6 space-y-6 mt-5 flex flex-col items-center justify-between">
-          <ul className="space-y-4 body_text">
+          <CardContent className="p-6 space-y-6 mt-2 flex flex-col items-center justify-between">
+          <ul className="space-y-4 service_card_body_text">
             {activeService.phrases.map((phrase, i) => (
               <li key={`phrase-${i}`} className="flex gap-2">
                 <span className="text-primary font-bold">•</span>
