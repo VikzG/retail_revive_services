@@ -12,6 +12,7 @@ type ClubProps = {
 type FormData = {
   name: string;
   email: string;
+  form_type: string;
 };
 
 type Errors = {
@@ -28,6 +29,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
+    form_type: "Inscription newsletter"
   });
 
   const [errors, setErrors] = useState<Errors>({
@@ -77,7 +79,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
           (result) => {
             console.log("Email sent successfully:", result.text);
             setIsSuccess(true);
-            setFormData({ name: "", email: "" });
+            setFormData({ name: "", email: "" , form_type:"Inscription newsletter"});
           },
           (error) => {
             console.error("Error sending email:", error.text);

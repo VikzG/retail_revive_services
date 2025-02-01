@@ -16,6 +16,7 @@ export default function Contact() {
     email: '',
     message: '',
     company: '',
+    form_type: "Formulaire de contact",
   })
   const [errors, setErrors] = useState({
     subject: '',
@@ -130,12 +131,13 @@ export default function Contact() {
                 email: formData.email,
                 message: formData.message,
                 company: formData.company,
+                form_type: "Formulaire de contact"
             },
             process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
         );
         console.log('Email envoyé avec succès :', result.text);
         setSuccessMessage("Nous avons bien reçu votre message !");
-        setFormData({ subject: '', name: '', email: '', company:'', message: '' });
+        setFormData({ subject: '', name: '', email: '', company:'', message: '', form_type : "Formulaire de contact" });
     } catch (error) {
         console.error('Erreur lors de l\'envoi de l\'email :', error);
         alert("Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.");
