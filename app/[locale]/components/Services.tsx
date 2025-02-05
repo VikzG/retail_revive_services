@@ -299,7 +299,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
           <CardContent className="p-6 space-y-6 mt-2 flex flex-col items-center justify-between">
           <ul className="space-y-4 service_card_body_text">
             {activeService.phrases.map((phrase, i) => (
-              <li key={`phrase-${i}`} className="flex gap-2">
+              <li key={`phrase-${i}`} className="flex gap-2 text-justify">
                 <span className="text-primary font-bold">•</span>
                 <span>{phrase}</span>
               </li>
