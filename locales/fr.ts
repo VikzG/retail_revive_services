@@ -354,7 +354,6 @@ export default {
     "section_membership": {
       "title": "DEVENEZ MEMBRE DU",
       "subtitle": "CLUB RETAIL AFRICA",
-      "pricing_note": "Tarifs valables jusqu'au 31 Octobre :",
       "solo_offer": "OFFRE SOLO",
       "solo_price": "1 000 000 CFA HT (1500€) / an / personne",
       "company_offer": "OFFRE ENTREPRISES",
@@ -365,7 +364,7 @@ export default {
     },
     "benefits": {
       "dinners": {
-        "title": "2 dîners par an",
+        "title": "1 dîner privé par an",
         "description": "aux côtés des décideurs influents du retail."
       },
       "annual_study": {
@@ -378,7 +377,7 @@ export default {
       },
       "events": {
         "title": "Accès exclusif à nos événements",
-        "description": "Workshops, séminaires thématiques et rencontres stratégiques."
+        "description": "Workshops, séminaires thématiques et rencontres stratégiques (avec 1 invîté)."
       }
     },
     "button_register": "INSCRIPTION"

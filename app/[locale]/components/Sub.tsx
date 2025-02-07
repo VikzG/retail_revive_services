@@ -149,9 +149,6 @@ export default function Sub() {
                   <h3 className="grand_titre_xxs">{t('sub.section_membership.subtitle')}</h3>
                 </div>
                 <div>
-                  <p className="body_text underline mb-4">
-                  {t('sub.section_membership.pricing_note')}
-                  </p>
                   <div className="space-y-4">
                     <div className="flex flex-col gap-3">
                       <h4 className="font-bold">{t('sub.section_membership.solo_offer')}</h4>
