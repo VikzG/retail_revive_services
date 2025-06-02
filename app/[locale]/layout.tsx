@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Archivo } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import MailchimpScripts from "./components/MailchimpScript";
 import { Providers } from "./providers";
 
 const roasterThinFont = localFont({
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     url: "https://test-retail-revive-services.netlify.app/",
     images: [
       {
-        url:"/r-logo-mobile.png", // L'URL de votre image de prévisualisation
+        url:"/r-logo-mobile.png",
         width: 1200,
         height: 630,
         alt: "Image de prévisualisation pour Retail Revive Services",
@@ -59,6 +60,7 @@ export default async function RootLayout({
       <body>
         <Providers locale={locale}>
           {children}
+           <MailchimpScripts />
         </Providers>
       </body>
     </html>
