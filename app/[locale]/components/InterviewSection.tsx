@@ -254,10 +254,16 @@ export const InterviewSection = (): JSX.Element => {
                   className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} gap-5 w-full`}
                 >
                   <div
-                    className={`px-2.5 py-1.5 rounded-none ${answer.speaker.bgColor}`}
+                    className={`px-2.5 py-1.5 rounded-none ${Array.isArray(answer.speaker) ? answer.speaker[0].bgColor : answer.speaker.bgColor}`}
                   >
                     <span className={`sous_titre text-white ${isMobile ? 'block text-center' : ''}`}>
-                      {answer.speaker.name}
+                      {Array.isArray(answer.speaker)
+                        ? answer.speaker.map((sp, i) => (
+                            <span key={sp.name} className={i > 0 ? "ml-2" : ""}>
+                              {sp.name}
+                            </span>
+                          ))
+                        : answer.speaker.name}
                     </span>
                   </div>
                   <p className="body_text">
@@ -302,10 +308,16 @@ export const InterviewSection = (): JSX.Element => {
                     className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} gap-5 w-full`}
                   >
                     <div
-                      className={`px-2.5 py-1.5 rounded-none ${answer.speaker.bgColor}`}
+                      className={`px-2.5 py-1.5 rounded-none ${Array.isArray(answer.speaker) ? answer.speaker[0].bgColor : answer.speaker.bgColor}`}
                     >
                       <span className={`sous_titre text-white ${isMobile ? 'block text-center' : ''}`}>
-                        {answer.speaker.name}
+                        {Array.isArray(answer.speaker)
+                          ? answer.speaker.map((sp, i) => (
+                              <span key={sp.name} className={i > 0 ? "ml-2" : ""}>
+                                {sp.name}
+                              </span>
+                            ))
+                          : answer.speaker.name}
                       </span>
                     </div>
                     <p className="body_text">
@@ -369,10 +381,16 @@ export const InterviewSection = (): JSX.Element => {
                       className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} gap-5 w-full`}
                     >
                       <div
-                        className={`px-2.5 py-1.5 rounded-none ${answer.speaker.bgColor}`}
+                        className={`px-2.5 py-1.5 rounded-none ${Array.isArray(answer.speaker) ? answer.speaker[0].bgColor : answer.speaker.bgColor}`}
                       >
                         <span className={`sous_titre text-white ${isMobile ? 'block text-center' : ''}`}>
-                          {answer.speaker.name}
+                          {Array.isArray(answer.speaker)
+                            ? answer.speaker.map((sp, i) => (
+                                <span key={sp.name} className={i > 0 ? "ml-2" : ""}>
+                                  {sp.name}
+                                </span>
+                              ))
+                            : answer.speaker.name}
                         </span>
                       </div>
                       <p className="body_text">
@@ -429,10 +447,16 @@ export const InterviewSection = (): JSX.Element => {
                       className={`flex flex-col ${isMobile ? 'items-center' : 'items-start'} gap-5 w-full`}
                     >
                       <div
-                        className={`px-2.5 py-1.5 rounded-none ${answer.speaker.bgColor}`}
+                        className={`px-2.5 py-1.5 rounded-none ${Array.isArray(answer.speaker) ? answer.speaker[0].bgColor : answer.speaker.bgColor}`}
                       >
                         <span className={`sous_titre text-white ${isMobile ? 'block text-center' : ''}`}>
-                          {answer.speaker.name}
+                          {Array.isArray(answer.speaker)
+                            ? answer.speaker.map((sp, i) => (
+                                <span key={sp.name} className={i > 0 ? "ml-2" : ""}>
+                                  {sp.name}
+                                </span>
+                              ))
+                            : answer.speaker.name}
                         </span>
                       </div>
                       <p className="body_text">
