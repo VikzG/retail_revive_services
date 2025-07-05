@@ -15,6 +15,8 @@ import Services from "@/app/[locale]/components/Services";
 import Footer from "@/app/[locale]/components/Footer";
 import Loader from "@/app/[locale]/components/Loader";
 import { useI18n } from '../../locales/client'
+import ClientsSection from "./components/ClientsSection";
+import { PageInterview } from "./components/PageInterview";
 
 
 
@@ -146,6 +148,7 @@ export default function Home() {
         <Experts setIsSubVisible={setIsSubVisible}/>
         <Opportunites />
         <Club setIsSubVisible={setIsSubVisible}/>
+        <ClientsSection />
         <Actualites setIsSubVisible={setIsSubVisible}/>
         <Presse />
         <Contact />

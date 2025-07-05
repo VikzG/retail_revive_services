@@ -195,10 +195,10 @@ export default {
 "actualites": {
   "mobile": {
     "sectionTitle": "NOS ACTUALITÉS",
-    "subheadingLink": "Téléchargez le digest dès Mars 2025 et soyez au cœur",
-    "subheadingLink_2": "des tendances qui redéfinissent le secteur.",
-    "description": "Découvrez les insights du Dîner-Débat des Décideurs sur l'avenir du retail en Afrique.",
-    "description_2" : "Téléchargez le digest exclusif de notre dernier événement, centré sur le thème",
+    "subheadingLink": "Téléchargez notre étude annuelle gratuite sur",
+    "subheadingLink_2": "le rétail en Afrique",
+    "description": "Inscrivez-vous dès maintenant à nos courriers exclusifs",
+    "description_2" : "pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Revive Services et ses partenaires, à travers des études de cas et témoignages d'entreprises.",
     "description_3": "\"Innovation & Diversification : Quels nouveaux standards pour un retail africain en pleine transformation ?\".",
     "description_4" : "Ce document met en lumière les réflexions des leaders du secteur sur des sujets stratégiques tels que",
     "description_5" : "la formation et la rétention des talents, le Made in Africa, l'expérience client et la digitalisation, la diversification de l'offre et la logistique et la chaîne d'approvisionnement.",
@@ -211,15 +211,14 @@ export default {
       "altText": "Dernier événement"
     },
     "eventDescription": {
-      "title": "DERNIER ÉVÉNEMENT",
-      "description": "LE DÎNER-DÉBAT DES DÉCIDEURS",
+      "title": "JUILLET 2025",
+      "description": "Interview exclusive",
     },
     "eventDescription_bottom": {
-      "description": "Vous souhaitez participer aux événements et être au cœur de l’innovation du retail en Afrique ?",
-      "description_2": "Inscrivez-vous à nos dîners privés et accédez aux dernières tendances, études et opportunités du marché.",
+      "description": "Elles dirigent trois enseignes complémentaires, entre franchise internationale et distribution locale. Rencontre avec Marie Berthe et Khadija Gueye, un duo à la vision affûtée et au sens du détail remarquable...",
     },
     "ctaButton": {
-      "label": "REJOINDRE LE CLUB"
+      "label": "LIRE L'ARTICLE"
     },
     "subscriptionSuccessMessage": "Merci pour votre intérêt ! Vous recevrez le digest dès le mois de Mars 2025",
     "subscriptionErrorMessage": "Une erreur s'est produite. Veuillez réessayer.",

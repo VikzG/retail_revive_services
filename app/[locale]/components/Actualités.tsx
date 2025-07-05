@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState,useEffect,useRef } from "react";
 import { gsap } from "gsap";
 import emailjs from '@emailjs/browser';
+import { PageInterview } from "./PageInterview";
 import { useI18n } from '../../[locale]/../../locales/client'
 
 type ClubProps = {
@@ -38,6 +39,7 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
   });
 
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isInterviewVisible, setIsInterviewVisible] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -161,10 +163,6 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
     <strong>{t('actualites.mobile.description')}</strong>
     <br />
     {t('actualites.mobile.description_2')}{" "}
-    <strong>{t('actualites.mobile.description_3')}</strong>
-    <br />
-    {t('actualites.mobile.description_4')}{" "}
-    <strong>{t('actualites.mobile.description_5')}</strong>
   </p>
       </div>
       </div>
@@ -229,9 +227,9 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
       </div>
 
       {/* Image Section */}
-      <div className="w-full h-48 relative mb-6">
+      <div className="w-full h-64 relative mb-6">
         <Image
-          src="/actualites/debat_img.png" // Replace with the actual image path
+        src="/actualites/img_top_actualites.png"
           alt="Dernier événement"
           fill
           style={{ objectFit: "cover" }}
@@ -240,94 +238,88 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
 
       {/* Event Description */}
       <div className="px-4">
-        <p className="sous_titre py-4">
-         <strong> {t('actualites.mobile.eventDescription.title')} </strong>: <br /> {t('actualites.mobile.eventDescription.description')}
+        <p className="sous_titre py-4 text-gold flex flex-col">
+         <strong> {t('actualites.mobile.eventDescription.title')} </strong> <br /> 
+         <em className="citations text-black">{t('actualites.mobile.eventDescription.description')}</em>
         </p>
         <p className="mt-2 body_text">
-        {t('actualites.mobile.eventDescription_bottom.description')}<strong> {t('actualites.mobile.eventDescription_bottom.description_2')}</strong> 
+        {t('actualites.mobile.eventDescription_bottom.description')}
         </p>
       </div>
 
       {/* Join Button */}
-      <div className="mt-6">
-      <Link 
-           onClick={(e) => {
-            e.preventDefault();
-            setIsSubVisible(true);
-          }}
-          href="/club"
-          className="inline-block actualite_bouton sous_titre bg-white text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
-          >
-              {t('actualites.mobile.ctaButton.label')}
-          </Link>
-      </div>
+<div className="mt-6">
+  <button 
+    onClick={() => setIsInterviewVisible(true)} 
+    className="mt-4 bg-gold text-white px-6 py-2 rounded-lg sous_titre shadow w-max"
+  >
+    LIRE L’ARTICLE
+  </button>
+</div>
+
+{isInterviewVisible && (
+  <div className="fixed top-0 left-0 w-full h-full z-[20] bg-white overflow-y-auto">
+    <PageInterview onClose={() => setIsInterviewVisible(false)} />
+  </div>
+)}
     </section>
     )
   }
   return (
-    <section id="actualites" className="actualites_animation min-h-[80vh] max-h-screen py-16 px-4 bg-white">
-      <div ref={actualitesRefDesktop} className="actualites_trigger grid grid-cols-3 gap-10 p-8">
-        
-        {/* Colonne 1 : Nos Actualités */}
-        <div className="p-6">
-          <h2 className="grand_titre_s text-dark_brown_grey mb-6">{t('actualites.desktop.sectionTitle')} <br/>{t('actualites.desktop.sectionTitle_2')}</h2>
-          <p className="text-gold sous_titre mt-16 underline uppercase mb-2">
+<section id="actualites" className="actualites_animation h-[700px] bg-beige">
+  <div ref={actualitesRefDesktop} className="actualites_trigger grid grid-cols-[45%_55%] h-full">
+
+    {/* Colonne de gauche : Texte + Formulaire */}
+    <div className="flex flex-col bg-[#F4F2E9] items-center justify-center p-20">
+      <div className="flex flex-col gap-8 w-[530px]">
+        <h2 className="grand_titre text-dark_brown_grey mb-6 uppercase text-center">
+          {t('actualites.desktop.sectionTitle')} {t('actualites.desktop.sectionTitle_2')}
+        </h2>
+
+        <p className="text-gold sous_titre underline uppercase mb-4">
           {t('actualites.desktop.columns.0.subheading')}
-          </p>
-          <p className="body_text text-gray-700 mb-8">
-            <strong>{t('actualites.desktop.columns.0.description')}</strong>
-            <br/>
-            {t('actualites.desktop.columns.0.description_2')}{" "}
-            <strong>{t('actualites.desktop.columns.0.description_3')}</strong>
-            <br />
-            {t('actualites.desktop.columns.0.description_4')}{" "}
-            <strong>{t('actualites.desktop.columns.0.description_5')}</strong>
-          </p>
-          
-          {/* Formulaire d'inscription */}
-          <form onSubmit={handleSubmit} className="flex flex-row gap-2 mt-14 space-y-4">
-  <input 
-    type="text" 
-    name="name"
-    value={formData.name}
-    onChange={handleInputChange}
-    placeholder={t('actualites.desktop.columns.0.subscriptionForm.namePlaceholder')}
-    className={`border p-2 mt-4 rounded-lg w-full ${
-      errors.name ? 'border-red-500' : 'border-gray-300'
-    }`}
-  />
-  {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+        </p>
 
-  <input 
-    type="email" 
-    name="email"
-    value={formData.email}
-    onChange={handleInputChange}
-    placeholder={t('actualites.desktop.columns.0.subscriptionForm.emailPlaceholder')}
-    className={`border p-2 rounded-lg w-full ${
-      errors.email ? 'border-red-500' : 'border-gray-300'
-    }`}
-  />
-  {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
+        <p className="body_text text-gray-700">
+          <strong>
+Inscrivez-vous dès maintenant </strong> à nos courriers exclusifs pour rester informé(e) des dernières tendances du retail en Afrique et des projets innovants portés par Retail Revive Services et ses partenaires, à travers des études de cas et témoignages d'entreprises.
 
-  <button 
-    type="submit" 
-    className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
-  >
-    OK
-  </button>
-</form>
-      {/* Pop-up de succès */}
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-row items-center gap-4 mt-12 w-[520px]">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleInputChange}
+          placeholder={t('actualites.desktop.columns.0.subscriptionForm.namePlaceholder')}
+          className={`border p-2 rounded-lg w-full ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+        />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+          placeholder={t('actualites.desktop.columns.0.subscriptionForm.emailPlaceholder')}
+          className={`border p-2 rounded-lg w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+        />
+        <button
+          type="submit"
+          className="actualite_form_bouton bg-gold text-white shadow sous_titre px-6 py-2 rounded-lg"
+        >
+          OK
+        </button>
+      </form>
+
       {isSuccess && (
         <div className="actualites_modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-8 rounded-lg shadow-lg text-center space-y-4">
             <h2 className="sous_titre font-semibold text-gold">
-            {t('actualites.mobile.setIsSuccess_1')}
+              {t('actualites.mobile.setIsSuccess_1')}
             </h2>
             <p className="text-gray-600 body_text">
-              <strong>
-              {t('actualites.mobile.setIsSuccess_2')}
-              </strong>
+              <strong>{t('actualites.mobile.setIsSuccess_2')}</strong>
             </p>
             <button
               onClick={() => setIsSuccess(false)}
@@ -338,64 +330,87 @@ export default function Actualites({ setIsSubVisible }: ClubProps) {
           </div>
         </div>
       )}
-        </div>
+    </div>
 
-        {/* Colonne 2 : Images */}
-        <div className="flex flex-col items-center space-y-6">
-          <div className="relative h-48 w-5/6">
-            <Image
-              src="/actualites/presse_img_1.png"
-              alt="Image 1"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-48 w-5/6">
-            <Image
-              src="/actualites/presse_img_2.png"
-              alt="Image 2"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-48 w-5/6">
-            <Image
-              src="/actualites/presse_img_3.jpg"
-              alt="Image 3"
-              fill
-              className="object-cover object-[center_35%]"
-            />
-          </div>
-        </div>
+    {/* Colonne de droite : Articles en colonne */}
+<div className="flex flex-col gap-6 justify-center">
+  {/* Article 1 */}
+  <div className="flex max-h-[300px] w-full py-8 px-16">
+    {/* Image à gauche */}
+    <div className="min-w-[262px] max-w-[262px]">
+      <Image
+        src="/actualites/img_top_actualites.png"
+        alt="Marie Berthe et Khadija Gueye"
+        width={262}
+        height={234}
+className="h-full w-full object-cover"
+      />
+    </div>
 
-
-        {/* Colonne 3 : Dernier Événement */}
-        <div className="flex flex-col justify-between">
-          <h3 className="sous_titre underline mb-2">
-          {t('actualites.desktop.columns.2.eventDescription.title')}
-          </h3>
-          <div>
-          <p className="body_text mb-4">
-          {t('actualites.desktop.columns.2.eventDescription.description')} <span className="font-bold">{t('actualites.desktop.columns.2.eventDescription.description_2')}</span> {t('actualites.desktop.columns.2.eventDescription.description_3')}
-          </p>
-          <p className="body_text">
-          {t('actualites.desktop.columns.2.eventDescription.description_4')}
-            <span className="font-bold"> {t('actualites.desktop.columns.2.eventDescription.description_5')}</span>
-          </p>
-          </div>
-          <Link 
-             onClick={(e) => {
-              e.preventDefault();
-              setIsSubVisible(true);
-            }}
-          href="/club"
-          className="inline-block actualite_bouton sous_titre bg-white w-[230px] text-gold px-6 py-2 rounded-lg border-gold border-solid border-2"
-          >
-              {t('actualites.desktop.columns.2.ctaButton.label')}
-          </Link>
-          <h2 className="grand_titre_s mt-10 text-dark_brown_grey uppercase text-end mb-6">{t('actualites.desktop.columns.2.footerTitle')} <br/>{t('actualites.desktop.columns.2.footerTitle_2')}</h2>
-        </div>
+    {/* Texte à droite */}
+    <div className="pl-6 flex flex-col justify-between">
+      <div>
+        <p className="text-gold sous_titre uppercase">Juillet 2025</p>
+        <h3 className="citations mb-2">Interview exclusive</h3>
+        <p className="body_text text-gray-700">
+Elles dirigent trois enseignes complémentaires, entre franchise internationale et distribution locale. Rencontre avec <strong>Marie Berthe et Khadija Gueye</strong>, un duo à la vision affûtée et au sens du détail remarquable...
+        </p>
       </div>
-    </section>
+<button 
+  onClick={() => setIsInterviewVisible(true)} 
+  className="mt-4 bg-gold text-white px-6 py-2 rounded-lg sous_titre shadow w-max"
+>
+  LIRE L’ARTICLE
+</button>
+    </div>
+  </div>
+
+  {/* Article 2 */}
+  <div className="flex max-h-[300px] w-full py-8 px-16">
+    {/* Image à gauche */}
+    <div className="min-w-[262px] max-w-[262px]">
+      <Image
+        src="/actualites/presse_img_1.png"
+        alt="Dîner débat des décideurs"
+        width={262}
+        height={234}
+className="h-full w-full object-cover"
+      />
+    </div>
+
+    {/* Texte à droite */}
+    <div className="pl-6 flex flex-col justify-between">
+      <div>
+        <p className="text-gold sous_titre uppercase">Octobre 2024</p>
+        <h3 className="citations mb-2">Dîner-débat des décideurs</h3>
+        <p className="body_text text-gray-700">
+Découvrez les insights du Dîner-Débat des Décideurs Téléchargez le digest exclusif de notre dernier événement, centré sur le thème <strong>"Innovation & Diversification : Quels nouveaux standards pour un retail africain en pleine transformation ?</strong>”
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex flex-row items-center gap-2 mt-4">
+        <input
+          type="email"
+          name="email"
+          placeholder={t('actualites.desktop.columns.0.subscriptionForm.emailPlaceholder')}
+          value={formData.email}
+          onChange={handleInputChange}
+          className={`border p-2 rounded-lg w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+        />
+        <button type="submit" className="bg-gold text-white px-6 py-2 rounded-lg sous_titre">
+          OK
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+  </div>
+      {isInterviewVisible && (
+      <div className="fixed top-0 left-0 w-full h-full bg-white z-[20] overflow-auto">
+        <PageInterview onClose={() => setIsInterviewVisible(false)} />
+      </div>
+    )}
+</section>
+
   );
 }

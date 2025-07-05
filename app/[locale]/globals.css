@@ -558,6 +558,14 @@ body {
   letter-spacing: 0.02em; /* Utilise 0.02em pour un espacement de 2% */
 }
 
+.citations_clients {
+  font-family: var(--font-roaster-thin), sans-serif;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.02em; /* Utilise 0.02em pour un espacement de 2% */
+}
+
 /* Classe pour le texte du corps */
 .body_text {
   font-family: 'Poppins';
@@ -783,6 +791,11 @@ button:disabled {
   .citations {
     font-size: 22px;
     line-height: 25.3px;
+    letter-spacing: 2%;
+  }
+  .citations_clients {
+    font-size: 18px;
+    line-height: 20px;
     letter-spacing: 2%;
   }
   .star_mobile_opportunite {
