@@ -13,8 +13,8 @@ const Loader = () => {
 
 timeline.to(loaderRef.current, {
   top: "-100%",       // Utilise position absolue ou relative
-  duration: 0.5,
-  delay: 1.6,
+  duration: 1,
+  delay: 2,
   ease: "power1.inOut",
 });
 
