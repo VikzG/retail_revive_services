@@ -111,21 +111,31 @@ const ClientsSection = () => {
   const renderLogos = () => {
     if (testimonialIndex === 0) {
       return (
-        <div className="absolute bottom-0 left-0 w-full bg-white">
-          <div 
-          className={`flex h-full ${isMobile ?  "gap-2" : "min-h-[170px] gap-8"} px-2 py-1 justify-center items-center flex-wrap `}>
-            {brandLogosSlide1.map((logo, index) => (
-              <Image
-                key={`row1-${index}`}
-                src={logo}
-                alt={`brand-${index}`}
-                width={100}
-                height={40}
-                className={`object-contain h-10 w-auto ${isMobile ?  "max-w-[40px]" : "max-w-[120px]"}`}
-              />
-            ))}
-          </div>
-        </div>
+<div className="absolute bottom-0 left-0 w-full bg-white">
+  <div
+    className={`flex h-full ${
+      isMobile ? "gap-2 py-2" : "min-h-[170px] gap-8 py-4"
+    } px-2 justify-center items-center flex-wrap`}
+  >
+    {brandLogosSlide1.map((logo, index) => (
+      <div
+        key={`row1-${index}`}
+        className={`relative ${
+          isMobile ? "w-[40px] h-[40px]" : "w-[120px] h-[40px]"
+        }`}
+      >
+        <Image
+          src={logo}
+          alt={`brand-${index}`}
+          fill
+          className="object-contain"
+          sizes={isMobile ? "40px" : "120px"}
+          priority
+        />
+      </div>
+    ))}
+  </div>
+</div>
       );
     } else if (testimonialIndex === 1) {
       return (
