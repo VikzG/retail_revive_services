@@ -113,7 +113,7 @@ const ClientsSection = () => {
       return (
         <div className="absolute bottom-0 left-0 w-full bg-white">
           <div 
-          className={`flex gap-6 h-full ${isMobile ?  "" : "min-h-[170px]"} py-8 justify-center items-center flex-wrap `}>
+          className={`flex h-full ${isMobile ?  "gap-2" : "min-h-[170px] gap-8"} px-2 py-1 justify-center items-center flex-wrap `}>
             {brandLogosSlide1.map((logo, index) => (
               <Image
                 key={`row1-${index}`}
@@ -121,7 +121,7 @@ const ClientsSection = () => {
                 alt={`brand-${index}`}
                 width={100}
                 height={40}
-                className={`object-contain h-10 w-auto ${isMobile ?  "max-w-[25px]" : "max-w-[120px]"}`}
+                className={`object-contain h-10 w-auto ${isMobile ?  "max-w-[40px]" : "max-w-[120px]"}`}
               />
             ))}
           </div>
@@ -130,7 +130,7 @@ const ClientsSection = () => {
     } else if (testimonialIndex === 1) {
       return (
         <div className={`absolute flex items-center justify-center bottom-0 ${isMobile ?  "min-h-[80px]" : "min-h-[170px]"} left-0 w-full bg-white`}>
-          <div className="flex gap-10 justify-center items-center h-full">
+<div className={`flex justify-center items-center h-full ${isMobile ? "gap-4" : "gap-32"}`}>
             {brandLogosSlide2.map((logo, index) => (
               <Image
                 key={`slide2-logo-${index}`}
@@ -138,7 +138,7 @@ const ClientsSection = () => {
                 alt={`brand-${index}`}
                 width={100}
                 height={40}
-                className={`object-contain ${isMobile ?  "w-[100px] h-10" : "w-auto h-30"}`}
+                className={`object-contain ${isMobile ?  "w-40 h-14" : "w-auto h-30"}`}
               />
             ))}
           </div>
@@ -249,7 +249,7 @@ const ClientsSection = () => {
                 alt={`center-logo-${testimonialIndex}`}
                 width={
                   testimonialIndex === 0
-                    ? 120
+                    ? 100
                     : testimonialIndex === 1
                     ? 300
                     : 450
