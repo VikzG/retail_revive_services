@@ -2,6 +2,23 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const brandLogosSlide1 = [
+  "/clients/logos_m/slide_1/123.png",
+  "/clients/logos_m/slide_1/be_sport.png",
+  "/clients/logos_m/slide_1/tommy.png",
+  "/clients/logos_m/slide_1/aldo.png",
+  "/clients/logos_m/slide_1/mango.png",
+  "/clients/logos_m/slide_1/celio.png",
+  "/clients/logos_m/slide_1/occitane.png",
+  "/clients/logos_m/slide_1/hugo_boss.png",
+  "/clients/logos_m/slide_1/city_sport.png",
+  "/clients/logos_m/slide_1/courir.png",
+  "/clients/logos_m/slide_1/guess.png",
+  "/clients/logos_m/slide_1/call_it_spring.png",
+  "/clients/logos_m/slide_1/lovisa.png",
+  "/clients/logos_m/slide_1/levis.png",
+];
+
+const brandLogosSlide1Mobile = [
   "/clients/logos_marques/123_logo.svg",
   "/clients/logos_marques/be_sport_logo.svg",
   "/clients/logos_marques/TH_logo.svg",
@@ -40,7 +57,7 @@ const testimonials = [
     logo: "/clients/logo_retail_smart.svg",
     category: "Retail Revive Smart - Formation",
     sliderCenterImg: "/clients/logos_marques/logo_SPCA.svg",
-    logosSlide: brandLogosSlide1,
+    logosSlide1: brandLogosSlide1,
   },
   {
     quote:
@@ -156,7 +173,7 @@ const ClientsSection = () => {
     >
       <div
         className={`flex justify-center items-center h-full ${
-          isMobile ? "gap-4" : "gap-32"
+          isMobile ? "gap-1" : "gap-32"
         }`}
       >
         {(logos ?? []).map((logo, index) => (
@@ -262,7 +279,7 @@ const ClientsSection = () => {
         </div>
 
         {/* Right image slider synced with testimonial */}
-        <div className={`relative w-full ${isMobile ? "h-[400px]" : "h-[600px]"} rounded-xl overflow-hidden`}>
+        <div className={`relative w-full ${isMobile ? "h-[300px]" : "h-[600px]"} rounded-xl overflow-hidden`}>
           <Image
             src={testimonials[testimonialIndex].slide}
             alt={`slide-${testimonialIndex}`}
