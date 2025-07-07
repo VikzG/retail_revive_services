@@ -83,7 +83,7 @@ const testimonials = [
     slide: "/clients/scensoria_img.png",
     logo: "/clients/logo_retail_smart.svg",
     category: "Retail Revive Smart - Formation",
-    sliderCenterImg: "/clients/logos_marques/scensoria_center.svg",
+    sliderCenterImg: "/clients/logos_m/slide_2/scensoria_noir.png",
     logosSlide: [],
   },
   {
@@ -137,7 +137,7 @@ const ClientsSection = () => {
 <div className="absolute bottom-0 left-0 w-full bg-white">
   <div
     className={`flex h-full ${
-      isMobile ? "gap-2 py-2" : "min-h-[170px] gap-8 py-4"
+      isMobile ? "gap-2 py-1" : "min-h-[170px] gap-8 py-4"
     } px-2 justify-center items-center flex-wrap`}
   >
     {brandLogosSlide1.map((logo, index) => (
@@ -290,25 +290,38 @@ const ClientsSection = () => {
             }`}
           />
           {testimonials[testimonialIndex].sliderCenterImg && (
-            <div
-              className={`absolute transition-opacity duration-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ${
-                fade ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={testimonials[testimonialIndex].sliderCenterImg}
-                alt={`center-logo-${testimonialIndex}`}
-                width={
-                  testimonialIndex === 0
-                    ? 100
-                    : testimonialIndex === 1
-                    ? 300
-                    : 450
-                }
-                height={120}
-                className="object-contain"
-              />
-            </div>
+<div
+  className={`absolute transition-opacity duration-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 ${
+    fade ? "opacity-100" : "opacity-0"
+  }`}
+>
+<div
+  className={`relative ${
+    testimonialIndex === 0
+      ? isMobile
+        ? "w-16 h-16 mb-10"
+        : "w-28 h-28"
+      : testimonialIndex === 1
+      ? isMobile
+        ? "w-36 h-36"
+        : "w-60 h-60"
+      : testimonialIndex === 2
+      ? isMobile
+        ? "w-[300px] h-[200px]"
+        : "w-[500px] h-[300px]"
+      : isMobile
+      ? "w-[100px] h-[80px]"
+      : "w-[200px] h-[120px]"
+  }`}
+>
+    <Image
+      src={testimonials[testimonialIndex].sliderCenterImg}
+      alt={`center-logo-${testimonialIndex}`}
+      fill
+      className="object-contain"
+    />
+  </div>
+</div>
           )}
           {renderLogos()}
         </div>
