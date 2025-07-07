@@ -307,7 +307,7 @@ const ClientsSection = () => {
         : "w-60 h-60"
       : testimonialIndex === 2
       ? isMobile
-        ? "w-[300px] h-[200px]"
+        ? "w-[300px] h-[200px] mt-6"
         : "w-[500px] h-[300px]"
       : isMobile
       ? "w-[100px] h-[80px]"
