@@ -17,6 +17,11 @@ body {
   scroll-behavior: smooth;
 }
 
+video, .loader_container {
+  image-rendering: auto;
+  backface-visibility: hidden;
+}
+
 /* banner */
 
 .banner_text_container {
@@ -733,6 +738,11 @@ button:disabled {
     width: 85px;
     height: 20px;
     transform: rotateX(0.5turn) translateX(-20px) scale(2);
+  }
+
+  .loader_container video {
+    width: 60%;
+    height: 60%;
   }
 }
 
