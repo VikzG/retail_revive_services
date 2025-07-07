@@ -139,20 +139,34 @@ const ClientsSection = () => {
       );
     } else if (testimonialIndex === 1) {
       return (
-        <div className={`absolute flex items-center justify-center bottom-0 ${isMobile ?  "min-h-[80px]" : "min-h-[170px]"} left-0 w-full bg-white`}>
-<div className={`flex justify-center items-center h-full ${isMobile ? "gap-4" : "gap-32"}`}>
-            {brandLogosSlide2.map((logo, index) => (
-              <Image
-                key={`slide2-logo-${index}`}
-                src={logo}
-                alt={`brand-${index}`}
-                width={100}
-                height={40}
-                className={`object-contain ${isMobile ?  "w-40 h-14" : "w-auto h-30"}`}
-              />
-            ))}
-          </div>
-        </div>
+<div
+  className={`absolute flex items-center justify-center bottom-0 ${
+    isMobile ? "min-h-[80px]" : "min-h-[170px]"
+  } left-0 w-full bg-white`}
+>
+  <div
+    className={`flex justify-center items-center h-full ${
+      isMobile ? "gap-4" : "gap-32"
+    }`}
+  >
+    {brandLogosSlide2.map((logo, index) => (
+      <div
+        key={`slide2-logo-${index}`}
+        className={`relative ${
+          isMobile ? "w-40 h-14" : "w-[250px] h-[150px]"
+        }`}
+      >
+        <Image
+          src={logo}
+          alt={`brand-${index}`}
+          fill
+          className="object-contain"
+          priority // pour forcer un chargement propre
+        />
+      </div>
+    ))}
+  </div>
+</div>
       );
     }
     return null;
