@@ -23,6 +23,11 @@ const brandLogosSlide2 = [
   "/clients/logos_marques/FATALES_LOGO.svg",
 ];
 
+const brandLogosSlide2Mobile = [
+  "/clients/logos_m/slide_2/scensoria_noir.png",
+  "/clients/logos_m/slide_2/fatales.png",
+];
+
 const testimonials = [
   {
     quote:
@@ -49,6 +54,7 @@ const testimonials = [
     category: "Retail Revive Connect - Distribution",
     sliderCenterImg: "/clients/logos_marques/tatianab_center.svg",
     logosSlide: brandLogosSlide2,
+    logosSlideMobile: brandLogosSlide2Mobile,
   },
   {
     quote:
@@ -137,38 +143,42 @@ const ClientsSection = () => {
   </div>
 </div>
       );
-    } else if (testimonialIndex === 1) {
-      return (
-<div
-  className={`absolute flex items-center justify-center bottom-0 ${
-    isMobile ? "min-h-[80px]" : "min-h-[170px]"
-  } left-0 w-full bg-white`}
->
-  <div
-    className={`flex justify-center items-center h-full ${
-      isMobile ? "gap-4" : "gap-32"
-    }`}
-  >
-    {brandLogosSlide2.map((logo, index) => (
+} else if (testimonialIndex === 1) {
+  const logos = isMobile
+    ? testimonials[testimonialIndex].logosSlideMobile
+    : testimonials[testimonialIndex].logosSlide;
+
+  return (
+    <div
+      className={`absolute flex items-center justify-center bottom-0 ${
+        isMobile ? "min-h-[80px]" : "min-h-[170px]"
+      } left-0 w-full bg-white`}
+    >
       <div
-        key={`slide2-logo-${index}`}
-        className={`relative ${
-          isMobile ? "w-40 h-14" : "w-[250px] h-[150px]"
+        className={`flex justify-center items-center h-full ${
+          isMobile ? "gap-4" : "gap-32"
         }`}
       >
-        <Image
-          src={logo}
-          alt={`brand-${index}`}
-          fill
-          className="object-contain"
-          priority // pour forcer un chargement propre
-        />
+        {(logos ?? []).map((logo, index) => (
+          <div
+            key={`slide2-logo-${index}`}
+            className={`relative ${
+              isMobile ? "w-40 h-14" : "w-[250px] h-[150px]"
+            }`}
+          >
+            <Image
+              src={logo}
+              alt={`brand-${index}`}
+              fill
+              className="object-contain"
+              priority
+            />
+          </div>
+        ))}
       </div>
-    ))}
-  </div>
-</div>
-      );
-    }
+    </div>
+  );
+}
     return null;
   };
 
