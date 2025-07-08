@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { GallerySection } from "./GallerySection";
 import { InterviewSection } from "./InterviewSection";
+import Footer from "./Footer";
 
 type PageInterviewProps = {
   onClose: () => void;
@@ -39,7 +39,7 @@ export const PageInterview = ({ onClose }: PageInterviewProps): JSX.Element => {
         <div className="bg-alabaster w-full relative">
           <div className="flex flex-col w-full">
             <InterviewSection />
-            <GallerySection />
+            <Footer />
           </div>
         </div>
       </div>

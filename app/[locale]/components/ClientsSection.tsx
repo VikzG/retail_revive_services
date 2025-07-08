@@ -18,23 +18,6 @@ const brandLogosSlide1 = [
   "/clients/logos_m/slide_1/levis.png",
 ];
 
-const brandLogosSlide1Mobile = [
-  "/clients/logos_marques/123_logo.svg",
-  "/clients/logos_marques/be_sport_logo.svg",
-  "/clients/logos_marques/TH_logo.svg",
-  "/clients/logos_marques/aldo_logo.svg",
-  "/clients/logos_marques/logo_mango.svg",
-  "/clients/logos_marques/celio_logo.svg",
-  "/clients/logos_marques/occitane_logo.svg",
-  "/clients/logos_marques/hugo_boss_logo.svg",
-  "/clients/logos_marques/city_sport.svg",
-  "/clients/logos_marques/courir_logo.svg",
-  "/clients/logos_marques/guess_logo.svg",
-  "/clients/logos_marques/call_it_spring.svg",
-  "/clients/logos_marques/lovisa_logo.svg",
-  "/clients/logos_marques/levis_logo.svg",
-];
-
 const brandLogosSlide2 = [
   "/clients/logos_marques/scensoria_logo.svg",
   "/clients/logos_marques/FATALES_LOGO.svg",
@@ -210,18 +193,29 @@ const ClientsSection = () => {
 >
           {/* Partie haute : logo + texte */}
           <div>
-            <div className={`${isMobile ? "text-center" : "flex flex-row gap-10"}`}>
-              <img
-                className={`self-end ${isMobile ? "hidden" : "block"}`}
-                src={testimonials[testimonialIndex].logo}
-              />
-              <div className="flex flex-col justify-between">
-                <h2 className={`sous_titre text-white bg-gold text-center py-2 uppercase ${isMobile ? "hidden" : "block"}`}>
-                  {testimonials[testimonialIndex].category}
-                </h2>
-                <h1 className="grand_titre">NOS CLIENTS</h1>
-              </div>
-            </div>
+{isMobile ? (
+  // Version mobile (inchangée)
+  <div className="text-center">
+    <div className="flex flex-col justify-between">
+      <h1 className="grand_titre">NOS CLIENTS</h1>
+    </div>
+  </div>
+) : (
+  // Version desktop (avec catégorie au-dessus)
+  <div className="flex flex-col gap-4">
+    <h2 className="sous_titre text-white bg-gold text-center py-2 uppercase">
+      {testimonials[testimonialIndex].category}
+    </h2>
+    <div className="flex flex-row gap-10 items-center">
+      <img
+        className="self-end block"
+        src={testimonials[testimonialIndex].logo}
+      />
+      <h1 className="grand_titre">NOS CLIENTS</h1>
+    </div>
+  </div>
+)}
+
 
             {/* Texte à gauche : quote OU version événement */}
             {testimonials[testimonialIndex].type === "event" ? (

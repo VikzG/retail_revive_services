@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from "react";
+import { GallerySection } from "./GallerySection";
 
 // Define speaker data for reuse
 const speakers = {
@@ -22,11 +23,11 @@ const interviewQuestions = [
     answers: [
       {
         speaker: speakers.marieBerthe,
-        text: "J'ai commencé par la vente de produits de maroquinerie et de parfumerie, en contactant directement certaines maisons de luxe, pour répondre à une demande très ciblée de mes clientes. C'est parti d'un besoin clair : certaines clientes cherchaient des parfums précis qu'elles ne trouvaient pas localement. Peu à peu, les choses se sont structurées. Ce n'est pas un héritage, c'est un projet que j'ai lancé moi-même, avec ma vision et mon parcours.",
+        text: "J’ai commencé par la vente de produits de maroquinerie et de parfumerie, en contactant directement certaines maisons de luxe, pour répondre à une demande très ciblée de mes clientes. C’est parti d’un besoin clair : certaines clientes cherchaient des parfums précis qu’elles ne trouvaient pas localement. Peu à peu, les choses se sont structurées. Ce n’est pas un héritage, c’est un projet que j’ai lancé moi-même, avec ma vision, mon parcours, et beaucoup de détermination. Mon père était enseignant, personne dans ma famille ne travaillait dans le commerce. J’ai appris sur le terrain, en écoutant mes clientes, en m’adaptant à leurs besoins, en construisant une relation de confiance. Je suis une passionnée de vente, de contact, d’exigence. C’est un métier qu’on apprend par la pratique, qui demande de la patience, de l’instinct, et un engagement quotidien. Aujourd’hui encore, je suis cette commerçante attentive qui veut toujours proposer le bon produit, au bon moment, à la bonne personne.",
       },
       {
         speaker: speakers.khadija,
-        text: "J'ai rejoint l'aventure après mes études, en apportant un regard plus jeune et plus digital. La cliente avait évolué, on devait aussi penser différemment le retail.",
+        text: "De mon côté, j’ai rejoint l’aventure après un parcours dans le secteur bancaire. En revenant dans l’entreprise familiale, j’ai apporté une nouvelle énergie et une lecture plus digitale du retail. Très vite, j’ai voulu structurer notre présence en ligne, créer du contenu, aller chercher de nouveaux clients sur les réseaux sociaux. Le digital a permis d’ouvrir notre univers à une clientèle plus jeune, curieuse, connectée. C’est aussi par ce biais qu’est née une communauté fidèle et engagée. Ce que j’apporte, c’est un regard générationnel, un goût pour les formats innovants, mais toujours au service de l’exigence que ma mère a incarnée depuis le début. Ensemble, on construit un retail qui nous ressemble : moderne, structuré, et profondément humain.",
       },
     ],
   },
@@ -37,11 +38,7 @@ const interviewQuestions = [
     answers: [
       {
         speaker: speakers.marieBerthe,
-        text: "Sillage était tourné vers les marques de niche, mais une partie importante de notre clientèle voulait les grands classiques de la parfumerie. On avait cette demande récurrente pour du maquillage, du soin, des marques internationales. L'idée de Beauty Success est venue naturellement. Leur ADN familial, leur accompagnement — tout cela résonnait avec notre manière de faire.",
-      },
-      {
-        speaker: speakers.khadija,
-        text: "Leur équipe est venue à Dakar, on a participé à leur convention. C'est une franchise exigeante mais bienveillante. On partage beaucoup de valeurs.",
+        text: "Sillage était tourné vers les marques de niche, mais une partie importante de notre clientèle voulait les grands classiques de la parfumerie. On avait cette demande récurrente pour du maquillage, du soin, des marques internationales. L’idée de Beauty Success est venue naturellement. Leur ADN — familial, proche de la clientèle, rigoureux dans le choix des marques — correspondait à notre propre approche. C’est une franchise française bien implantée, avec une vraie volonté d’accompagner ses partenaires à l’international. Le premier contact s’est fait à Cannes. Nous avons été séduites par la proximité humaine de leurs équipes, leur business model et leur capacité à structurer un accompagnement solide.",
       },
     ],
   },
@@ -73,7 +70,7 @@ const interviewQuestions = [
     answers: [
       {
         speaker: speakers.khadija,
-        text: "Une place centrale. Longtemps, on a pensé que les parfums de niche ne concernaient qu'une élite. Aujourd'hui, le digital nous permet de transmettre autre chose : de la connaissance, de l'émotion. J'ai pris la main sur les réseaux pour parler vrai, expliquer les produits, créer du lien. C'est ce qui attire une clientèle plus jeune et engagée.",
+        text: "Une place centrale. Longtemps, on a pensé que les parfums de niche ne concernaient qu’une élite. Aujourd’hui, le digital nous permet de transmettre autre chose : de la connaissance, de l’émotion. J’ai pris la main sur les réseaux pour parler vrai, expliquer les produits, créer du lien. C’est ce qui attire une clientèle plus jeune et engagée. On ne vend pas juste un parfum, on partage une histoire, une sensation, une personnalité. On a aussi lancé des formats expérientiels comme les afterworks parfumés, où les clients découvrent les fragrances à travers des cocktails ou des ateliers sensoriels. Le but : éduquer sans imposer, rendre la beauté plus accessible, plus vivante.",
       },
     ],
   },
@@ -98,7 +95,7 @@ const interviewQuestions = [
       },
       {
         speaker: speakers.marieBerthe,
-        text: "Je me fais plus discrète aujourd'hui, mais je reste présente. Travailler avec sa fille, c'est aussi un moyen de transmettre autrement.",
+        text: "Je me fais plus discrète aujourd’hui, mais je reste présente. Travailler avec sa fille, c’est aussi un moyen de transmettre autrement. Après, il faut savoir que nous ne sommes pas seules. Il y a une vraie organisation autour de nous, avec une équipe jeune, engagée et compétente, qui participe activement au développement du groupe. La transmission se fait naturellement, oui, mais elle s’appuie sur des bases solides et un collectif. Cette aventure, c’est un équilibre entre l’héritage, l’envie et un vrai travail d’équipe.",
       },
     ],
   },
@@ -266,7 +263,7 @@ export const InterviewSection = (): JSX.Element => {
                         : answer.speaker.name}
                     </span>
                   </div>
-                  <p className="body_text">
+                  <p className="body_text text-justify">
                     {answer.text}
                   </p>
                 </div>
@@ -320,7 +317,7 @@ export const InterviewSection = (): JSX.Element => {
                           : answer.speaker.name}
                       </span>
                     </div>
-                    <p className="body_text">
+                    <p className="body_text text-justify">
                       {answer.text}
                     </p>
                   </div>
@@ -347,7 +344,7 @@ export const InterviewSection = (): JSX.Element => {
                       </span>
                     </div>
                   </div>
-                  <p className="body_text">
+                  <p className="body_text text-justify">
                     Il s&apos;est passé près de deux ans. De la réflexion
                     stratégique à l&apos;ouverture, en passant par la validation
                     du local, la formation, les expéditions, etc. C&apos;est un
@@ -362,7 +359,7 @@ export const InterviewSection = (): JSX.Element => {
 
         {/* Third Row */}
         <div className={`flex ${isMobile ? 'flex-col-reverse' : ''} w-full`}>
-          <div className={`flex flex-col justify-center ${isMobile ? 'w-full' : 'w-1/2'} ${isMobile ? 'gap-8 p-8' : 'gap-16 pt-16'}`}>
+          <div className={`flex flex-col justify-center ${isMobile ? 'w-full' : 'w-1/2'} ${isMobile ? 'gap-8 p-8' : 'gap-16 py-16'}`}>
             {/* Questions 4-6 */}
             {[3, 4, 5].map((questionIndex) => (
               <div
@@ -393,7 +390,7 @@ export const InterviewSection = (): JSX.Element => {
                             : answer.speaker.name}
                         </span>
                       </div>
-                      <p className="body_text">
+                      <p className="body_text text-justify">
                         {answer.text}
                       </p>
                     </div>
@@ -413,19 +410,9 @@ export const InterviewSection = (): JSX.Element => {
         </div>
 
         {/* Fourth Row */}
-        <div className={`flex ${isMobile ? 'flex-col' : ''} w-full bg-light_beige`}>
-          <div className={`flex flex-col items-center justify-center ${isMobile ? 'gap-8 py-8' : 'gap-40 p-16'} ${isMobile ? 'w-full' : 'flex-1'}`}>
-            <div className={`${isMobile ? 'w-full rounded-none h-[250px]' : 'w-[500px] h-[500px]'} rounded-full overflow-hidden`}>
-              <img
-                className="w-full h-full object-cover"
-                alt="Marie Berthe et Khadija Gueye"
-                src="/interview/interview_img_5.png"
-              />
-            </div>
-
-            <p className="body_text font-semibold italic text-center w-full">
-              Khadija Gueye à gauche, Marie Berthe Gueye à droite.
-            </p>
+        <div className={`flex ${isMobile ? 'flex-col-reverse' : ''} w-full bg-white`}>
+          <div className={`flex flex-col ${isMobile ? 'gap-8' : ''} ${isMobile ? 'w-full' : 'w-1/2'}`}>
+            <GallerySection />
           </div>
 
           <div className={`flex flex-col ${isMobile ? 'gap-6 p-8' : 'gap-8 p-16'} ${isMobile ? 'w-full' : 'flex-1'}`}>
@@ -459,7 +446,7 @@ export const InterviewSection = (): JSX.Element => {
                             : answer.speaker.name}
                         </span>
                       </div>
-                      <p className="body_text">
+                      <p className="body_text text-justify">
                         {answer.text}
                       </p>
                     </div>

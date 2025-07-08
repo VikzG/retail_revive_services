@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     url: "https://test-retail-revive-services.netlify.app/",
     images: [
       {
-        url:"/r-logo-mobile.png",
-        width: 1200,
-        height: 630,
+        url:"favicon_rrs.png",
+        width: 30,
+        height: 30,
         alt: "Image de prévisualisation pour Retail Revive Services",
       },
     ],
