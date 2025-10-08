@@ -218,7 +218,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
 
   // Code de la version desktop
   return (
-    <section id="services" className="nos_services min-h-[1000px] py-8 flex flex-row gap-4 bg-light_beige">
+    <section id="services" className="nos_services max-h-[1000px] py-8 flex flex-row gap-4 bg-light_beige">
       <div className="services_block_1 flex flex-col justify-around ps-12 w-1/2">
         <div className="flex flex-col gap-14 text-start">
           <h2 ref={h2ServicesRef} className="grand_titre">
@@ -281,7 +281,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
       </div>
 
       <div className="services_block_2 flex flex-col items-center justify-center w-1/2">
-        <Card className="max-w-2xl w-3/4 h-5/6 overflow-hidden">
+        <Card className="max-w-2xl w-3/4 h-[750px] overflow-hidden">
           <div className="relative">
           <Image
             src={activeService.image} // Image du service actif (sélectionné ou survolé)
@@ -296,7 +296,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
               </h2>
             </div>
           </div>
-          <CardContent className="p-6 space-y-6 mt-2 flex flex-col items-center justify-between">
+          <CardContent className="p-6 mt-2 flex flex-col items-center gap-16">
           <ul className="space-y-4 service_card_body_text">
             {activeService.phrases.map((phrase, i) => (
               <li key={`phrase-${i}`} className="flex gap-2 text-justify">

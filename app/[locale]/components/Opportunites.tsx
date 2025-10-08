@@ -197,7 +197,7 @@ export default function Opportunites() {
  }
 
   return (
-    <div className="min-h-[1000px] bg-dark_brown_grey text-white relative overflow-hidden">
+    <div className="h-[1000px] bg-dark_brown_grey text-white relative overflow-hidden">
       {/* Top right corner badge */}
       <div className="absolute top-12 right-12 flex items-center gap-2 text-gold">
         <Star className="w-11 h-11 fill-current stroke-none text-gold" />

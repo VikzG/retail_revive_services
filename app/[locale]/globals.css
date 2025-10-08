@@ -185,9 +185,6 @@ video, .loader_container {
 
 /* expertise */ 
 
-.expertise {
-  min-height: 100vh;
-}
 
 .expertise_titre{
   font-family: var(--font-roaster-thin), sans-serif;

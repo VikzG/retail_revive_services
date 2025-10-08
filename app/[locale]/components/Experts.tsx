@@ -226,7 +226,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
   }
   // Code de la version desktop
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-light_beige py-12 px-8">
+    <div className="h-[1000px] flex flex-col items-center justify-center bg-light_beige py-12 px-8">
       <div className="mx-auto">
         {/* Top Team Section */}
         <div className="mb-20">

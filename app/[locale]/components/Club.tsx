@@ -169,10 +169,10 @@ export default function Club({ setIsSubVisible }: ClubProps) {
   return (
     <div
       id="club"
-      className="bg-light_beige min-h-screen text-dark_brown_grey flex"
+      className="bg-light_beige h-[1000px] text-dark_brown_grey flex"
     >
       {/* Colonne gauche - Image prenant 40% de la largeur */}
-      <div className="w-2/5 h-screen relative overflow-hidden rounded-lg shadow-lg">
+      <div className="w-2/5 relative overflow-hidden rounded-lg shadow-lg">
         <Image
           src="/club/club_img.png" // Remplacez avec le bon chemin d'image
           alt="Luxury Building"
@@ -184,7 +184,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
 
       {/* Colonne droite - Texte et informations prenant 60% de la largeur */}
       <div className="min-w-[900px] w-3/5 flex flex-col justify-between pt-12">
-        <div className="flex flex-row px-16">
+        <div className="flex flex-row items-center justify-around">
           <div ref={clubSectionRef} className="club_section_anim flex flex-col">
             <h1 className="sur_titre_club text-black">
               {t("club.sectionTitle")} <br />
@@ -196,7 +196,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
             </h1>
 
             {/* Bloc Avis Client en dessous */}
-            <div className="bg-white w-3/4 rounded-xl shadow-lg p-6 space-y-4 mt-8">
+            <div className="bg-white max-w-[400px] rounded-xl shadow-lg p-6 space-y-4 mt-8">
               <div className="flex flex-row justify-between">
                 <p className="font-semibold text-gold">
                   {t("club.customerReviewTitle")}
@@ -216,7 +216,7 @@ export default function Club({ setIsSubVisible }: ClubProps) {
           </div>
 
           {/* Conteneur flex pour le titre et la liste des avantages à droite */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-around items-center">
             {/* Liste des avantages avec séparation par une ligne noire */}
             <ul className="space-y-6 w-80 body_text text-dark_brown_grey">
               <li className="border-b border-black pb-4 last:border-b-0">

@@ -163,7 +163,7 @@ useEffect(() => {
 }
 // Code de la version desktop
   return (
-    <section id="expertise" className="expertise flex flex-col items-center justify-center gap-4 bg-dark_brown_grey text-white px-6 py-10">
+    <section id="expertise" className="expertise flex flex-col h-[1000px] items-center justify-center gap-4 bg-dark_brown_grey text-white px-6 py-10">
       <div className="text-center mb-8">
         <p ref={expertiseIntro} className="citations text-center text-sm">
         {t('expertise.pre_intro')} <span className="text-gold">{t('expertise.intro')} </span> 
