@@ -7,14 +7,15 @@ em {
   font-style: normal;
 }
 
+/* "clip" et non "hidden" : hidden transforme le body en conteneur de scroll,
+   ce qui empêche Lenis (et window.scrollTo) de faire défiler la page.
+   Pas de scroll-behavior: smooth, c'est Lenis qui gère le défilement doux. */
 html, body {
-  overflow-x: hidden; /* Empêche le scrolling horizontal */
-  scroll-behavior: smooth;
+  overflow-x: clip; /* Empêche le scrolling horizontal */
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
 }
 
 video, .loader_container {

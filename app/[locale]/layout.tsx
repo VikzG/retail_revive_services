@@ -4,6 +4,7 @@ import { Archivo } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import CookieConsent from "./components/CookieConsent";
+import SmoothScroll from "./components/SmoothScroll";
 import { Providers } from "./providers";
 
 const roasterThinFont = localFont({
@@ -59,6 +60,7 @@ export default async function RootLayout({
     <html lang={locale} className={`${roasterThinFont.variable} ${roasterLightFont.variable}`}>
       <body>
         <Providers locale={locale}>
+          <SmoothScroll />
           {children}
            <CookieConsent />
         </Providers>

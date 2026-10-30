@@ -35,7 +35,8 @@ export const PageInterview = ({ onClose }: PageInterviewProps): React.JSX.Elemen
       ref={containerRef}
       className="fixed top-0 left-0 w-full h-full bg-transparent z-20"
     >
-      <div className="bg-[#f4f2e9] flex flex-row justify-center w-full h-full overflow-y-auto">
+      {/* data-lenis-prevent : cette page a son propre scroll, Lenis ne doit pas l'intercepter */}
+      <div data-lenis-prevent className="bg-[#f4f2e9] flex flex-row justify-center w-full h-full overflow-y-auto">
         <div className="bg-alabaster w-full relative">
           <div className="flex flex-col w-full">
             <InterviewSection />
