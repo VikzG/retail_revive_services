@@ -102,9 +102,10 @@ export default function Club({ setIsSubVisible }: ClubProps) {
         {/* Image at the top */}
         <div className="w-full h-48 relative mb-6">
           <Image
-            src="/club/club_img.png" // Replace with the actual image path
+            src="/club/club_img.webp" // Replace with the actual image path
             alt="Club Retail Africa"
             fill
+            sizes="(max-width: 768px) 100vw, 50vw"
             style={{ objectFit: "cover" }}
           />
         </div>
@@ -174,9 +175,10 @@ export default function Club({ setIsSubVisible }: ClubProps) {
       {/* Colonne gauche - Image prenant 40% de la largeur */}
       <div className="w-2/5 relative overflow-hidden rounded-lg shadow-lg">
         <Image
-          src="/club/club_img.png" // Remplacez avec le bon chemin d'image
+          src="/club/club_img.webp" // Remplacez avec le bon chemin d'image
           alt="Luxury Building"
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           style={{ objectFit: "cover" }}
           className="rounded-lg"
         />

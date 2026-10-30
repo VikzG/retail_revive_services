@@ -179,7 +179,9 @@ export default function Opportunites() {
     {/* Image */}
     <div className="w-full flex flex-col items-center justify-center">
       <img
-        src="/opportunites/opportunite_img.png" // Update this path to your image source
+        loading="lazy"
+        decoding="async"
+        src="/opportunites/opportunite_img.webp" // Update this path to your image source
         alt="Club Retail Africa"
         className="w-48 h-auto rounded-t-full"
       />
@@ -236,9 +238,10 @@ export default function Opportunites() {
         <div className="opportunite_img_container relative bottom-36 w-[350px] h-[550px] ml-[65vw]">
           <div className="absolute inset-0 overflow-hidden rounded-t-full">
             <Image
-              src="/opportunites/opportunite_img.png"
+              src="/opportunites/opportunite_img.webp"
               alt="Elegant meeting space"
               fill
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover"
             />
           </div>

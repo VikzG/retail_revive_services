@@ -268,24 +268,24 @@ export default {
     "id": 1,
     "title": "\"Dîner-Débat of Decision Makers\"",
     "phrase": "On October 10, 2024, La Résidence Abidjan hosted the very first Decision Makers' Dinner-Debate, an exclusive event organized by Retail Revive Services (RRS), a Pan-African consultancy specializing...",
-    "imgSrc": "/presse/presse_11.jpg",
-    "imgLogo": "/presse/logo_elle.png",
+    "imgSrc": "/presse/presse_11.webp",
+    "imgLogo": "/presse/logo_elle.webp",
     "link": "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars"
   },
   {
     "id": 2,
     "title": "\"Retail in Africa\"",
     "phrase": "Organized by Retail Revive Services (RRS), the Pan-African consultancy specializing in retail transformation, this event aimed to lay the groundwork for the future strategy of African retail...",
-    "imgSrc": "/presse/presse_22.jpg",
-    "imgLogo": "/presse/logo_ivorian.png",
+    "imgSrc": "/presse/presse_22.webp",
+    "imgLogo": "/presse/logo_ivorian.webp",
     "link": "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars"
   },
   {
     "id": 3,
     "title": "\"Collective Vision and Transformation\"",
     "phrase": "In Africa, the retail sector is undergoing rapid transformation, with a market projected to reach nearly $1 trillion by 2030. According to the latest analysis of the Deloitte African Retail Barometer...",
-    "imgSrc": "/presse/photo-33.png",
-    "imgLogo": "/presse/ecofin_logo.png",
+    "imgSrc": "/presse/photo-33.webp",
+    "imgLogo": "/presse/ecofin_logo.webp",
     "link": "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars"
   }
 ],
@@ -328,6 +328,13 @@ export default {
   "copyright_mobile_2": "all rights reserved",
   "legal_mentions": "legal mentions",
   "email": "contact@retailreviveservices.com",
+},
+"cookies": {
+  "message": "We use Mailchimp to offer you our newsletter. This service sets cookies and measures your visits. You can accept or refuse it; the website works either way.",
+  "accept": "Accept",
+  "refuse": "Refuse",
+  "learn_more": "Learn more",
+  "manage": "Manage cookies",
 },
 "sub": {
   "invitation_message": "You are invited to join an",

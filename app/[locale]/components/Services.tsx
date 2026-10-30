@@ -38,7 +38,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
   }, []);
 
  ({
-    image: "/services/services_img_1.png",
+    image: "/services/services_img_1.webp",
     title: t('services.categories.consulting'),
     href: "",
     phrases: [
@@ -50,7 +50,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
   const services: Service[] = [
     {
       title: t('services.categories.consulting'),
-      image: "/services/services_img_1.png",
+      image: "/services/services_img_1.webp",
       href: "",
       phrases: [
         <span><strong>{t('services.details.consulting.0.title')}</strong> {t('services.details.consulting.0.description')}</span>,
@@ -59,7 +59,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     },
     {
       title: t('services.categories.training'),
-      image: "/services/services_img_2.png",
+      image: "/services/services_img_2.webp",
       href: "",
       phrases: [
         <span><strong>{t('services.details.training.0.title')}</strong> {t('services.details.training.0.description')}</span>,
@@ -69,7 +69,7 @@ export default function Services({ setIsSubVisible }: ServicesProps) {
     },
     {
       title: t('services.categories.distribution'),
-      image: "/services/services_img_33.png",
+      image: "/services/services_img_33.webp",
       href: "",
       phrases: [
         <span><strong>{t('services.details.distribution.0.title')}</strong> {t('services.details.distribution.0.description')}</span>,

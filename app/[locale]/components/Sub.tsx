@@ -87,9 +87,10 @@ export default function Sub() {
           <div className="timbre_container absolute top-0 right-0 h-[150px] w-[130px] border-4 border-white m-4">
           <Image
             className=" drop-shadow"
-            src="/sub/timbre_rss.png"
+            src="/sub/timbre_rss.webp"
             alt="Timbre"
-            layout="fill"
+            fill
+            sizes="300px"
           />
           </div>
           <div className="flex flex-col justify-center items-center w-full text-center">
@@ -129,9 +130,10 @@ export default function Sub() {
               <div className="timbre_container absolute top-0 right-0 h-[150px] w-[130px] border-4 border-white m-4">
           <Image
             className=" drop-shadow"
-            src="/sub/timbre_rss.png"
+            src="/sub/timbre_rss.webp"
             alt="Timbre"
-            layout="fill"
+            fill
+            sizes="300px"
           />
           </div>
               <h2 className="sous_titre_sub">

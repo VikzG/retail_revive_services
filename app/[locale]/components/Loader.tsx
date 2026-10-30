@@ -7,19 +7,32 @@ const Loader = () => {
 
   useEffect(() => {
     const timeline = gsap.timeline({
+      paused: true,
       onComplete: () => setShowLoader(false),
     });
 
-    // Animation de fin du loader (tu peux adapter la durée ici)
+    // Animation de fin du loader
     timeline.to(loaderRef.current, {
       y: "-100%",
       opacity: 0,
-      duration: 1,
-      delay: 2, // correspond à environ le même temps que ton ancienne timeline
+      duration: 0.6,
       ease: "power1.inOut",
     });
 
+    // On laisse le logo visible au moins 0.8s, puis on part dès que la page
+    // est chargée (au plus tard après 2s pour ne jamais bloquer le visiteur)
+    const start = Date.now();
+    const hide = () => {
+      const wait = Math.max(0, 800 - (Date.now() - start));
+      setTimeout(() => timeline.play(), wait);
+    };
+    const maxTimer = setTimeout(() => timeline.play(), 2000);
+    if (document.readyState === "complete") hide();
+    else window.addEventListener("load", hide, { once: true });
+
     return () => {
+      clearTimeout(maxTimer);
+      window.removeEventListener("load", hide);
       timeline.kill();
     };
   }, []);

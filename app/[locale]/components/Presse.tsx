@@ -23,24 +23,24 @@ export default function Presse() {
       id: 1,
       title: t('Presse.articles.0.title'),
       phrase:t('Presse.articles.0.phrase'),
-      imgSrc: "/presse/presse_11.jpg",
-      imgLogo: "/presse/logo_elle.png",
+      imgSrc: "/presse/presse_11.webp",
+      imgLogo: "/presse/logo_elle.webp",
       link: "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars",
     },
     {
       id: 2,
       title: t('Presse.articles.1.title'),
       phrase:t('Presse.articles.1.phrase'),
-      imgSrc: "/presse/presse_22.jpg",
-      imgLogo: "/presse/logo_ivorian.png",
+      imgSrc: "/presse/presse_22.webp",
+      imgLogo: "/presse/logo_ivorian.webp",
       link: "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars",
     },
     {
       id: 3,
       title: t('Presse.articles.2.title'),
       phrase:t('Presse.articles.2.phrase'),
-      imgSrc: "/presse/photo-33.png",
-      imgLogo: "/presse/ecofin_logo.png",
+      imgSrc: "/presse/photo-33.webp",
+      imgLogo: "/presse/ecofin_logo.webp",
       link: "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars",
     },
   ];
@@ -106,6 +106,7 @@ export default function Presse() {
                   src={article.imgSrc}
                   alt={article.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: "cover" }}
                   className="rounded-t-lg"
                 />
@@ -163,6 +164,7 @@ export default function Presse() {
         src={current.imgSrc}
         alt={current.title}
         fill
+        sizes="(max-width: 768px) 100vw, 50vw"
         style={{ objectFit: "cover" }}
         className="absolute top-0 left-0 w-full h-full"
       />

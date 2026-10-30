@@ -282,24 +282,24 @@ export default {
       "id": 1,
       "title": "\"Dîner-Débat des Décideurs\"",
       "phrase": "Le 10 octobre 2024, La Résidence Abidjan a accueilli le tout premier Dîner-Débat des Décideurs, un événement exclusif organisé par Retail Revive Services (RRS), un cabinet panafricain spécialisé...",
-      "imgSrc": "/presse/presse_11.jpg",
-      "imgLogo": "/presse/logo_elle.png",
+      "imgSrc": "/presse/presse_11.webp",
+      "imgLogo": "/presse/logo_elle.webp",
       "link": "https://www.ellecotedivoire.com/diner-debat-des-decideurs-vers-un-retail-africain-de-1000-milliards-de-dollars"
     },
     {
       "id": 2,
       "title": "\"Retail en Afrique\"",
       "phrase": "Organisé par Retail Revive Services (RRS), le cabinet panafricain spécialisé dans la transformation des organisations retail, cet événement visait à poser les bases de la stratégie future du retail africain...",
-      "imgSrc": "/presse/presse_22.jpg",
-      "imgLogo": "/presse/logo_ivorian.png",
+      "imgSrc": "/presse/presse_22.webp",
+      "imgLogo": "/presse/logo_ivorian.webp",
       "link": "https://www.ivorian.net/actualites/vision-collective-et-transformation-du-retail-en-afrique-vers-un-marche-a-1000-milliards-dedollars"
     },
     {
       "id": 3,
       "title": "\"Vision collective et transformation\"",
       "phrase": "En Afrique, le secteur du retail connaît une transformation rapide, avec un marché estimé à près de 1000 milliards de dollars d’ici 2030. D’après les dernières analyses du Baromètre Retail en Afrique de Deloitte...",
-      "imgSrc": "/presse/photo-33.png",
-      "imgLogo": "/presse/ecofin_logo.png",
+      "imgSrc": "/presse/photo-33.webp",
+      "imgLogo": "/presse/ecofin_logo.webp",
       "link": "https://www.agenceecofin.com/reflexion/0411-123112-retail-en-afrique-vers-un-marche-a-1000-milliards-de-dollars"
     }
   ],
@@ -341,6 +341,13 @@ export default {
     "copyright_mobile_2": "tous droits réservés",
     "legal_mentions": "mentions légales",
     "email": "contact@retailreviveservices.com",
+  },
+  "cookies": {
+    "message": "Nous utilisons Mailchimp pour vous proposer notre newsletter. Ce service dépose des cookies et mesure vos visites. Vous pouvez l’accepter ou le refuser, le site fonctionne dans les deux cas.",
+    "accept": "Accepter",
+    "refuse": "Refuser",
+    "learn_more": "En savoir plus",
+    "manage": "Gérer les cookies",
   },
   "sub": {
     "invitation_message": "Vous êtes invité(e) à rejoindre un",

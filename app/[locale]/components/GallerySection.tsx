@@ -41,9 +41,11 @@ export const GallerySection = (): JSX.Element => {
     <section className="flex flex-col gap-20 py-8 relative w-full h-full bg-[#F2F0E6]">
       {/* Banner image */}
       <img
+        loading="lazy"
+        decoding="async"
         className="w-full h-auto object-cover"
         alt="Banniere rrs news"
-        src="/interview/interview_banner.png"
+        src="/interview/interview_banner.webp"
       />
 
       <div className={`flex flex-col items-center gap-20 relative w-full px-4`}>
@@ -62,6 +64,8 @@ export const GallerySection = (): JSX.Element => {
           </div>
 
           <img
+            loading="lazy"
+            decoding="async"
             className={`${
               isMobile ? "w-[200px] h-[77px]" : "w-[274px] h-[105px]"
             }`}

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Nav from "@/app/[locale]/components/Nav";
@@ -45,7 +46,7 @@ export default function Home() {
   const subContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 2.5 });
+    const tl = gsap.timeline({ delay: 1.2 });
     tl.fromTo(
       headerTitleRef.current,
       { opacity: 0 },
@@ -89,10 +90,13 @@ export default function Home() {
           setIsInterviewVisible={setIsInterviewVisible}
         />
         <div className="banner_container relative h-screen w-full">
-          <img
-            className="brightness-50 w-full h-full object-cover"
-            src="/banner/banner_rss.png"
+          <Image
+            className="brightness-50 object-cover"
+            src="/banner/banner_rss.webp"
             alt={t("bannerAlt")} // Traduction pour l'attribut alt
+            fill
+            priority
+            sizes="100vw"
           />
           <div ref={headerTitleRef}>
             <div className="span_header_container absolute w-full flex justify-center p-4">
@@ -185,7 +189,6 @@ export default function Home() {
         />
         <Presse />
         <Contact />
-        <Loader />
       </main>
       <Footer />
       <div

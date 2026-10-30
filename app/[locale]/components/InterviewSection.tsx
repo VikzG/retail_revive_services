@@ -147,9 +147,11 @@ export const InterviewSection = (): JSX.Element => {
         {/* Left Image */}
         <div className={`${isMobile ? 'w-full relative' : 'w-1/2'} ${isMobile ? 'px-0' : 'pl-8'}`}>
           <img
+            loading="lazy"
+            decoding="async"
             className={`w-full ${isMobile ? 'h-[520px] brightness-50' : 'h-[800px]'} object-cover`}
             alt="Marie et Khadija edito"
-            src="/interview/interview_img_1.jpg"
+            src="/interview/interview_img_1.webp"
           />
           
           {/* Mobile overlay - JUILLET 2025 et INTERVIEW */}
@@ -272,9 +274,11 @@ export const InterviewSection = (): JSX.Element => {
 
             <div className={`flex items-center justify-center ${isMobile ? 'w-full h-[300px]' : 'w-1/2'} p-0`}>
               <img
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
                 alt="Sillage logo div"
-                src="/interview/interview_img_2.png"
+                src="/interview/interview_img_2.webp"
               />
             </div>
           </div>
@@ -285,9 +289,11 @@ export const InterviewSection = (): JSX.Element => {
           <div className={`flex ${isMobile ? 'flex-col-reverse' : ''} w-full rounded-none border-none shadow-none`}>
             <div className={`flex items-center justify-center ${isMobile ? 'w-full h-[300px] order-2' : 'flex-1'} p-0`}>
               <img
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
                 alt="Sillage logo div"
-                src="/interview/interview_img_3.png"
+                src="/interview/interview_img_3.webp"
               />
             </div>
 
@@ -402,9 +408,11 @@ export const InterviewSection = (): JSX.Element => {
 
           <div className={`flex flex-col items-center ${isMobile ? 'w-full h-[300px]' : 'w-1/2'} bg-white`}>
             <img
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
               alt="Instagram phone view"
-              src="/interview/interview_img_4.png"
+              src="/interview/interview_img_4.webp"
             />
           </div>
         </div>

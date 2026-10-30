@@ -52,27 +52,27 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     {
       name: "BAKA",
       role: t('team.roles.BAKA'),
-      image: "/experts/experte_img.jpg",
+      image: "/experts/experte_img.webp",
     },
     {
       name: "NELLY",
       role: t('team.roles.NELLY'),
-      image: "/experts/nelly_img.png",
+      image: "/experts/nelly_img.webp",
     },
     {
       name: "LESLIE",
       role: t('team.roles.LESLIE'),
-      image: "/experts/leslie_img.png",
+      image: "/experts/leslie_img.webp",
     },
     {
       name: "ANGÉLIQUE",
       role: t('team.roles.ANGÉLIQUE'),
-      image: "/experts/angelique_img.png",
+      image: "/experts/angelique_img.webp",
     },
     {
       name: "CLAUDIA",
       role: t('team.roles.CLAUDIA'),
-      image: "/experts/claudia_img.png",
+      image: "/experts/claudia_img.webp",
     },
   ];
 
@@ -80,27 +80,27 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
     {
       name: "STEVE",
       role: t('team.roles.STEVE'),
-      image: "/experts/steve_img.png",
+      image: "/experts/steve_img.webp",
     },
     {
       name: "DOMINIQUE",
       role: t('team.roles.DOMINIQUE'),
-      image: "/experts/dominique_img.png",
+      image: "/experts/dominique_img.webp",
     },
     {
       name: "EVA",
       role: t('team.roles.EVA'),
-      image: "/experts/eva_img.png",
+      image: "/experts/eva_img.webp",
     },
     {
       name: "SANDRA",
       role: t('team.roles.SANDRA'),
-      image: "/experts/sandra_img.png",
+      image: "/experts/sandra_img.webp",
     },
     {
       name: "KAREN",
       role: t('team.roles.KAREN'),
-      image: "/experts/karen_img.png",
+      image: "/experts/karen_img.webp",
     },
   ];
 
@@ -183,6 +183,8 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
             >
               <div className="w-6/6 h-3/5 overflow-hidden rounded-xl m-auto mb-4">
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={expert.image}
                   alt={expert.name}
                   className="w-full h-full rounded-lg object-cover"
@@ -244,6 +246,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                       src={member.image}
                       alt={member.name}
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       style={{ objectFit: "cover" }}
                       className="rounded-lg experts-img"
                     />
@@ -306,6 +309,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                     src={expert.image}
                     alt={expert.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     style={{ objectFit: "cover" }}
                     className="experts-img rounded-lg"
                   />
@@ -328,6 +332,7 @@ export default function Experts({ setIsSubVisible }: ExpertProps) {
                     src={expert.image}
                     alt={expert.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     style={{ objectFit: "cover" }}
                     className="rounded-lg"
                   />

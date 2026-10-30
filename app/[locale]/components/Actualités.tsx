@@ -230,9 +230,10 @@ export default function Actualites({ setIsSubVisible, isInterviewVisible,setIsIn
       {/* Image Section */}
       <div className="w-full h-64 relative mb-6">
         <Image
-        src="/actualites/img_top_actualites.png"
+        src="/actualites/img_top_actualites.webp"
           alt="Dernier événement"
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           style={{ objectFit: "cover" }}
         />
       </div>
@@ -252,7 +253,7 @@ export default function Actualites({ setIsSubVisible, isInterviewVisible,setIsIn
 <div className="mt-6">
   <button 
     onClick={() => setIsInterviewVisible(true)} 
-    className="mt-4 bg-gold text-white px-6 py-2 rounded-lg sous_titre shadow w-max"
+    className="actualite_form_bouton mt-4 bg-gold text-white px-6 py-2 rounded-lg sous_titre shadow w-max"
   >
     LIRE L’ARTICLE
   </button>
@@ -340,7 +341,7 @@ Inscrivez-vous dès maintenant </strong> à nos courriers exclusifs pour rester 
     {/* Image à gauche */}
     <div className="min-w-[262px] max-w-[262px]">
       <Image
-        src="/actualites/img_top_actualites.png"
+        src="/actualites/img_top_actualites.webp"
         alt="Marie Berthe et Khadija Gueye"
         width={262}
         height={234}
@@ -359,7 +360,7 @@ Elles dirigent trois enseignes complémentaires, entre franchise internationale 
       </div>
 <button 
   onClick={() => setIsInterviewVisible(true)} 
-  className="mt-4 bg-gold text-white px-6 py-2 rounded-lg sous_titre shadow w-max"
+  className="actualite_form_bouton mt-4 bg-gold text-white px-6 py-2 rounded-lg sous_titre shadow w-max"
 >
   LIRE L’ARTICLE
 </button>
@@ -371,7 +372,7 @@ Elles dirigent trois enseignes complémentaires, entre franchise internationale 
     {/* Image à gauche */}
     <div className="min-w-[262px] max-w-[262px]">
       <Image
-        src="/actualites/presse_img_1.png"
+        src="/actualites/presse_img_1.webp"
         alt="Dîner débat des décideurs"
         width={262}
         height={234}
@@ -398,7 +399,7 @@ Découvrez les insights du Dîner-Débat des Décideurs Téléchargez le digest 
           onChange={handleInputChange}
           className={`border p-2 rounded-lg w-full ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
         />
-        <button type="submit" className="bg-gold text-white px-6 py-2 rounded-lg sous_titre">
+        <button type="submit" className="actualite_form_bouton bg-gold text-white px-6 py-2 rounded-lg sous_titre">
           OK
         </button>
       </form>

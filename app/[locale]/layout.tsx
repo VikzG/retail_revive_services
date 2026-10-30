@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { Archivo } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import MailchimpScripts from "./components/MailchimpScript";
+import CookieConsent from "./components/CookieConsent";
 import { Providers } from "./providers";
 
 const roasterThinFont = localFont({
@@ -60,7 +60,7 @@ export default async function RootLayout({
       <body>
         <Providers locale={locale}>
           {children}
-           <MailchimpScripts />
+           <CookieConsent />
         </Providers>
       </body>
     </html>

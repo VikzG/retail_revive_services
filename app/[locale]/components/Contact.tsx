@@ -252,7 +252,7 @@ export default function Contact() {
 
         <div
           className="w-full py-8 px-4 bg-cover bg-center flex flex-col items-center justify-center"
-          style={{ backgroundImage: "url('/contact/contact_img.png')" }}
+          style={{ backgroundImage: "url('/contact/contact_img.webp')" }}
         >
           {renderForm()}
         </div>
@@ -289,9 +289,10 @@ export default function Contact() {
   {/* Le parent du composant Image doit être relatif */}
   <div className="w-2/5 flex-shrink-0 relative h-full">
     <Image
-      src="/contact/contact_img.png"
+      src="/contact/contact_img.webp"
       alt="Sculpture en terre cuite"
       fill
+      sizes="(max-width: 768px) 100vw, 50vw"
       style={{ objectFit: "cover" }}
     />
   </div>

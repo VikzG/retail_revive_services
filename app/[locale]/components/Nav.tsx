@@ -140,11 +140,9 @@ function Nav({ isSubVisible, setIsSubVisible,isInterviewVisible,setIsInterviewVi
           </span>
         ) : (
 <Link href="#club-retail">
-  <img
-    src="/logo/LOGO_RRS.svg"
-    alt="Logo RRS"
-    width="80"
-    height="45"
+  <span
+    role="img"
+    aria-label="Logo RRS"
     className="retail_revive_svg"
   />
 </Link>

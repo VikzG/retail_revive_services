@@ -2,20 +2,20 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 const brandLogosSlide1 = [
-  "/clients/logos_m/slide_1/123.png",
-  "/clients/logos_m/slide_1/be_sport.png",
-  "/clients/logos_m/slide_1/tommy.png",
-  "/clients/logos_m/slide_1/aldo.png",
-  "/clients/logos_m/slide_1/mango.png",
-  "/clients/logos_m/slide_1/celio.png",
-  "/clients/logos_m/slide_1/occitane.png",
-  "/clients/logos_m/slide_1/hugo_boss.png",
-  "/clients/logos_m/slide_1/city_sport.png",
-  "/clients/logos_m/slide_1/courir.png",
-  "/clients/logos_m/slide_1/guess.png",
-  "/clients/logos_m/slide_1/call_it_spring.png",
-  "/clients/logos_m/slide_1/lovisa.png",
-  "/clients/logos_m/slide_1/levis.png",
+  "/clients/logos_m/slide_1/123.webp",
+  "/clients/logos_m/slide_1/be_sport.webp",
+  "/clients/logos_m/slide_1/tommy.webp",
+  "/clients/logos_m/slide_1/aldo.webp",
+  "/clients/logos_m/slide_1/mango.webp",
+  "/clients/logos_m/slide_1/celio.webp",
+  "/clients/logos_m/slide_1/occitane.webp",
+  "/clients/logos_m/slide_1/hugo_boss.webp",
+  "/clients/logos_m/slide_1/city_sport.webp",
+  "/clients/logos_m/slide_1/courir.webp",
+  "/clients/logos_m/slide_1/guess.webp",
+  "/clients/logos_m/slide_1/call_it_spring.webp",
+  "/clients/logos_m/slide_1/lovisa.webp",
+  "/clients/logos_m/slide_1/levis.webp",
 ];
 
 const brandLogosSlide2 = [
@@ -24,8 +24,8 @@ const brandLogosSlide2 = [
 ];
 
 const brandLogosSlide2Mobile = [
-  "/clients/logos_m/slide_2/scensoria_noir.png",
-  "/clients/logos_m/slide_2/fatales.png",
+  "/clients/logos_m/slide_2/scensoria_noir.webp",
+  "/clients/logos_m/slide_2/fatales.webp",
 ];
 
 const testimonials = [
@@ -36,7 +36,7 @@ const testimonials = [
       name: "Cynthia B",
       title: "Directrice des ventes chez SPCA",
     },
-    slide: "/clients/clients_team_img.png",
+    slide: "/clients/clients_team_img.webp",
     logo: "/clients/logo_retail_smart.svg",
     category: "Retail Revive Smart - Formation",
     sliderCenterImg: "/clients/logos_marques/logo_SPCA.svg",
@@ -49,7 +49,7 @@ const testimonials = [
       name: "Tatiana B",
       title: "Fondatrice de la marque",
     },
-    slide: "/clients/tatiana_b_img.png",
+    slide: "/clients/tatiana_b_img.webp",
     logo: "/clients/logo_retail_connect.svg",
     category: "Retail Revive Connect - Distribution",
     sliderCenterImg: "/clients/logos_marques/tatianab_center.svg",
@@ -63,16 +63,16 @@ const testimonials = [
       name: "Helena B",
       title: "Directrice des ventes chez Scensoria",
     },
-    slide: "/clients/scensoria_img.png",
+    slide: "/clients/scensoria_img.webp",
     logo: "/clients/logo_retail_smart.svg",
     category: "Retail Revive Smart - Formation",
-    sliderCenterImg: "/clients/logos_m/slide_2/scensoria_noir.png",
+    sliderCenterImg: "/clients/logos_m/slide_2/scensoria_noir.webp",
     logosSlide: [],
   },
   {
     quote: "",
     author: { name: "", title: "" },
-    slide: "/clients/logos_marques/sephora_gold_card.png",
+    slide: "/clients/logos_marques/sephora_gold_card.webp",
     logo: "/clients/logo_retail_smart.svg",
     category: "Retail Revive Services - Evenement",
     sliderCenterImg: "",
@@ -136,7 +136,6 @@ const ClientsSection = () => {
                   fill
                   className="object-contain"
                   sizes={isMobile ? "40px" : "120px"}
-                  priority
                 />
               </div>
             ))}
@@ -170,8 +169,8 @@ const ClientsSection = () => {
                   src={logo}
                   alt={`brand-${index}`}
                   fill
+                  sizes="120px"
                   className="object-contain"
-                  priority
                 />
               </div>
             ))}
@@ -212,6 +211,8 @@ const ClientsSection = () => {
                 </h2>
                 <div className="flex flex-row gap-10 items-center">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     className="self-end block"
                     src={testimonials[testimonialIndex].logo}
                   />
@@ -319,6 +320,7 @@ const ClientsSection = () => {
                   src={testimonials[testimonialIndex].sliderCenterImg}
                   alt={`center-logo-${testimonialIndex}`}
                   fill
+                  sizes="200px"
                   className="object-contain"
                 />
               </div>
