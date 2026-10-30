@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 
-export const GallerySection = (): JSX.Element => {
+export const GallerySection = (): React.JSX.Element => {
   const [isMobile, setIsMobile] = useState(false);
 
   // Nouveau : Champs du formulaire

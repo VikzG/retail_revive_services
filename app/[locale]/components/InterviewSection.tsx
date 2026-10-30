@@ -126,7 +126,7 @@ const interviewQuestions = [
   },
 ];
 
-export const InterviewSection = (): JSX.Element => {
+export const InterviewSection = (): React.JSX.Element => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 import gsap from "gsap";
 import { Card, CardContent } from "@/app/[locale]/components/ui/card";
 import { Swiper, SwiperSlide } from 'swiper/react';

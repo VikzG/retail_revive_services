@@ -8,7 +8,7 @@ type PageInterviewProps = {
   onClose: () => void;
 };
 
-export const PageInterview = ({ onClose }: PageInterviewProps): JSX.Element => {
+export const PageInterview = ({ onClose }: PageInterviewProps): React.JSX.Element => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Animation d'entrée
