@@ -23,6 +23,42 @@ video, .loader_container {
   backface-visibility: hidden;
 }
 
+/* Loader : logo visible 0.8s puis sortie vers le haut en 0.6s */
+.loader_container {
+  animation: loader-exit 0.6s ease-in-out 0.8s forwards;
+}
+
+@keyframes loader-exit {
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Apparition du titre puis du texte de la bannière, juste après le loader */
+.hero_fade_1,
+.hero_fade_2 {
+  animation: hero-fade-in 1s ease-out both;
+}
+
+.hero_fade_1 {
+  animation-delay: 1.2s;
+}
+
+.hero_fade_2 {
+  animation-delay: 1.7s;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* banner */
 
 .banner_text_container {

@@ -27,6 +27,7 @@ const poppins = Poppins({ weight: ['300'], subsets: ['latin'] });
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://retailreviveservices.com"),
   title: "Retail Revive Services",
   description: "Nous propulsons les entreprises vers l’innovation & le succès sur le continent africain",
   openGraph: {
@@ -45,6 +46,11 @@ export const metadata: Metadata = {
   },
 };
 
+
+// Les deux langues sont générées au build et servies directement par le CDN
+export function generateStaticParams() {
+  return [{ locale: "fr" }, { locale: "en" }];
+}
 
 export default async function RootLayout({
   children,

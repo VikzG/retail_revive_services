@@ -37,27 +37,11 @@ export default function Home() {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  const headerTitleRef = useRef(null);
-  const headerSpanRef = useRef(null);
   const introductionRef = useRef<HTMLDivElement>(null);
 
   const [isSubVisible, setIsSubVisible] = useState<boolean>(false);
   const [isInterviewVisible, setIsInterviewVisible] = useState(false);
   const subContainerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const tl = gsap.timeline({ delay: 1.2 });
-    tl.fromTo(
-      headerTitleRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1 }
-    ).fromTo(
-      headerSpanRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1 },
-      "-=0.5"
-    );
-  }, []);
 
   useEffect(() => {
     if (introductionRef.current) {
@@ -98,7 +82,8 @@ export default function Home() {
             priority
             sizes="100vw"
           />
-          <div ref={headerTitleRef}>
+          {/* Apparition en CSS (hero_fade_*) pour ne pas dépendre du JavaScript */}
+          <div className="hero_fade_1">
             <div className="span_header_container absolute w-full flex justify-center p-4">
               <span className="sous_titre justify-center text-white">
                 {t("partner")} {/* Traduction pour "votre partenaire" */}
@@ -115,8 +100,7 @@ export default function Home() {
           {/* Conteneur pour le paragraphe centré en bas */}
           <div className="banner_text_container absolute bottom-28 flex justify-center p-4">
             <p
-              ref={headerSpanRef}
-              className="body_text text-center text-white max-w-4xl"
+              className="hero_fade_2 body_text text-center text-white max-w-4xl"
             >
               {t("welcome")} <strong>{t("welcome_2")}</strong> {t("welcome_3")}{" "}
               <strong>{t("welcome_4")}</strong> {t("welcome_5")}
