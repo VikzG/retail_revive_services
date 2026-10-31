@@ -23,9 +23,9 @@ video, .loader_container {
   backface-visibility: hidden;
 }
 
-/* Loader : logo visible 0.8s puis sortie vers le haut en 0.6s */
+/* Loader : logo visible 2s (demande de la cliente) puis sortie vers le haut en 0.6s */
 .loader_container {
-  animation: loader-exit 0.6s ease-in-out 0.8s forwards;
+  animation: loader-exit 0.6s ease-in-out 2s forwards;
 }
 
 @keyframes loader-exit {
@@ -43,11 +43,11 @@ video, .loader_container {
 }
 
 .hero_fade_1 {
-  animation-delay: 1.2s;
+  animation-delay: 2.4s;
 }
 
 .hero_fade_2 {
-  animation-delay: 1.7s;
+  animation-delay: 2.9s;
 }
 
 @keyframes hero-fade-in {
